@@ -1,14 +1,11 @@
-import pandas as pd
-
-import requests
-
-import inforion
-
 import json
+import logging as log
+import pandas as pd
+import requests
+import inforion
+from inforion.ionapi.basic import load_config, login
 
-from inforion.ionapi.basic import load_config,login,header
 
- 
 def post_to_data_lake(url, ionfile,imslid, inputfile, schema):
     config = load_config(ionfile)
     token = login(url,config)
@@ -49,3 +46,15 @@ def post_to_data_lake(url, ionfile,imslid, inputfile, schema):
         print("Error")
     return False
     
+
+def get_datalake_ping(base_url, ion_file):
+    ping_url_path = '/IONSERVICES/datalakeapi/v1/status/ping'
+    config = load_config(ion_file)
+    token = login(base_url, config)
+    headers = {
+        "accept": "application/json",
+        "Authorization": "Bearer {}".format(token['access_token'])
+    }
+    res = requests.get(base_url + ping_url_path, headers=headers)
+    log.info('datalake ping: {}'.format(res.content))
+    return res
