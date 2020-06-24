@@ -13,13 +13,13 @@ from inforion import *
 import inforion.helper.filehandling as filehandling
 
 def test_urlnotvailid():
-    assert  "not valid" in main("google","")
+    assert  "not valid" in main_load("google","")
 
 def test_filenotexists():
-    assert  "Error: File does not exist" == main("https://www.google.de","test")
+    assert  "Error: File does not exist" == main_load("https://www.google.de","test")
  
 def test_checklogin():
-    assert  "Bearer" in main("https://mingle-sso.eu1.inforcloudsuite.com:443/BVB_DEV","FellowKey.ionapi","checklogin")
+    assert  "Bearer" in main_load("https://mingle-sso.eu1.inforcloudsuite.com:443/BVB_DEV","FellowKey.ionapi",None,"checklogin")
 
 def test_checkfiletype_csv():
     assert  ".csv" in  filehandling.checkfiletype("Test.csv")
