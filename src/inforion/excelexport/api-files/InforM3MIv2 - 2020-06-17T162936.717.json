@@ -1,0 +1,5833 @@
+{
+  "info": {
+    "version": "6402",
+    "title": "OPS500MI - Retrieves Store Information",
+    "description": "Retrieves Store Information"
+  },
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json; charset=UTF-8"
+  ],
+  "basePath": "/BVB_DEV/M3/m3api-rest/v2/execute/OPS500MI",
+  "swagger": "2.0",
+  "definitions": {
+    "BulkResponseResult": {
+      "type": "object",
+      "properties": {
+        "transaction": {
+          "type": "string"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "errorCode": {
+          "type": "string"
+        },
+        "errorCfg": {
+          "type": "string"
+        },
+        "errorField": {
+          "type": "string"
+        },
+        "errorType": {
+          "type": "string"
+        },
+        "notProcessed": {
+          "type": "boolean",
+          "example": false
+        },
+        "records": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "BulkResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "transaction": {
+                "type": "string"
+              },
+              "parameters": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                }
+              },
+              "errorMessage": {
+                "type": "string"
+              },
+              "errorCode": {
+                "type": "string"
+              },
+              "errorCfg": {
+                "type": "string"
+              },
+              "errorField": {
+                "type": "string"
+              },
+              "errorType": {
+                "type": "string"
+              },
+              "notProcessed": {
+                "type": "boolean",
+                "example": false
+              },
+              "records": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "wasTerminated": {
+          "type": "boolean",
+          "example": false
+        },
+        "terminationReason": {
+          "type": "string"
+        },
+        "nrOfSuccessfullTransactions": {
+          "type": "integer",
+          "format": "int32",
+          "example": 1
+        },
+        "nrOfNotProcessedTransactions": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "nrOfFailedTransactions": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "terminationErrorType": {
+          "type": "string"
+        },
+        "bulkJobId": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "paths": {
+    "/AddStore": {
+      "get": {
+        "summary": "Transfers Store related data",
+        "description": "Transfers Store related data",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "AddStore"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "WHLO": "Warehouse(3)",
+                          "VOLC": "Shop volume class(1)",
+                          "STOC": "Shop class(1)",
+                          "STRA": "Shop rank(3)",
+                          "STCE": "Shop category(3)",
+                          "BUAR": "Business area(3)",
+                          "SURF": "Shop surface(15)",
+                          "ADDY": "Permitted delivery day(7)",
+                          "WF01": "Store User-defined field 1(1)",
+                          "WF02": "Store User-defined field 2(1)",
+                          "WF03": "Store User-defined field 3(3)",
+                          "WF04": "Store User-defined field 4(3)",
+                          "WF05": "Store User-defined field 5(10)",
+                          "WF06": "Store User-defined field 6(10)",
+                          "WF07": "Store User-defined field 7(30)",
+                          "WF08": "Store User-defined field 8(30)",
+                          "WF09": "Store User-defined field 9(15)",
+                          "WF10": "Store User-defined field 10(15)",
+                          "WF11": "Store User-defined field 11(15)",
+                          "WF12": "Store User-defined field 12(15)",
+                          "WF13": "Store User-defined field 13(17)",
+                          "WF14": "Store User-defined field 14(17)",
+                          "WF15": "Store User-defined field 15(10)",
+                          "WF16": "Store User-defined field 16(10)",
+                          "WF17": "Store User-defined field 17(4)",
+                          "WF18": "Store User-defined field 18(4)",
+                          "WF19": "Store User-defined field 19(4)",
+                          "WF20": "Store User-defined field 20(4)",
+                          "WF21": "Store User-defined field 21(4)",
+                          "WF22": "Store User-defined field 22(4)",
+                          "WPOI": "POS system interface(1)",
+                          "OPIM": "Item master interface(1)",
+                          "OPIW": "Item/warehouse interface(1)",
+                          "OPIL": "Item language interface(1)",
+                          "OPIP": "Item alias interface(1)",
+                          "OPCI": "Customer interface(1)",
+                          "OPPP": "Sales price interface(1)",
+                          "OPPO": "Promotion interface(1)",
+                          "OPUP": "User interface(1)",
+                          "OPMM": "Inventory accounting interface(1)",
+                          "OPSS": "Sales statistics interface(1)",
+                          "OPGL": "Financial interface(1)",
+                          "AL1T": "Alias category(2)",
+                          "AL1Q": "Alias qualifier(4)",
+                          "AL2T": "Alias category(2)",
+                          "AL2Q": "Alias qualifier(4)",
+                          "PRR1": "Price list 1(10)",
+                          "PRR2": "Price list 2(10)",
+                          "PRR3": "Price list 3(10)",
+                          "PRR4": "Price list 4(10)",
+                          "PRR5": "Price list 5(10)",
+                          "PRR6": "Price list 6(10)",
+                          "PRR7": "Price list 7(10)",
+                          "PRR8": "Price list 8(10)",
+                          "PRR9": "Price list 9(10)",
+                          "CURM": "Currency method(1)",
+                          "FVDM": "From date method(1)",
+                          "AUP1": "User group - function access(10)",
+                          "AUP2": "User group - function access(10)",
+                          "AUP3": "User group - function access(10)",
+                          "AUP4": "User group - function access(10)",
+                          "AUP5": "User group - function access(10)",
+                          "TRT1": "POS to M3 Requisition +(3)",
+                          "TRT2": "POS to M3 Requisition -(3)",
+                          "TRT3": "POS to M3 Dist Order Main Warehouse(3)",
+                          "TRT4": "POS to M3 Dist Order Shop(3)",
+                          "CUA1": "Address line 1(36)",
+                          "CUA2": "Address line 2(36)",
+                          "CUA3": "Address line 3(36)",
+                          "CUA4": "Address line 4(36)",
+                          "SUAP": "Stock update in POS(1)",
+                          "OPVT": "Tax calculations from point-of-sales(1)",
+                          "OPEV": "Amount excluding VAT(1)",
+                          "PLTB": "Price list table(10)",
+                          "AL3T": "Alias category(2)",
+                          "AL3Q": "Alias qualifier(4)",
+                          "OP19": "Check sequence - item ID(5)",
+                          "OP73": "Search sequence - alias type(5)",
+                          "CUCD": "Currency(3)",
+                          "CRTP": "Exchange rate type(2)",
+                          "SVON": "Separate voucher number(1)",
+                          "RSTN": "Store ID(10)",
+                          "CUNO": "Customer(10)",
+                          "TEXC": "Amounts exclude tax(1)",
+                          "TX40": "Description(40)",
+                          "SBS1": "Subscriber(3)",
+                          "CLCV": "Calculate VAT(1)",
+                          "WHTA": "Warehouse table(4)",
+                          "ULZO": "Unloading zone(5)",
+                          "TPCU": "Template customer(10)",
+                          "PCPC": "Cost price check(1)",
+                          "SCP1": "Send cost price to POS(1)",
+                          "DPOL": "Dispatch policy(3)",
+                          "OVIS": "Overissue allowed(1)",
+                          "WHSL": "Location(10)",
+                          "MODL": "Delivery method(3)",
+                          "TEDL": "Delivery terms(3)",
+                          "WLT1": "Location type(2)",
+                          "WLT2": "Location type(2)",
+                          "WLT3": "Location type(2)",
+                          "WLT4": "Location type(2)",
+                          "WLT5": "Location type(2)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {}
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "in": "query",
+            "type": "string",
+            "name": "WHLO",
+            "description": "Warehouse(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "VOLC",
+            "description": "Shop volume class(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "STOC",
+            "description": "Shop class(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "STRA",
+            "description": "Shop rank(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "STCE",
+            "description": "Shop category(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "BUAR",
+            "description": "Business area(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "SURF",
+            "description": "Shop surface(15)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "ADDY",
+            "description": "Permitted delivery day(7)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF01",
+            "description": "Store User-defined field 1(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF02",
+            "description": "Store User-defined field 2(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF03",
+            "description": "Store User-defined field 3(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF04",
+            "description": "Store User-defined field 4(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF05",
+            "description": "Store User-defined field 5(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF06",
+            "description": "Store User-defined field 6(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF07",
+            "description": "Store User-defined field 7(30)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF08",
+            "description": "Store User-defined field 8(30)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF09",
+            "description": "Store User-defined field 9(15)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF10",
+            "description": "Store User-defined field 10(15)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF11",
+            "description": "Store User-defined field 11(15)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF12",
+            "description": "Store User-defined field 12(15)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF13",
+            "description": "Store User-defined field 13(17)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF14",
+            "description": "Store User-defined field 14(17)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF15",
+            "description": "Store User-defined field 15(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF16",
+            "description": "Store User-defined field 16(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF17",
+            "description": "Store User-defined field 17(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF18",
+            "description": "Store User-defined field 18(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF19",
+            "description": "Store User-defined field 19(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF20",
+            "description": "Store User-defined field 20(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF21",
+            "description": "Store User-defined field 21(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF22",
+            "description": "Store User-defined field 22(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WPOI",
+            "description": "POS system interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPIM",
+            "description": "Item master interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPIW",
+            "description": "Item/warehouse interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPIL",
+            "description": "Item language interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPIP",
+            "description": "Item alias interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPCI",
+            "description": "Customer interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPPP",
+            "description": "Sales price interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPPO",
+            "description": "Promotion interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPUP",
+            "description": "User interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPMM",
+            "description": "Inventory accounting interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPSS",
+            "description": "Sales statistics interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPGL",
+            "description": "Financial interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "AL1T",
+            "description": "Alias category(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AL1Q",
+            "description": "Alias qualifier(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "AL2T",
+            "description": "Alias category(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AL2Q",
+            "description": "Alias qualifier(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR1",
+            "description": "Price list 1(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR2",
+            "description": "Price list 2(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR3",
+            "description": "Price list 3(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR4",
+            "description": "Price list 4(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR5",
+            "description": "Price list 5(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR6",
+            "description": "Price list 6(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR7",
+            "description": "Price list 7(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR8",
+            "description": "Price list 8(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR9",
+            "description": "Price list 9(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CURM",
+            "description": "Currency method(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "FVDM",
+            "description": "From date method(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AUP1",
+            "description": "User group - function access(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AUP2",
+            "description": "User group - function access(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AUP3",
+            "description": "User group - function access(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AUP4",
+            "description": "User group - function access(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AUP5",
+            "description": "User group - function access(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TRT1",
+            "description": "POS to M3 Requisition +(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TRT2",
+            "description": "POS to M3 Requisition -(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TRT3",
+            "description": "POS to M3 Dist Order Main Warehouse(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TRT4",
+            "description": "POS to M3 Dist Order Shop(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUA1",
+            "description": "Address line 1(36)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUA2",
+            "description": "Address line 2(36)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUA3",
+            "description": "Address line 3(36)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUA4",
+            "description": "Address line 4(36)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "SUAP",
+            "description": "Stock update in POS(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "OPVT",
+            "description": "Tax calculations from point-of-sales(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "OPEV",
+            "description": "Amount excluding VAT(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PLTB",
+            "description": "Price list table(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "AL3T",
+            "description": "Alias category(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AL3Q",
+            "description": "Alias qualifier(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "OP19",
+            "description": "Check sequence - item ID(5)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "OP73",
+            "description": "Search sequence - alias type(5)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUCD",
+            "description": "Currency(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CRTP",
+            "description": "Exchange rate type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "SVON",
+            "description": "Separate voucher number(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "RSTN",
+            "description": "Store ID(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUNO",
+            "description": "Customer(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "TEXC",
+            "description": "Amounts exclude tax(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TX40",
+            "description": "Description(40)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "SBS1",
+            "description": "Subscriber(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CLCV",
+            "description": "Calculate VAT(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WHTA",
+            "description": "Warehouse table(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "ULZO",
+            "description": "Unloading zone(5)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TPCU",
+            "description": "Template customer(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "PCPC",
+            "description": "Cost price check(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "SCP1",
+            "description": "Send cost price to POS(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "DPOL",
+            "description": "Dispatch policy(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OVIS",
+            "description": "Overissue allowed(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WHSL",
+            "description": "Location(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "MODL",
+            "description": "Delivery method(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TEDL",
+            "description": "Delivery terms(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WLT1",
+            "description": "Location type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WLT2",
+            "description": "Location type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WLT3",
+            "description": "Location type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WLT4",
+            "description": "Location type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WLT5",
+            "description": "Location type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/GetStore": {
+      "get": {
+        "summary": "Transfers Store related data",
+        "description": "Transfers Store related data",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "GetStore"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "WHLO": "Warehouse(3)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "WHLO": "Warehouse(3)",
+                            "VOLC": "Shop volume class(1)",
+                            "STOC": "Shop class(1)",
+                            "STRA": "Shop rank(3)",
+                            "STCE": "Shop category(3)",
+                            "BUAR": "Business area(3)",
+                            "SURF": "Shop surface(15)",
+                            "ADDY": "Permitted delivery day(7)",
+                            "WF01": "Store User-defined field 1(1)",
+                            "WF02": "Store User-defined field 2(1)",
+                            "WF03": "Store User-defined field 3(3)",
+                            "WF04": "Store User-defined field 4(3)",
+                            "WF05": "Store User-defined field 5(10)",
+                            "WF06": "Store User-defined field 6(10)",
+                            "WF07": "Store User-defined field 7(30)",
+                            "WF08": "Store User-defined field 8(30)",
+                            "WF09": "Store User-defined field 9(15)",
+                            "WF10": "Store User-defined field 10(15)",
+                            "WF11": "Store User-defined field 11(15)",
+                            "WF12": "Store User-defined field 12(15)",
+                            "WF13": "Store User-defined field 13(17)",
+                            "WF14": "Store User-defined field 14(17)",
+                            "WF15": "Store User-defined field 15(10)",
+                            "WF16": "Store User-defined field 16(10)",
+                            "WF17": "Store User-defined field 17(4)",
+                            "WF18": "Store User-defined field 18(4)",
+                            "WF19": "Store User-defined field 19(4)",
+                            "WF20": "Store User-defined field 20(4)",
+                            "WF21": "Store User-defined field 21(4)",
+                            "WF22": "Store User-defined field 22(4)",
+                            "WPOI": "POS system interface(1)",
+                            "OPIM": "Item master interface(1)",
+                            "OPIW": "Item/warehouse interface(1)",
+                            "OPIL": "Item language interface(1)",
+                            "OPIP": "Item alias interface(1)",
+                            "OPCI": "Customer interface(1)",
+                            "OPPP": "Sales price interface(1)",
+                            "OPPO": "Promotion interface(1)",
+                            "OPUP": "User interface(1)",
+                            "OPMM": "Inventory accounting interface(1)",
+                            "OPSS": "Sales statistics interface(1)",
+                            "OPGL": "Financial interface(1)",
+                            "AL1T": "Alias category(2)",
+                            "AL1Q": "Alias qualifier(4)",
+                            "AL2T": "Alias category(2)",
+                            "AL2Q": "Alias qualifier(4)",
+                            "PRR1": "Price list 1(10)",
+                            "PRR2": "Price list 2(10)",
+                            "PRR3": "Price list 3(10)",
+                            "PRR4": "Price list 4(10)",
+                            "PRR5": "Price list 5(10)",
+                            "PRR6": "Price list 6(10)",
+                            "PRR7": "Price list 7(10)",
+                            "PRR8": "Price list 8(10)",
+                            "PRR9": "Price list 9(10)",
+                            "CURM": "Currency method(1)",
+                            "FVDM": "From date method(1)",
+                            "AUP1": "User group - function access(10)",
+                            "AUP2": "User group - function access(10)",
+                            "AUP3": "User group - function access(10)",
+                            "AUP4": "User group - function access(10)",
+                            "AUP5": "User group - function access(10)",
+                            "TRT1": "POS to M3 Requisition +(3)",
+                            "TRT2": "POS to M3 Requisition -(3)",
+                            "TRT3": "POS to M3 Dist Order Main Warehouse(3)",
+                            "TRT4": "POS to M3 Dist Order Shop(3)",
+                            "CUA1": "Address line 1(36)",
+                            "CUA2": "Address line 2(36)",
+                            "CUA3": "Address line 3(36)",
+                            "CUA4": "Address line 4(36)",
+                            "SUAP": "Stock update in POS(1)",
+                            "OPVT": "Tax calculations from point-of-sales(1)",
+                            "OPEV": "Amount excluding VAT(1)",
+                            "PLTB": "Price list table(10)",
+                            "AL3T": "Alias category(2)",
+                            "AL3Q": "Alias qualifier(4)",
+                            "OP19": "Check sequence - item ID(5)",
+                            "OP73": "Search sequence - alias type(5)",
+                            "CUCD": "Currency(3)",
+                            "CRTP": "Exchange rate type(2)",
+                            "SVON": "Separate voucher number(1)",
+                            "RSTN": "Store ID(10)",
+                            "CUNO": "Customer(10)",
+                            "TEXC": "Amounts exclude tax(1)",
+                            "TX40": "Description(40)",
+                            "SBS1": "Subscriber(3)",
+                            "CLCV": "Calculate VAT(1)",
+                            "WHTA": "Warehouse table(4)",
+                            "ULZO": "Unloading zone(5)",
+                            "TPCU": "Template customer(10)",
+                            "PCPC": "Cost price check(1)",
+                            "SCP1": "Send cost price to POS(1)",
+                            "LMTS": "Timestamp(18)",
+                            "DPOL": "Dispatch policy(3)",
+                            "OVIS": "Overissue allowed(1)",
+                            "WHSL": "Location(10)",
+                            "MODL": "Delivery method(3)",
+                            "TEDL": "Delivery terms(3)",
+                            "WLT1": "Location type(2)",
+                            "WLT2": "Location type(2)",
+                            "WLT3": "Location type(2)",
+                            "WLT4": "Location type(2)",
+                            "WLT5": "Location type(2)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "in": "query",
+            "type": "string",
+            "name": "WHLO",
+            "description": "Warehouse(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/LstCollabStores": {
+      "get": {
+        "summary": "LstCollabStores",
+        "description": "LstCollabStores",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "LstCollabStores"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "CONO": "Company(3)",
+                          "WHLO": "Warehouse(3)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "CONO": "Company(3)",
+                            "DIVI": "Division(3)",
+                            "RSTN": "Store ID(10)",
+                            "WHLO": "Warehouse(3)",
+                            "TX40": "Description(40)",
+                            "CUNO": "Customer number(10)",
+                            "CUNM": "Name(36)",
+                            "SDST": "District(3)",
+                            "PYNO": "Payer(10)",
+                            "CUST": "Statistics customer(10)",
+                            "FRE1": "Statistics identity 1 customer(5)",
+                            "FRE2": "Statistics identity 2 customer(5)",
+                            "CCUS": "Company group customer number(10)",
+                            "CFC1": "User-defined field 1 - customer(10)",
+                            "CFC2": "User-defined field 2 - customer(17)",
+                            "CFC3": "User-defined field 3 - customer(3)",
+                            "CFC4": "User-defined field 4 - customer(5)",
+                            "CFC5": "User-defined field 5 - customer(1)",
+                            "CFC6": "User-defined field 6 - customer(10)",
+                            "CFC7": "User-defined field 7 - customer(17)",
+                            "CFC8": "User-defined field 8 - customer(3)",
+                            "CFC9": "User-defined field 9 - customer(5)",
+                            "CFC0": "User-defined field 10 - customer(1)",
+                            "CONM": "Company name(36)",
+                            "ADR1": "Address line 1(36)",
+                            "ADR2": "Address line 2(36)",
+                            "ADR3": "Address line 3(36)",
+                            "ADR4": "Address line 4(36)",
+                            "CSCD": "Country(3)",
+                            "PONO": "Postal code(10)",
+                            "ECAR": "State(2)",
+                            "TOWN": "City(20)",
+                            "PNOD": "Planning node(15)",
+                            "STCE": "Shop category(3)",
+                            "BUAR": "Business area(3)",
+                            "STOC": "Shop class(1)",
+                            "VOLC": "Shop volume class(1)",
+                            "WF01": "User-defined field 1(1)",
+                            "WF02": "User-defined field 2(1)",
+                            "WF03": "User-defined field 3(3)",
+                            "WF04": "User-defined field 4(3)",
+                            "WF05": "User-defined field 5(10)",
+                            "WF06": "User-defined field 6(10)",
+                            "WF07": "User-defined field 7(30)",
+                            "WF08": "User-defined field 8(30)",
+                            "WF09": "User-defined field 9(15)",
+                            "WF10": "User-defined field 10(15)",
+                            "WF11": "User-defined field 11(15)",
+                            "WF12": "User-defined field 12(15)",
+                            "WF13": "User-defined field 13(17)",
+                            "WF14": "User-defined field 14(17)",
+                            "WF15": "User-defined field 15(10)",
+                            "WF16": "User-defined field 16(10)",
+                            "WF17": "User-defined field 17(4)",
+                            "WF18": "User-defined field 18(4)",
+                            "WF19": "User-defined field 19(4)",
+                            "WF20": "User-defined field 20(4)",
+                            "WF21": "User-defined field 21(4)",
+                            "WF22": "User-defined field 22(4)",
+                            "FRCO": "County ID(7)",
+                            "DOPL": "Validity dates on price list lines(1)",
+                            "OVIS": "Overissue allowed(1)",
+                            "WHSL": "Location(10)",
+                            "MODL": "Delivery method(3)",
+                            "TEDL": "Delivery terms(3)",
+                            "WLT1": "Location type(2)",
+                            "WLT2": "Location type(2)",
+                            "WLT3": "Location type(2)",
+                            "WLT4": "Location type(2)",
+                            "WLT5": "Location type(2)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CONO",
+            "description": "Company(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WHLO",
+            "description": "Warehouse(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/LstShopCategory": {
+      "get": {
+        "summary": "Store category",
+        "description": "Store category",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "LstShopCategory"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "CONO": "Company Number(3)",
+                          "FRSC": "From Shop Category(3)",
+                          "TOSC": "To Shop Number(3)",
+                          "LMTS": "Last import´s timestamp(18)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "CONO": "Company Number(3)",
+                            "STCE": "Shop class(3)",
+                            "TX40": "Description(40)",
+                            "TX15": "Name(15)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CONO",
+            "description": "Company Number(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "FRSC",
+            "description": "From Shop Category(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TOSC",
+            "description": "To Shop Number(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "LMTS",
+            "description": "Last import´s timestamp(18)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/LstShopClass": {
+      "get": {
+        "summary": "Store shop classes",
+        "description": "Store shop classes",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "LstShopClass"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "CONO": "Company Number(3)",
+                          "FRST": "From Shop Classes(1)",
+                          "TOST": "To Shop Classes(1)",
+                          "LMTS": "Last import´s timestamp(18)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "CONO": "Company Number(3)",
+                            "STOC": "Volume Classes(1)",
+                            "TX40": "Description(40)",
+                            "TX15": "Name(15)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CONO",
+            "description": "Company Number(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "FRST",
+            "description": "From Shop Classes(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TOST",
+            "description": "To Shop Classes(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "LMTS",
+            "description": "Last import´s timestamp(18)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/LstShopVolClass": {
+      "get": {
+        "summary": "Store Volume class",
+        "description": "Store Volume class",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "LstShopVolClass"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "CONO": "Company Number(3)",
+                          "FRVO": "From Shop Vol Class(1)",
+                          "TOVO": "To Shop Vol Class(1)",
+                          "LMTS": "Last import´s timestamp(18)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "CONO": "Company Number(3)",
+                            "VOLC": "Shop class(1)",
+                            "TX40": "Description(40)",
+                            "TX15": "Name(15)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CONO",
+            "description": "Company Number(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "FRVO",
+            "description": "From Shop Vol Class(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TOVO",
+            "description": "To Shop Vol Class(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "LMTS",
+            "description": "Last import´s timestamp(18)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/LstStore": {
+      "get": {
+        "summary": "Transfers Store related data",
+        "description": "Transfers Store related data",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "LstStore"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "CONO": "Company(3)",
+                          "FWHL": "From Warehouse(3)",
+                          "TWHL": "To Warehouse(3)",
+                          "FRSN": "From Store(10)",
+                          "TRSN": "To Store(10)",
+                          "LMTS": "Timestamp(18)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "CONO": "Company(3)",
+                            "DIVI": "Division(3)",
+                            "RSTN": "Store ID(10)",
+                            "WHLO": "Warehouse(3)",
+                            "TX40": "Description(40)",
+                            "CUNO": "Customer number(10)",
+                            "CUNM": "Name(36)",
+                            "SDST": "District(3)",
+                            "PYNO": "Payer(10)",
+                            "CUST": "Statistics customer(10)",
+                            "FRE1": "Statistics identity 1 customer(5)",
+                            "FRE2": "Statistics identity 2 customer(5)",
+                            "CCUS": "Company group customer number(10)",
+                            "CFC1": "User-defined field 1 - customer(10)",
+                            "CFC2": "User-defined field 2 - customer(17)",
+                            "CFC3": "User-defined field 3 - customer(3)",
+                            "CFC4": "User-defined field 4 - customer(5)",
+                            "CFC5": "User-defined field 5 - customer(1)",
+                            "CFC6": "User-defined field 6 - customer(10)",
+                            "CFC7": "User-defined field 7 - customer(17)",
+                            "CFC8": "User-defined field 8 - customer(3)",
+                            "CFC9": "User-defined field 9 - customer(5)",
+                            "CFC0": "User-defined field 10 - customer(1)",
+                            "CONM": "Company name(36)",
+                            "ADR1": "Address line 1(36)",
+                            "ADR2": "Address line 2(36)",
+                            "ADR3": "Address line 3(36)",
+                            "ADR4": "Address line 4(36)",
+                            "CSCD": "Country(3)",
+                            "PONO": "Postal code(10)",
+                            "ECAR": "State(2)",
+                            "TOWN": "City(20)",
+                            "PNOD": "Planning node(15)",
+                            "STCE": "Shop category(3)",
+                            "BUAR": "Business area(3)",
+                            "STOC": "Shop class(1)",
+                            "VOLC": "Shop volume class(1)",
+                            "WF01": "User-defined field 1(1)",
+                            "WF02": "User-defined field 2(1)",
+                            "WF03": "User-defined field 3(3)",
+                            "WF04": "User-defined field 4(3)",
+                            "WF05": "User-defined field 5(10)",
+                            "WF06": "User-defined field 6(10)",
+                            "WF07": "User-defined field 7(30)",
+                            "WF08": "User-defined field 8(30)",
+                            "WF09": "User-defined field 9(15)",
+                            "WF10": "User-defined field 10(15)",
+                            "WF11": "User-defined field 11(15)",
+                            "WF12": "User-defined field 12(15)",
+                            "WF13": "User-defined field 13(17)",
+                            "WF14": "User-defined field 14(17)",
+                            "WF15": "User-defined field 15(10)",
+                            "WF16": "User-defined field 16(10)",
+                            "WF17": "User-defined field 17(4)",
+                            "WF18": "User-defined field 18(4)",
+                            "WF19": "User-defined field 19(4)",
+                            "WF20": "User-defined field 20(4)",
+                            "WF21": "User-defined field 21(4)",
+                            "WF22": "User-defined field 22(4)",
+                            "FRCO": "County ID(7)",
+                            "DPOL": "Dispatch policy(3)",
+                            "OVIS": "Overissue allowed(1)",
+                            "WHSL": "Location(10)",
+                            "MODL": "Delivery method(3)",
+                            "TEDL": "Delivery terms(3)",
+                            "WLT1": "Location type(2)",
+                            "WLT2": "Location type(2)",
+                            "WLT3": "Location type(2)",
+                            "WLT4": "Location type(2)",
+                            "WLT5": "Location type(2)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CONO",
+            "description": "Company(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "FWHL",
+            "description": "From Warehouse(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TWHL",
+            "description": "To Warehouse(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "FRSN",
+            "description": "From Store(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TRSN",
+            "description": "To Store(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "LMTS",
+            "description": "Timestamp(18)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/LstTmplCustomer": {
+      "get": {
+        "summary": "LstTmplCustomer",
+        "description": "LstTmplCustomer",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "LstTmplCustomer"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "CONO": "Company(3)",
+                          "WHLO": "Warehouse(3)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "CONO": "Company(3)",
+                            "CUNO": "Customer number(10)",
+                            "CUNM": "Name(36)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CONO",
+            "description": "Company(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WHLO",
+            "description": "Warehouse(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/UpdStore": {
+      "get": {
+        "summary": "Transfers Store related data",
+        "description": "Transfers Store related data",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "UpdStore"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "WHLO": "Warehouse(3)",
+                          "VOLC": "Shop volume class(1)",
+                          "STOC": "Shop class(1)",
+                          "STRA": "Shop rank(3)",
+                          "STCE": "Shop category(3)",
+                          "BUAR": "Business area(3)",
+                          "SURF": "Shop surface(15)",
+                          "ADDY": "Permitted delivery day(7)",
+                          "WF01": "Store User-defined field 1(1)",
+                          "WF02": "Store User-defined field 2(1)",
+                          "WF03": "Store User-defined field 3(3)",
+                          "WF04": "Store User-defined field 4(3)",
+                          "WF05": "Store User-defined field 5(10)",
+                          "WF06": "Store User-defined field 6(10)",
+                          "WF07": "Store User-defined field 7(30)",
+                          "WF08": "Store User-defined field 8(30)",
+                          "WF09": "Store User-defined field 9(15)",
+                          "WF10": "Store User-defined field 10(15)",
+                          "WF11": "Store User-defined field 11(15)",
+                          "WF12": "Store User-defined field 12(15)",
+                          "WF13": "Store User-defined field 13(17)",
+                          "WF14": "Store User-defined field 14(17)",
+                          "WF15": "Store User-defined field 15(10)",
+                          "WF16": "Store User-defined field 16(10)",
+                          "WF17": "Store User-defined field 17(4)",
+                          "WF18": "Store User-defined field 18(4)",
+                          "WF19": "Store User-defined field 19(4)",
+                          "WF20": "Store User-defined field 20(4)",
+                          "WF21": "Store User-defined field 21(4)",
+                          "WF22": "Store User-defined field 22(4)",
+                          "WPOI": "POS system interface(1)",
+                          "OPIM": "Item master interface(1)",
+                          "OPIW": "Item/warehouse interface(1)",
+                          "OPIL": "Item language interface(1)",
+                          "OPIP": "Item alias interface(1)",
+                          "OPCI": "Customer interface(1)",
+                          "OPPP": "Sales price interface(1)",
+                          "OPPO": "Promotion interface(1)",
+                          "OPUP": "User interface(1)",
+                          "OPMM": "Inventory accounting interface(1)",
+                          "OPSS": "Sales statistics interface(1)",
+                          "OPGL": "Financial interface(1)",
+                          "AL1T": "Alias category(2)",
+                          "AL1Q": "Alias qualifier(4)",
+                          "AL2T": "Alias category(2)",
+                          "AL2Q": "Alias qualifier(4)",
+                          "PRR1": "Price list 1(10)",
+                          "PRR2": "Price list 2(10)",
+                          "PRR3": "Price list 3(10)",
+                          "PRR4": "Price list 4(10)",
+                          "PRR5": "Price list 5(10)",
+                          "PRR6": "Price list 6(10)",
+                          "PRR7": "Price list 7(10)",
+                          "PRR8": "Price list 8(10)",
+                          "PRR9": "Price list 9(10)",
+                          "CURM": "Currency method(1)",
+                          "FVDM": "From date method(1)",
+                          "AUP1": "User group - function access(10)",
+                          "AUP2": "User group - function access(10)",
+                          "AUP3": "User group - function access(10)",
+                          "AUP4": "User group - function access(10)",
+                          "AUP5": "User group - function access(10)",
+                          "TRT1": "POS to M3 Requisition +(3)",
+                          "TRT2": "POS to M3 Requisition -(3)",
+                          "TRT3": "POS to M3 Dist Order Main Warehouse(3)",
+                          "TRT4": "POS to M3 Dist Order Shop(3)",
+                          "CUA1": "Address line 1(36)",
+                          "CUA2": "Address line 2(36)",
+                          "CUA3": "Address line 3(36)",
+                          "CUA4": "Address line 4(36)",
+                          "SUAP": "Stock update in POS(1)",
+                          "OPVT": "Tax calculations from point-of-sales(1)",
+                          "OPEV": "Amount excluding VAT(1)",
+                          "PLTB": "Price list table(10)",
+                          "AL3T": "Alias category(2)",
+                          "AL3Q": "Alias qualifier(4)",
+                          "OP19": "Check sequence - item ID(5)",
+                          "OP73": "Search sequence - alias type(5)",
+                          "CUCD": "Currency(3)",
+                          "CRTP": "Exchange rate type(2)",
+                          "SVON": "Separate voucher number(1)",
+                          "RSTN": "Store ID(10)",
+                          "CUNO": "Customer(10)",
+                          "TEXC": "Amounts exclude tax(1)",
+                          "TX40": "Description(40)",
+                          "SBS1": "Subscriber(3)",
+                          "CLCV": "Calculate VAT(1)",
+                          "WHTA": "Warehouse table(4)",
+                          "ULZO": "Unloading zone(5)",
+                          "TPCU": "Template customer(10)",
+                          "PCPC": "Cost price check(1)",
+                          "SCP1": "Send cost price to POS(1)",
+                          "DPOL": "Dispatch policy(3)",
+                          "OVIS": "Overissue allowed(1)",
+                          "WHSL": "Location(10)",
+                          "MODL": "Delivery method(3)",
+                          "TEDL": "Delivery terms(3)",
+                          "WLT1": "Location type(2)",
+                          "WLT2": "Location type(2)",
+                          "WLT3": "Location type(2)",
+                          "WLT4": "Location type(2)",
+                          "WLT5": "Location type(2)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {}
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WHLO",
+            "description": "Warehouse(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "VOLC",
+            "description": "Shop volume class(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "STOC",
+            "description": "Shop class(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "STRA",
+            "description": "Shop rank(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "STCE",
+            "description": "Shop category(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "BUAR",
+            "description": "Business area(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "SURF",
+            "description": "Shop surface(15)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "ADDY",
+            "description": "Permitted delivery day(7)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF01",
+            "description": "Store User-defined field 1(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF02",
+            "description": "Store User-defined field 2(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF03",
+            "description": "Store User-defined field 3(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF04",
+            "description": "Store User-defined field 4(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF05",
+            "description": "Store User-defined field 5(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF06",
+            "description": "Store User-defined field 6(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF07",
+            "description": "Store User-defined field 7(30)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF08",
+            "description": "Store User-defined field 8(30)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF09",
+            "description": "Store User-defined field 9(15)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF10",
+            "description": "Store User-defined field 10(15)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF11",
+            "description": "Store User-defined field 11(15)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF12",
+            "description": "Store User-defined field 12(15)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF13",
+            "description": "Store User-defined field 13(17)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF14",
+            "description": "Store User-defined field 14(17)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF15",
+            "description": "Store User-defined field 15(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WF16",
+            "description": "Store User-defined field 16(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF17",
+            "description": "Store User-defined field 17(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF18",
+            "description": "Store User-defined field 18(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF19",
+            "description": "Store User-defined field 19(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF20",
+            "description": "Store User-defined field 20(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF21",
+            "description": "Store User-defined field 21(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WF22",
+            "description": "Store User-defined field 22(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "WPOI",
+            "description": "POS system interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPIM",
+            "description": "Item master interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPIW",
+            "description": "Item/warehouse interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPIL",
+            "description": "Item language interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPIP",
+            "description": "Item alias interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPCI",
+            "description": "Customer interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPPP",
+            "description": "Sales price interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPPO",
+            "description": "Promotion interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPUP",
+            "description": "User interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPMM",
+            "description": "Inventory accounting interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPSS",
+            "description": "Sales statistics interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OPGL",
+            "description": "Financial interface(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "AL1T",
+            "description": "Alias category(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AL1Q",
+            "description": "Alias qualifier(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "AL2T",
+            "description": "Alias category(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AL2Q",
+            "description": "Alias qualifier(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR1",
+            "description": "Price list 1(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR2",
+            "description": "Price list 2(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR3",
+            "description": "Price list 3(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR4",
+            "description": "Price list 4(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR5",
+            "description": "Price list 5(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR6",
+            "description": "Price list 6(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR7",
+            "description": "Price list 7(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR8",
+            "description": "Price list 8(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PRR9",
+            "description": "Price list 9(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CURM",
+            "description": "Currency method(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "FVDM",
+            "description": "From date method(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AUP1",
+            "description": "User group - function access(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AUP2",
+            "description": "User group - function access(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AUP3",
+            "description": "User group - function access(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AUP4",
+            "description": "User group - function access(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AUP5",
+            "description": "User group - function access(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TRT1",
+            "description": "POS to M3 Requisition +(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TRT2",
+            "description": "POS to M3 Requisition -(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TRT3",
+            "description": "POS to M3 Dist Order Main Warehouse(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TRT4",
+            "description": "POS to M3 Dist Order Shop(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUA1",
+            "description": "Address line 1(36)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUA2",
+            "description": "Address line 2(36)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUA3",
+            "description": "Address line 3(36)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUA4",
+            "description": "Address line 4(36)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "SUAP",
+            "description": "Stock update in POS(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "OPVT",
+            "description": "Tax calculations from point-of-sales(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "OPEV",
+            "description": "Amount excluding VAT(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PLTB",
+            "description": "Price list table(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "AL3T",
+            "description": "Alias category(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "AL3Q",
+            "description": "Alias qualifier(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "OP19",
+            "description": "Check sequence - item ID(5)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "OP73",
+            "description": "Search sequence - alias type(5)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUCD",
+            "description": "Currency(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CRTP",
+            "description": "Exchange rate type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "SVON",
+            "description": "Separate voucher number(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "RSTN",
+            "description": "Store ID(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "CUNO",
+            "description": "Customer(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "TEXC",
+            "description": "Amounts exclude tax(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TX40",
+            "description": "Description(40)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "SBS1",
+            "description": "Subscriber(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "CLCV",
+            "description": "Calculate VAT(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WHTA",
+            "description": "Warehouse table(4)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "ULZO",
+            "description": "Unloading zone(5)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TPCU",
+            "description": "Template customer(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "PCPC",
+            "description": "Cost price check(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "SCP1",
+            "description": "Send cost price to POS(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "DPOL",
+            "description": "Dispatch policy(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "number",
+            "name": "OVIS",
+            "description": "Overissue allowed(1)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WHSL",
+            "description": "Location(10)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "MODL",
+            "description": "Delivery method(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "TEDL",
+            "description": "Delivery terms(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WLT1",
+            "description": "Location type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WLT2",
+            "description": "Location type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WLT3",
+            "description": "Location type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WLT4",
+            "description": "Location type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "WLT5",
+            "description": "Location type(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/FpwVersion": {
+      "get": {
+        "summary": "Returns the current FPW version number",
+        "description": "Returns the current FPW version number",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "FpwVersion"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {}
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "VER": "Version number in the form 2.0.0(10)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/GetCurrentUser": {
+      "get": {
+        "summary": "Get principal user information",
+        "description": "Get principal user information",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "GetCurrentUser"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {}
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "TEID": "Tenant ID(21)",
+                            "USER": "M3 User(10)",
+                            "PRUS": "Principal User(60)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/GetFieldHeading": {
+      "get": {
+        "summary": "Retrieve description for a general word",
+        "description": "Retrieve description for a general word",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "GetFieldHeading"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "MS15": "General word(5)",
+                          "SUFF": "Suffix(2)",
+                          "LNCD": "Language(2)",
+                          "LNFP": "Language file prefix(3)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "TX40": "Description(40)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "in": "query",
+            "type": "string",
+            "name": "MS15",
+            "description": "General word(5)"
+          },
+          {
+            "required": true,
+            "in": "query",
+            "type": "string",
+            "name": "SUFF",
+            "description": "Suffix(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "LNCD",
+            "description": "Language(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "LNFP",
+            "description": "Language file prefix(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/GetFixLevel": {
+      "get": {
+        "summary": "GetFixLevel",
+        "description": "GetFixLevel",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "GetFixLevel"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "FIXL": "Fix level, Jira action number(15)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "SLVL": "Supports fix level(1)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "in": "query",
+            "type": "string",
+            "name": "FIXL",
+            "description": "Fix level, Jira action number(15)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/GetMIBuild": {
+      "get": {
+        "summary": "Get build data for MI-program",
+        "description": "Get build data for MI-program",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "GetMIBuild"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {}
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "VERS": "Version(2)",
+                            "PTFS": "Release(1)",
+                            "MBLD": "Build number(15)",
+                            "SYID": "System(6)",
+                            "PGNM": "Program name(10)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/GetMessageText": {
+      "get": {
+        "summary": "Get message text",
+        "description": "Get message text",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "GetMessageText"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {
+                          "MSID": "Message ID(7)",
+                          "LNCD": "Language(2)",
+                          "LNFP": "Optional language file prefix(3)",
+                          "PARM": "Parameter value(132)"
+                        }
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "MSGT": "Message text(132)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": true,
+            "in": "query",
+            "type": "string",
+            "name": "MSID",
+            "description": "Message ID(7)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "LNCD",
+            "description": "Language(2)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "LNFP",
+            "description": "Optional language file prefix(3)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "PARM",
+            "description": "Parameter value(132)"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/GetServerTime": {
+      "get": {
+        "summary": "Get current date and time from server",
+        "description": "Get current date and time from server",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "GetServerTime"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {}
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "DATE": "Date YYYYMMDD(10)",
+                            "TIME": "Time 6 digits(6)",
+                            "LMTS": "Number of milliseconds(18)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/GetUserInfo": {
+      "get": {
+        "summary": "Get user information",
+        "description": "Get user information",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "GetUserInfo"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {}
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "ZZUSID": "User(10)",
+                            "ZDCONO": "Company(3)",
+                            "ZDDIVI": "Division(3)",
+                            "ZDFACI": "Facility(3)",
+                            "ZZWHLO": "Warehouse(3)",
+                            "ZDAUPF": "User group-function access(10)",
+                            "ZDREPF": "Display item name in own language(1)",
+                            "ZDLANC": "System language(2)",
+                            "ZDDTFM": "Date format(3)",
+                            "DSEP": "Date separator(1)",
+                            "TSEP": "Time separator(1)",
+                            "TIZO": "Time zone(5)",
+                            "USFN": "User full name(40)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    },
+    "/ServerTimeZone": {
+      "get": {
+        "summary": "Returns server time with timezone",
+        "description": "Returns server time with timezone",
+        "responses": {
+          "200": {
+            "description": "The transaction was executed as requested",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "results": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "transaction": {
+                        "type": "string",
+                        "example": "ServerTimeZone"
+                      },
+                      "parameters": {
+                        "type": "object",
+                        "additionalProperties": {
+                          "type": "string"
+                        },
+                        "example": {}
+                      },
+                      "errorMessage": {
+                        "type": "string"
+                      },
+                      "errorCode": {
+                        "type": "string"
+                      },
+                      "errorCfg": {
+                        "type": "string"
+                      },
+                      "errorField": {
+                        "type": "string"
+                      },
+                      "errorType": {
+                        "type": "string"
+                      },
+                      "notProcessed": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "records": {
+                        "type": "array",
+                        "items": {
+                          "type": "object",
+                          "additionalProperties": {
+                            "type": "string"
+                          },
+                          "example": {
+                            "TMTZ": "Date/time with time zone(30)",
+                            "UTCT": "UTC time(30)"
+                          }
+                        }
+                      }
+                    }
+                  }
+                },
+                "wasTerminated": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "terminationReason": {
+                  "type": "string"
+                },
+                "nrOfSuccessfullTransactions": {
+                  "type": "integer",
+                  "format": "int32",
+                  "example": 1
+                },
+                "nrOfNotProcessedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "nrOfFailedTransactions": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "terminationErrorType": {
+                  "type": "string"
+                },
+                "bulkJobId": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "cono",
+            "description": "The company context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "divi",
+            "description": "The division context to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "lanc",
+            "description": "The language code to use. Defaults to user default"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "locale",
+            "description": "The locale to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "timeZone",
+            "description": "The time zone to use"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "maxrecs",
+            "description": "Max number of records returned. 0 is unlimited"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "dateformat",
+            "description": "Date format to use",
+            "default": "YMD8",
+            "enum": [
+              "YMD8",
+              "YMD6",
+              "MDY6",
+              "DMY6",
+              "YWD5",
+              "YMD8-"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "excludeempty",
+            "description": "When true, empty fields are omitted in response",
+            "default": "false"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "righttrim",
+            "description": "When true, all values are right trimmed in response",
+            "default": "true"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "returncols",
+            "description": "A comma separated list of column names that should be included in the response. Defaults to all columns"
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "format",
+            "description": "Controls output JSON format",
+            "default": "PRETTY",
+            "enum": [
+              "UNFORMATTED",
+              "COMPACT",
+              "PRETTY"
+            ]
+          },
+          {
+            "required": false,
+            "in": "query",
+            "type": "string",
+            "name": "extendedresult",
+            "description": "Show transaction parameters in the response",
+            "default": "false"
+          }
+        ]
+      }
+    }
+  }
+}
