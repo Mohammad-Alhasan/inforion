@@ -10,7 +10,6 @@ import pandas as pd
 # Import the test framework (this is a hypothetical module)
 from inforion import *
 
-from inforion.datalake import *
 from inforion.datalake.datalake import post_to_data_lake
 
 valid_url = "https://mingle-ionapi.eu1.inforcloudsuite.com/FELLOWCONSULTING_DEV/IONSERVICES/api/ion/messaging/service/v2/message"
