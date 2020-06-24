@@ -29,11 +29,20 @@ stages:
             displayName: 'Download ION certificate'
             inputs:
               secureFile: 'FellowKey.ionapi'
- 
+
+          - task: DownloadSecureFile@1
+            inputs:
+              secureFile: FellowConsulting_Cloud.ionapi
+          
+          - task: DownloadSecureFile@1
+            inputs:
+              secureFile: datalake_test.csv
+
           - script: |
               cp 'D:\a\_temp\FellowKey.ionapi' $(Build.SourcesDirectory)
+              cp 'D:\a\_temp\FellowConsulting_Cloud.ionapi' $(Build.SourcesDirectory)
+              cp 'D:\a\_temp\datalake_test.csv' $(Build.SourcesDirectory)
               dir $(Build.SourcesDirectory)
-
 
               
           - task: UsePythonVersion@0
