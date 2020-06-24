@@ -13,7 +13,7 @@ from inforion import *
 import inforion.helper.filehandling as filehandling
 
 def test_urlnotvailid():
-    assert  "not valid" in main_load("google","")
+    assert  "Error: URL is not valid" in main_load("google","")
 
 def test_filenotexists():
     assert  "Error: File does not exist" == main_load("https://www.google.de","test")

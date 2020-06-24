@@ -22,7 +22,7 @@ from oauthlib.oauth2 import BackendApplicationClient
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
-import  inforion.ionapi.controller as controller
+import inforion.ionapi.controller as controller
 import inforion.helper.filehandling as filehandling
 #import sendresults, saveresults
 #from inforion.ionapi.model import 
