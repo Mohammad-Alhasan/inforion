@@ -58,6 +58,10 @@ stages:
               testResultsFiles: "test.xml"
               testRunTitle: "$(Agent.OS) - $(Build.DefinitionName) - Python $(python.version)"
             condition: succeededOrFailed()
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              summaryFileLocation: coverage.xml
+
       - job: "Ubuntu_1804"
         pool:
           vmImage: "ubuntu-18.04"
