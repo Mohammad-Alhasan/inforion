@@ -21,6 +21,8 @@ from inforion.transformation.transform import tranform_data
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *  
 from inforion.excelexport import *
+from inforion.datalake.datalake import *
+
 
 
 from inforion.helper.urlsplit import spliturl
@@ -31,7 +33,7 @@ def main():
     print (argv)
     help_string = "Usage:\n./%s -u URL -f IONFile -m method"
     try:
-        opts, args = getopt.getopt(argv, "h:t:u:f:p:m:i:o:s:e:a:b:", ["typ","url","ionfile","program","method","inputfile","outputfile","start","end","mappingfile","mainsheet"])
+        opts, args = getopt.getopt(argv, "h:t:u:f:p:m:i:o:s:e:a:b:c:l:", ["typ","url","ionfile","program","method","inputfile","outputfile","start","end","mappingfile","mainsheet","schema","lid"])
 
     except getopt.GetoptError:
         print (help_string)
@@ -68,6 +70,10 @@ def main():
             mappingfile = arg
         elif opt in ("-b", "--mainsheet"):
             mainsheet = arg
+        elif opt in ("-c", "--schema"):
+             schema = arg
+        elif opt in ("-l", "--lid"):
+            lid = arg
    
     if typ == "L":
         dataframe = pd.read_excel(inputfile)
@@ -86,6 +92,10 @@ def main():
     elif typ == 'T':
         inputdata = pd.read_excel(inputfile)
         return tranform_data(mappingfile,mainsheet,inputdata,outputfile)
+    
+    elif typ == 'D':
+            post_to_data_lake(url, ionfile, lid, inputfile, schema)
+
     
     
 
