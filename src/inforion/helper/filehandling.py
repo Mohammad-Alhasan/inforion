@@ -37,6 +37,11 @@ def savetodisk(file,df):
         df.to_csv(file)
     else:
 
-        writer = pd.ExcelWriter(outputfile, engine='xlsxwriter')
+        writer = pd.ExcelWriter(file, engine='xlsxwriter')
         df.to_excel(writer, sheet_name='Log Output',index=False)
         writer.save()
+
+def getDataFrame(inputfile):
+    ext = checkfiletype(inputfile)
+    df = loadfile(ext,inputfile)
+    return df

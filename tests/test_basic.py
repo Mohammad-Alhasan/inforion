@@ -5,6 +5,7 @@ import unittest
 from _pytest._io.saferepr import saferepr
 import logging
 import os
+import pandas as pd
 
 # Import the test framework (this is a hypothetical module)
 from inforion import *
@@ -36,3 +37,6 @@ def test_checkfiletype_notsupport():
 
 def test_mappingfilepath():
     assert  "Error: Mapping file path missing" in main_transformation(None,"TestSheet")
+
+def test_checkstagingdata():
+    assert  "Error: Data frame is empty" in main_transformation("sample.xls","TestSheet",pd.DataFrame())

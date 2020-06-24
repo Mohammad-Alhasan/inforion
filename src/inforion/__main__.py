@@ -8,7 +8,7 @@ import pandas as pd
 import logging
 
 import sys, getopt
-
+import inforion as infor
 #from . import __version__
 
 #from requests_oauthlib import OAuth2Session
@@ -70,56 +70,8 @@ def main():
             mainsheet = arg
    
     if typ == "L":
-        result = spliturl(url)
-
-        if "Call" in result:
-            if len(result["Call"]) > 0:
-                if result["Call"] == "execute":
-
-                    config = load_config(ionfile)
-                    token=login(url,config)
-                    
-                    
-                    
-                    headers = header(config,token)
-                    if "Bearer"  not in headers['Authorization']:
-                        return "InforION Login is not working"
-                    #return CRS610bulk(url,headers,inputfile,'CRS610MI',outputfile,start,end)
-                    if start is None or end is None:
-                        return execute(url,headers,program,method,inputfile,outputfile)  
-                        
-                    else:
-                        return execute(url,headers,program,method,inputfile,outputfile,start,end)  
-                        
-                if result["Call"] == "executeSnd":
-        
-                    config = load_config(ionfile)
-                    token=login(url,config)
-                    
-                    headers = header(config,token)
-                    if "Bearer"  not in headers['Authorization']:
-                        return "InforION Login is not working"
-                    #return CRS610bulk(url,headers,inputfile,'CRS610MI',outputfile,start,end)
-                    return executeSnd(url,headers,program,method,inputfile,outputfile,start,end)  
-                if result["Call"] == "executeAsyncSnd":
-            
-                    config = load_config(ionfile)
-                    token=login(url,config)
-                    
-                    headers = header(config,token)
-                    if "Bearer"  not in headers['Authorization']:
-                        return "InforION Login is not working"
-                    #return CRS610bulk(url,headers,inputfile,'CRS610MI',outputfile,start,end)
-                    return executeAsyncSnd(url,headers,program,method,inputfile,outputfile,start,end)  
-                    
-
-        if method == "checklogin":
-            config = load_config(ionfile)
-            token=login(url,config)
-            headers = header(config,token)
-            
-            if "Bearer" in headers['Authorization']:
-                return "InforION Login is working"
+        dataframe = pd.read_excel(inputfile)
+        return infor.main_load(url,ionfile,program,method,dataframe,outputfile,start,end)
    
     elif typ == 'E':
 

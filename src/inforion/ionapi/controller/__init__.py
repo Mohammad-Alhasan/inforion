@@ -83,7 +83,7 @@ def sendresults(url,headers, data,timeout=65):
 
 def saveresults(r,df,program,index,chunk,elements=1):
 
-    #print (r)
+    message = ''
     max_elements = elements
     try:
         if chunk == 0:
@@ -97,26 +97,27 @@ def saveresults(r,df,program,index,chunk,elements=1):
             if 'results' in r.keys():
                 
                 if len(r['results'])>0:
-                    
+
                     for key in r['results']:
 
                         methode = key['transaction']
                         
                         
                         if 'errorMessage' in key:
-                            message = key['errorMessage']
-                            message = message.rstrip("\r\n")
-                            message = ' '.join(message.split())
-                            #print ("Fehler in Record " + str(i) + " " + message)
-                            df.loc[newindex, methode] = message
+                            error = key['errorMessage']
+                            error = error.rstrip("\r\n")
+                            error = ' '.join(error.split())
+                            message += methode+':'+error+'|'
 
                         else:
-                            message = 'Ok'
-                            df.loc[newindex, methode] = message
+                            message += methode+':OK|'
+                        
+                        df.loc[newindex, 'MESSAGE'] = message
                         
                         if elements == 1:
                             newindex = newindex + 1
                             elements = max_elements
+                            message = ''
                         else:
                             elements = elements - 1
 

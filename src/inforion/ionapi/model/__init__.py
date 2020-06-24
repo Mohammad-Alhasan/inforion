@@ -23,9 +23,7 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
 import  inforion.ionapi.controller as controller
-
 import inforion.helper.filehandling as filehandling
-
 #import sendresults, saveresults
 #from inforion.ionapi.model import 
 
@@ -34,12 +32,9 @@ MaxChunk = 150
 
 
 
-def execute(url,headers,program,methode,inputfile,outputfile=None,start=0,end=None):
+def execute(url,headers,program,methode,dataframe,outputfile=None,start=0,end=None):
     
-    ext = filehandling.checkfiletype(inputfile)
-    df = filehandling.loadfile(ext,inputfile)
-    #df = pd.read_csv(inputfile)
-    #df = pd.read_excel(inputfile)
+    df = dataframe
     
 
     data = {'program': program,
@@ -117,13 +112,12 @@ def execute(url,headers,program,methode,inputfile,outputfile=None,start=0,end=No
         
 
         print ('Save to file: ' + outputfile)
-        filehandling.saveresults(outputfile,df)
+        filehandling.savetodisk(outputfile,df)
 
     
-def executeSnd(url,headers,program,methode,inputfile,outputfile=None,start=0,end=None):
+def executeSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end=None):
     
-    ext = filehandling.checkfiletype(inputfile)
-    df = filehandling.loadfile(ext,inputfile)
+    df = dataframe
 
 
     tdata = {'program': program,
@@ -187,12 +181,11 @@ def executeSnd(url,headers,program,methode,inputfile,outputfile=None,start=0,end
     if outputfile is not None:
         
         print ('Save to file: ' + outputfile)
-        filehandling.saveresults(outputfile,df)
+        filehandling.savetodisk(outputfile,df)
 
-def executeAsyncSnd(url,headers,program,methode,inputfile,outputfile=None,start=0,end=None):
+def executeAsyncSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end=None):
 
-    ext = filehandling.checkfiletype(inputfile)
-    df = filehandling.loadfile(ext,inputfile)
+    df = dataframe
         
     data = {'program': program,
             'cono':    409 }
@@ -263,4 +256,4 @@ def executeAsyncSnd(url,headers,program,methode,inputfile,outputfile=None,start=
     
     if outputfile is not None:
         print ('Save to file: ' + outputfile)
-        filehandling.saveresults(outputfile,df)
+        filehandling.savetodisk(outputfile,df)
