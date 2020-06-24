@@ -113,6 +113,8 @@ def execute(url,headers,program,methode,dataframe,outputfile=None,start=0,end=No
 
         print ('Save to file: ' + outputfile)
         filehandling.savetodisk(outputfile,df)
+    
+    return df
 
     
 def executeSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end=None):
@@ -182,6 +184,8 @@ def executeSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end
         
         print ('Save to file: ' + outputfile)
         filehandling.savetodisk(outputfile,df)
+    
+    return df
 
 def executeAsyncSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end=None):
 
@@ -257,3 +261,5 @@ def executeAsyncSnd(url,headers,program,methode,dataframe,outputfile=None,start=
     if outputfile is not None:
         print ('Save to file: ' + outputfile)
         filehandling.savetodisk(outputfile,df)
+    
+    return df
