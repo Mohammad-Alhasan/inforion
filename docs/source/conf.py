@@ -18,7 +18,7 @@
 # -- Project information -----------------------------------------------------
 
 project = 'InforION'
-copyright = '2020, Daniel Jordan'
+copyright = '2020, Fellow Consulting AG'
 author = 'Daniel Jordan'
 
 # The full version, including alpha/beta/rc tags

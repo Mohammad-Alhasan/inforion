@@ -15,11 +15,12 @@ stages:
         pool:
           vmImage: "vs2017-win2016"
         strategy:
+          maxParallel: 3
           matrix:
-            #Python36:
-            #  python.version: "3.6"
-            #Python37:
-            #  python.version: "3.7"
+            Python36:
+              python.version: "3.6"
+            Python37:
+              python.version: "3.7"
             Python38:
               python.version: "3.8"
         steps:
@@ -49,7 +50,8 @@ stages:
           - pwsh: |
               refreshenv
               $env:pathext += ';.py'
-              python -m pytest --junitxml=test.xml -o junit_family=xunit1 --cov=inforion --cov-report=xml
+              python -m pytest --junitxml=test.xml -o junit_family=xunit1 --cov=inforion --cov-report=xml --cov-report=html
+              #pytest tests --doctest-modules --junitxml=junit/test-results.xml --cov=. --cov-report=xml --cov-report=html
             displayName: "Test"
           - task: PublishTestResults@2
             inputs:
