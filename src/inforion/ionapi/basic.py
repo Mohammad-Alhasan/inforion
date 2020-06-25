@@ -22,10 +22,10 @@ def addSecs(tm, secs):
         if type(secs) != int:
             secs = int(secs)
         fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
-        fulldate = fulldate + datetime.timedelta(seconds=secs-60)
+        fulldate = fulldate + datetime.timedelta(seconds=secs-90)
     except:
         fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
-        fulldate = fulldate + datetime.timedelta(seconds=800)
+        fulldate = fulldate + datetime.timedelta(seconds=500)
     return fulldate.time()
 
 def load_config(IONFile):
