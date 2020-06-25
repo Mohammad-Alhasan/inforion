@@ -4,6 +4,8 @@ import sys
 import os 
 import json
 
+import time
+import datetime
 
 from requests_oauthlib import OAuth2Session
 from requests.auth import HTTPBasicAuth
@@ -13,16 +15,33 @@ from oauthlib.oauth2 import BackendApplicationClient
 from inforion.helper.dynamic import url_change
 from inforion.helper.urlsplit import spliturl
 
+import inforion.ionapi.model.inforlogin as inforlogin
+
+def addSecs(tm, secs):
+    try:
+        if type(secs) != int:
+            secs = int(secs)
+        fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
+        fulldate = fulldate + datetime.timedelta(seconds=secs-90)
+    except:
+        fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
+        fulldate = fulldate + datetime.timedelta(seconds=500)
+    return fulldate.time()
+
 def load_config(IONFile):
     with open(IONFile) as json_file:
         data = json.load(json_file)
     return data 
 
+
     
+
 
 def login(url,config):
     
     result = spliturl(url)
+
+    start_session = datetime.datetime.now().time()
 
     #print (result)
     base_url = url_change(url) 
@@ -48,12 +67,86 @@ def login(url,config):
     #print (data)
     r = requests.post(url, data=data)
     
+    r = r.json()
+
+    access_token = r['access_token']
+    expires_in = r['expires_in']
+    refresh_token = r['refresh_token']
+    token_type = r['token_type']
+    saak = config['saak']
+    sask = config['sask']
+    client_id = config['ci']
+    client_secret = config['cs']
+  
+    session_expire = addSecs(start_session, expires_in)
+    #session_expire = addSecs(start_session, 30)  
+
+    
+    inforlogin.update(access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
+
     #print (r.status_code)
     #print ("TEST")
     #print (r.json())
 
 
-    return r.json()
+    return r
+
+
+
+def reconnect(url,headers):
+    start_session = datetime.datetime.now().time()
+
+
+    result = spliturl(url)
+
+    #print (result)
+    base_url = url_change(url) 
+    #base_url = "https://mingle-sso.eu1.inforcloudsuite.com/"
+   
+    #base_url = base_url + "/" + result['Company']
+
+        #'https://mingle-sso.eu1.inforcloudsuite.com:443/BVB_DEV'
+
+    url = base_url + "/as/token.oauth2"
+    
+    refresh_token = inforlogin._GLOBAL_refresh_token
+    saak = inforlogin._GLOBAL_saak
+    sask = inforlogin._GLOBAL_sask
+    client_id = inforlogin._GLOBAL_client_id
+    client_secret = inforlogin._GLOBAL_client_secret
+
+    expires_in = inforlogin._GLOBAL_expires_in
+
+    data = {
+                'grant_type' : 'refresh_token',
+                'refresh_token' : refresh_token,
+                'username' : saak,
+                'password' : sask,
+                'client_id' : client_id,
+                'client_secret' : client_secret,
+                'scope' : '',
+                'redirect_uri' : 'https://localhost/'
+    }
+
+    #print (data)
+    r = requests.post(url, data=data)
+    
+    r = r.json()
+    #print (r)
+
+    access_token = r['access_token']
+    #expires_in = str(r['expires_in'])
+    token_type = r['token_type']
+    #print ('new')
+    session_expire = addSecs(start_session, expires_in)
+    #print ('new update')
+    inforlogin.update(access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
+   
+
+    headers['access_token'] = access_token
+
+    return headers
+
 
 
 

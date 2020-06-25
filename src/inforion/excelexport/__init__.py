@@ -1,14 +1,14 @@
 import json
 import os
-import xlwings as xw
 import xlsxwriter
 import openpyxl
+import shutil
 
 path = os.path.abspath(__file__)
 dir_path = os.path.dirname(path)
 
 apiDirPath = dir_path + "/api-files"
-templateFileName = dir_path + "/BVB_Mapping_Template.xlsx"
+templateFileName = dir_path + "/Mapping_Template.xlsx"
 
 class bcolors:
     HEADER = '\033[95m'
@@ -58,29 +58,11 @@ def getParametersList(filepath):
     return parameters_list
 
 
-def createEmptySheet(outputfilename, copytemplatesheet):
-    # Create a workbook and add a worksheet.
+def copyTemplateFile(outputfilename):
     filename = outputfilename
     if(not outputfilename.endswith('.xlsx')):
         filename = filename + '.xlsx'
-
-    workbook = xlsxwriter.Workbook(filename)
-    # worksheet = workbook.add_worksheet(apiName)
-    workbook.close()
-
-    if(copytemplatesheet):
-
-        wb1 = xw.Book(templateFileName)
-        wb2 = xw.Book(filename)
-
-        ws1 = wb1.sheets['Mapping Template']
-        ws1.api.copy_worksheet(after_=wb2.sheets[0].api)
-
-        wb2.save()
-        wb2.app.quit()
-
-    return True
-
+    return shutil.copy(templateFileName,filename)
 
 def checkIfTemplateFileExists():
     return os.path.isfile(templateFileName)
@@ -98,7 +80,8 @@ def getTypeCode(type_str):
 def updateSheetWithData(filename, apiName, params):
     xfile = openpyxl.load_workbook(filename)
 
-    sheet = xfile.get_sheet_by_name('Mapping Template')
+    #sheet = xfile.get_sheet_by_name('Mapping Template')
+    sheet = xfile['Mapping Template']
 
     current_row = 11
     for k, v in params.items():
@@ -137,13 +120,16 @@ def generate_api_template_file(program, outputfile):
     if api_info is not None:
         #print(api_info)
         params = getParametersList(api_info[1])
-        createEmptySheet(filename, True)
+        copyTemplateFile(filename)
         updateSheetWithData(filename, api_info[0], params)
         print(bcolors.OKGREEN + "File generated successfully" + bcolors.ENDC)
+        return True
     else:
         print(bcolors.FAIL +
               "Error: API specifications file not found in directory 'api-files'. Please make sure that specifications file exits" + bcolors.ENDC)
+    return False
 
+"""
 def getAPIProgramNames():
     files = os.listdir(apiDirPath)
     for filename in files:
@@ -152,3 +138,4 @@ def getAPIProgramNames():
             data = json.load(json_file)
             file_api_name = data['info']['title'].split()[0]
             print("\'" + file_api_name + "\'" +',')
+"""

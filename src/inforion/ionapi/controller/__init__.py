@@ -2,6 +2,11 @@
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import * 
 
+import datetime
+
+import inforion.ionapi.model.inforlogin as inforlogin_info
+import inforion.ionapi.basic as inforlogin
+
 class TimeoutHTTPAdapter(HTTPAdapter):
     def __init__(self, *args, **kwargs):
         self.timeout = DEFAULT_TIMEOUT
@@ -51,7 +56,19 @@ def sendresults(url,headers, data,timeout=65):
     http.mount("https://", adapter)
     http.mount("http://", adapter)
 
+   
+
     
+
+
+    if datetime.datetime.now().time() > inforlogin_info._GLOBAL_session_expire:
+        print ("Reconnect")
+        headers = inforlogin.reconnect(url,headers)
+        #print (headers)
+        
+        
+
+
     
     
     try:
@@ -81,7 +98,7 @@ def sendresults(url,headers, data,timeout=65):
     
     return r
 
-def saveresults(r,df,program,index,chunk,elements=1):
+def saveresults(r,df,program,index,chunk,MaxChunk=150,elements=1):
 
     message = ''
     max_elements = elements

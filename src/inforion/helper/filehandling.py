@@ -9,20 +9,20 @@ def checkfiletype(filepath):
 
     # Split the extension from the path and normalise it to lowercase.
     ext = os.path.splitext(filepath)[-1].lower()
-    print (ext)
 
-    if ext == ".csv":
-        print ("file is csv")
-    elif ext == ".xlsx" or ext == ".xls":
-        print ("file is excel")
+
+    if ext == ".csv" or ext == ".xlsx" or ext == ".xls":
+        return ext
     else:
         print ("Inputfile Type is not supported")
         sys.exit(0)
     
-    return ext
+    
 
-def loadfile(ext,file):
+def loadfile(file):
 
+    ext = checkfiletype(file)
+    
     if ext == ".csv":
         df = pd.read_csv(file)
     elif ext == ".xlsx" or ext == ".xls":

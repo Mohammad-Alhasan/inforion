@@ -38,11 +38,20 @@ stages:
             inputs:
               secureFile: datalake_test.csv
 
+          - task: DownloadSecureFile@1
+            inputs:
+              secureFile: credentials.ionapi
+
           - script: |
-              cp 'D:\a\_temp\FellowKey.ionapi' $(Build.SourcesDirectory)
-              cp 'D:\a\_temp\FellowConsulting_Cloud.ionapi' $(Build.SourcesDirectory)
-              cp 'D:\a\_temp\datalake_test.csv' $(Build.SourcesDirectory)
+              move /Y 'D:\a\_temp\FellowKey.ionapi' $(Build.SourcesDirectory)
+              move /Y 'D:\a\_temp\FellowConsulting_Cloud.ionapi' $(Build.SourcesDirectory)
+              move /Y 'D:\a\_temp\datalake_test.csv' $(Build.SourcesDirectory)
+
+              mkdir $(Build.SourcesDirectory)\tests\credentials
+              move /Y 'D:\a\_temp\credentials.ionapi' $(Build.SourcesDirectory)\tests\credentials
+
               dir $(Build.SourcesDirectory)
+              dir $(Build.SourcesDirectory)\tests\credentials
 
               
           - task: UsePythonVersion@0

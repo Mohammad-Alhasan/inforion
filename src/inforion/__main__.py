@@ -23,6 +23,8 @@ from inforion.ionapi.model import *
 from inforion.excelexport import *
 from inforion.datalake.datalake import *
 
+import inforion.helper.filehandling as filehandling
+
 
 
 from inforion.helper.urlsplit import spliturl
@@ -33,7 +35,7 @@ def main():
     print (argv)
     help_string = "Usage:\n./%s -u URL -f IONFile -m method"
     try:
-        opts, args = getopt.getopt(argv, "h:t:u:f:p:m:i:o:s:e:a:b:c:l:", ["typ","url","ionfile","program","method","inputfile","outputfile","start","end","mappingfile","mainsheet","schema","lid"])
+        opts, args = getopt.getopt(argv, "h:t:u:f:p:m:i:o:s:e:a:b:c:l:z:", ["typ","url","ionfile","program","method","inputfile","outputfile","start","end","mappingfile","mainsheet","schema","lid","configfile"])
 
     except getopt.GetoptError:
         print (help_string)
@@ -74,9 +76,22 @@ def main():
              schema = arg
         elif opt in ("-l", "--lid"):
             lid = arg
+        elif opt in ("-z", "--configfile"):
+            configfile = arg
+            with open(configfile) as file:
+                config_json = json.load(file)
+            if ['url','ionfile','program','method','inputfile']:
+                print ("JSON File wrong config")
+                sys.exit(0)
+                
+
+
    
+
+
     if typ == "L":
-        dataframe = pd.read_excel(inputfile)
+        dataframe = filehandling.loadfile(inputfile)
+        #dataframe = pd.read_excel(inputfile)
         return infor.main_load(url,ionfile,program,method,dataframe,outputfile,start,end)
    
     elif typ == 'E':
