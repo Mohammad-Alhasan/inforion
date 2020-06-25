@@ -72,8 +72,10 @@ def login(url,config):
     client_id = config['ci']
     client_secret = config['cs']
   
-    session_expire = addSecs(start_session, int(expires_in))  
+    #session_expire = addSecs(start_session, int(expires_in))  
+    session_expire = addSecs(start_session, 100)  
 
+    
     inforlogin.update(access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
 
     #print (r.status_code)
@@ -107,9 +109,10 @@ def reconnect(url,headers):
     client_id = inforlogin._GLOBAL_client_id
     client_secret = inforlogin._GLOBAL_client_secret
 
-
+    print (refresh_token)
     data = {
-                'grant_type' : refresh_token,
+                'grant_type' : 'refresh_token',
+                'refresh_token' : refresh_token,
                 'username' : saak,
                 'password' : sask,
                 'client_id' : client_id,
@@ -122,14 +125,15 @@ def reconnect(url,headers):
     r = requests.post(url, data=data)
     
     r = r.json()
+    print (r)
 
     access_token = r['access_token']
     expires_in = r['expires_in']
     refresh_token = r['refresh_token']
     token_type = r['token_type']
 
-    session_expire = addSecs(start_session, int(expires_in))  
-
+    session_expire = addSecs(start_session, int(expires_in)) 
+    
     inforlogin.update(access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
 
     #print (r.status_code)
