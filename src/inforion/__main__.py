@@ -97,8 +97,8 @@ def main():
 
 
     if typ == "L":
-        dataframe = filehandling.loadfile(inputfile)
-        #dataframe = pd.read_excel(inputfile)
+        #dataframe = filehandling.loadfile(inputfile)
+        dataframe = pd.read_excel(inputfile)
         return infor.main_load(url,ionfile,program,method,dataframe,outputfile,start,end)
    
     elif typ == 'E':

@@ -23,6 +23,7 @@ def addSecs(tm, secs):
             secs = int(secs)
         fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
         fulldate = fulldate + datetime.timedelta(seconds=secs-300)
+        #fulldate = fulldate + datetime.timedelta(seconds=60)
     except:
         fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
         fulldate = fulldate + datetime.timedelta(seconds=600)
@@ -78,8 +79,8 @@ def login(url,config):
     client_id = config['ci']
     client_secret = config['cs']
   
-    #session_expire = addSecs(start_session, expires_in)
-    session_expire = addSecs(start_session, 600)  
+    session_expire = addSecs(start_session, expires_in)
+    #session_expire = addSecs(start_session, 60)  
 
     
     inforlogin.update(access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
@@ -138,8 +139,8 @@ def reconnect(url,headers):
     #expires_in = str(r['expires_in'])
     token_type = r['token_type']
     #print ('new')
-    #session_expire = addSecs(start_session, expires_in)
-    session_expire = addSecs(start_session, 600)  
+    session_expire = addSecs(start_session, expires_in)
+    #session_expire = addSecs(start_session, 60)  
     #print ('new update')
     inforlogin.update(access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
    
