@@ -83,6 +83,13 @@ def main():
             if ['url','ionfile','program','method','inputfile']:
                 print ("JSON File wrong config")
                 sys.exit(0)
+            else:
+                url = config_json['url']
+                ionfile = config_json['ionfile']
+                program = config_json['program']
+                method = config_json['method']
+                inputfile = config_json['inputfile']
+                outputfile = config_json['output']
                 
 
 

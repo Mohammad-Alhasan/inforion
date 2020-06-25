@@ -68,6 +68,7 @@ setup(
     install_requires=[
         "certifi",
         "oauth",
+        "progressbar",
         "oauthlib",
         "packaging",
         "requests",
@@ -75,6 +76,7 @@ setup(
         "requests-toolbelt",
         "setuptools-git-version",
         "six",
+        "xlsxwriter",
         "inforion"
     ]
 )
