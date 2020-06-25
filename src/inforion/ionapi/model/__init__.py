@@ -1,5 +1,6 @@
 
 import pandas as pd
+import numpy as np
 import requests
 import inforion
 import json
@@ -108,6 +109,9 @@ def execute(url,headers,program,methode,dataframe,outputfile=None,start=0,end=No
         df,data,chunk = controller.saveresults(r,df,methode,index,chunk,methode_count)
 
 
+    df = df.replace(np.nan, '', regex=True)
+    df = df.astype(str)
+
     if outputfile is not None:
         
 
@@ -179,6 +183,9 @@ def executeSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end
         index = index + 1 
         df,data,chunk = saveresults(r,df,methode,index,chunk)
 
+
+    df = df.replace(np.nan, '', regex=True)
+    df = df.astype(str)
 
     if outputfile is not None:
         
@@ -257,6 +264,8 @@ def executeAsyncSnd(url,headers,program,methode,dataframe,outputfile=None,start=
 
         print (r)
 
+    df = df.replace(np.nan, '', regex=True)
+    df = df.astype(str)
     
     if outputfile is not None:
         print ('Save to file: ' + outputfile)
