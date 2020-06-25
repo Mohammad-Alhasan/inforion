@@ -18,8 +18,14 @@ from inforion.helper.urlsplit import spliturl
 import inforion.ionapi.model.inforlogin as inforlogin
 
 def addSecs(tm, secs):
-    fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
-    fulldate = fulldate + datetime.timedelta(seconds=secs)
+    try:
+        if type(secs) != int:
+            secs = int(secs)
+        fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
+        fulldate = fulldate + datetime.timedelta(seconds=secs-60)
+    except:
+        fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
+        fulldate = fulldate + datetime.timedelta(seconds=800)
     return fulldate.time()
 
 def load_config(IONFile):
@@ -72,8 +78,8 @@ def login(url,config):
     client_id = config['ci']
     client_secret = config['cs']
   
-    session_expire = addSecs(start_session, int(expires_in))  
-    #session_expire = addSecs(start_session, 60)  
+    session_expire = addSecs(start_session, expires_in)
+    #session_expire = addSecs(start_session, 30)  
 
     
     inforlogin.update(access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
@@ -108,8 +114,9 @@ def reconnect(url,headers):
     sask = inforlogin._GLOBAL_sask
     client_id = inforlogin._GLOBAL_client_id
     client_secret = inforlogin._GLOBAL_client_secret
+
     expires_in = inforlogin._GLOBAL_expires_in
-    #print (refresh_token)
+
     data = {
                 'grant_type' : 'refresh_token',
                 'refresh_token' : refresh_token,
@@ -130,17 +137,15 @@ def reconnect(url,headers):
     access_token = r['access_token']
     #expires_in = str(r['expires_in'])
     token_type = r['token_type']
-
-    session_expire = addSecs(start_session, expires_in) 
-    
+    #print ('new')
+    session_expire = addSecs(start_session, expires_in)
+    #print ('new update')
     inforlogin.update(access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
+   
 
-    #print (r.status_code)
-    #print ("TEST")
-    #print (r.json())
+    headers['access_token'] = access_token
 
-
-    return r
+    return headers
 
 
 
