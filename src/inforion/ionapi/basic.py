@@ -108,7 +108,7 @@ def reconnect(url,headers):
     sask = inforlogin._GLOBAL_sask
     client_id = inforlogin._GLOBAL_client_id
     client_secret = inforlogin._GLOBAL_client_secret
-
+    expires_in = inforlogin._GLOBAL_expires_in
     #print (refresh_token)
     data = {
                 'grant_type' : 'refresh_token',
@@ -128,10 +128,10 @@ def reconnect(url,headers):
     #print (r)
 
     access_token = r['access_token']
-    expires_in = r['expires_in']
+    #expires_in = str(r['expires_in'])
     token_type = r['token_type']
 
-    session_expire = addSecs(start_session, int(expires_in)) 
+    session_expire = addSecs(start_session, expires_in) 
     
     inforlogin.update(access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
 
