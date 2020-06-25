@@ -73,7 +73,7 @@ def main_load(url=None,ionfile=None,program=None,method=None,dataframe=None,outp
         headers = header(config,token)
         return (headers['Authorization'])
 
-def main_transformation(mappingfile=None,mainsheet=None,stagingdata=None):
+def main_transformation(mappingfile=None,mainsheet=None,stagingdata=None,outputfile=None):
         
     if mappingfile is None:
         return ("Error: Mapping file path missing")
@@ -87,7 +87,7 @@ def main_transformation(mappingfile=None,mainsheet=None,stagingdata=None):
     if stagingdata.empty:
         return("Error: Data frame is empty")
     
-    return (tranform_data(mappingfile,mainsheet,stagingdata))
+    return (tranform_data(mappingfile,mainsheet,stagingdata,outputfile))
 
 
 
