@@ -92,7 +92,7 @@ def execute(url,headers,program,methode,dataframe,outputfile=None,start=0,end=No
                 data['transactions'] = a
 
                 r = controller.sendresults(url,headers,data)
-                df,data,chunk = controller.saveresults(r,df,program,index,chunk,methode_count)
+                df,data,chunk = controller.saveresults(r,df,program,index,chunk,MaxChunk,methode_count)
                 data1 = {}
                 a = []
                  
@@ -105,7 +105,7 @@ def execute(url,headers,program,methode,dataframe,outputfile=None,start=0,end=No
         
         r = controller.sendresults(url,headers,data)
         index = index + 1 
-        df,data,chunk = controller.saveresults(r,df,methode,index,chunk,methode_count)
+        df,data,chunk = controller.saveresults(r,df,methode,index,chunk,MaxChunk,methode_count)
 
 
     if outputfile is not None:
