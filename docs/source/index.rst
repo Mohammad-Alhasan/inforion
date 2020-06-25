@@ -12,6 +12,7 @@ Send Data to InforION ( Datalake, M3, LN )
    :maxdepth: 1
 
    introduction
+   datalake
 
 .. toctree::
    :caption: Usage
