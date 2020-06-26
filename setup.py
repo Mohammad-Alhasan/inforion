@@ -6,9 +6,18 @@ from __future__ import print_function, unicode_literals
 
 from setuptools import find_packages, setup
 
+
 import sys
 
+def parse_requirements(filename):
+    """ load requirements from a pip requirements file """
+    lineiter = (line.strip() for line in open(filename))
+    return [line for line in lineiter if line and not line.startswith("#")]
 
+
+def load_requirements(fname):
+    reqs = parse_requirements(fname, session="test")
+    return [str(ir.req) for ir in reqs]
 
 if sys.version_info < (3, 6):
     print("Python 3.6 or newer is required", file=sys.stderr)
@@ -44,6 +53,11 @@ def readme():
 with open("README.md", "r") as fh:
     long_description = fh.read()
 
+install_reqs = parse_requirements('requirements/main.txt')
+reqs = install_reqs
+
+
+
 setup(
     name="inforion", # Replace with your own username
     version_format='1.{tag}.{commitcount}',
@@ -65,7 +79,12 @@ setup(
     package_data={'inforion': ['ionapi/controller/*','ionapi/model/*','ionapi/*','helper/*','transformation/*']},
     entry_points={'console_scripts': ['inforion = inforion.__main__:main']},
     keywords=['Infor', 'InforION', 'Datalake', 'LN', 'M3'],
-    install_requires=[
+    install_requires=reqs,
+    zip_safe=True)
+)
+
+'''
+install_requires=[
         "certifi",
         "oauth",
         "progressbar",
@@ -77,6 +96,9 @@ setup(
         "setuptools-git-version",
         "six",
         "xlsxwriter",
-        "inforion"
+        "inforion",
+        "pandas",
+        "progressbar2",
+        "openpyxl"
     ]
-)
+'''

@@ -29,7 +29,7 @@ import inforion.helper.filehandling as filehandling
 #from inforion.ionapi.model import 
 
 DEFAULT_TIMEOUT = 50 # seconds
-MaxChunk = 150
+MaxChunk = 100
 
 
 
@@ -113,8 +113,6 @@ def execute(url,headers,program,methode,dataframe,outputfile=None,start=0,end=No
     df = df.astype(str)
 
     if outputfile is not None:
-        
-
         print ('Save to file: ' + outputfile)
         filehandling.savetodisk(outputfile,df)
     
@@ -126,12 +124,16 @@ def executeSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end
     df = dataframe
 
 
-    tdata = {'program': program,
+    data = {'program': program,
+            'extendedresult': True,
             'cono':    409 }
         
     #/ChgOrderInfo
     #/ChgFinancial
     #/ChgBasicData
+
+    methode = methode.split(",")
+    methode_count = len(methode)
     
     mylist = []
     data1 = {}
@@ -145,7 +147,7 @@ def executeSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end
         counter = 0
         df = df[start:end].copy(deep=False)
         df = df.reset_index(drop=True)
-        #print (df.head(10))
+        
         
     #else:
     total_rows = df.shape[0]
@@ -166,29 +168,31 @@ def executeSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end
             row = row.to_json()
             row = json.loads(row)
 
+            for i in methode:
+                data1['transaction'] = i
+                data1['record'] = row
+                a.append(data1.copy())
             
-            
-            data1['transaction'] = methode
-            data1['record'] = row
-            
+           
 
-            a.append(data1.copy())
-
-            
-        
-               
+                
         
         data['transactions'] = a
-        r = sendresults(url,headers,data)
+    
         index = index + 1 
-        df,data,chunk = saveresults(r,df,methode,index,chunk)
+        
+    
+    print (data)
 
+    r = controller.sendresults(url,headers,data)
+
+
+    df,data,chunk = controller.saveresults(r,df,methode,index,chunk)
 
     df = df.replace(np.nan, '', regex=True)
     df = df.astype(str)
 
     if outputfile is not None:
-        
         print ('Save to file: ' + outputfile)
         filehandling.savetodisk(outputfile,df)
     
@@ -196,12 +200,15 @@ def executeSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end
 
 def executeAsyncSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end=None):
 
+    print ("Still in Beta")
+
     df = dataframe
         
     data = {'program': program,
             'cono':    409 }
         
-
+    methode = methode.split(",")
+    methode_count = len(methode)
     
     mylist = []
     data1 = {}
@@ -236,15 +243,10 @@ def executeAsyncSnd(url,headers,program,methode,dataframe,outputfile=None,start=
             row = row.to_json()
             row = json.loads(row)
 
-            if type(methode) == str:
-                data1['transaction'] = methode
+            for i in methode:
+                data1['transaction'] = i
                 data1['record'] = row
                 a.append(data1.copy())
-            elif type(methode) == list:
-                for i in range(len(methode)):
-                    data1['transaction'] = methode(i)
-                    data1['record'] = row
-                    a.append(data1.copy())
 
             
 
@@ -256,13 +258,16 @@ def executeAsyncSnd(url,headers,program,methode,dataframe,outputfile=None,start=
         
         data['transactions'] = a
 
+
         print (data)
 
-        r = sendresults(url,headers,data)
+        r = controller.sendresults(url,headers,data,stream=True)
         index = index + 1 
         #df,data,chunk = saveresults(r,df,methode,index,chunk)
 
-        print (r)
+    print (r)
+
+    '''
 
     df = df.replace(np.nan, '', regex=True)
     df = df.astype(str)
@@ -272,3 +277,5 @@ def executeAsyncSnd(url,headers,program,methode,dataframe,outputfile=None,start=
         filehandling.savetodisk(outputfile,df)
     
     return df
+
+    '''

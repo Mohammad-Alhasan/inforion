@@ -43,7 +43,7 @@ def requests_retry_session(
 
     
 
-def sendresults(url,headers, data,timeout=65):
+def sendresults(url,headers, data,timeout=65,stream=False):
     
     retry_strategy = Retry(
         total=5,
@@ -60,7 +60,7 @@ def sendresults(url,headers, data,timeout=65):
 
     
 
-    print (inforlogin_info._GLOBAL_session_expire)
+    
     if datetime.datetime.now().time() > inforlogin_info._GLOBAL_session_expire:
         print ("Reconnect")
         headers = inforlogin.reconnect(url,headers)
@@ -74,7 +74,7 @@ def sendresults(url,headers, data,timeout=65):
     try:
                     
         #response = requests.request("POST", url, headers=headers, data=json.dumps(data),timeout=15)
-        response = http.request("POST", url, headers=headers, data=json.dumps(data),timeout=timeout)
+        response = http.request("POST", url, headers=headers, data=json.dumps(data),timeout=timeout,stream=stream)
                
         if response.status_code == 200:
             try:
