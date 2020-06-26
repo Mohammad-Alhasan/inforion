@@ -2,6 +2,7 @@
 import pandas as pd
 import json
 import numpy as np
+import decimal
 
 def tranform_data(mappingfile, mainsheet,stagingdata,outputfile=None):
 
@@ -34,6 +35,14 @@ def tranform_data(mappingfile, mainsheet,stagingdata,outputfile=None):
                                 row_dict[row[15]] = str(tab[tb_row[row[38]]])
                             else:
                                 row_dict[row[15]] = str(tb_row[row[38]])
+                    elif row[36] == 'func':
+                        if row[37] == "DIV":
+                            data_values = row[38].split('|')
+                            with decimal.localcontext() as ctx:
+                                if data_values[2] != "":
+                                    ctx.prec = int(data_values[2])
+                                division = decimal.Decimal(tb_row[data_values[0]]) / decimal.Decimal(data_values[1])
+                        row_dict[row[15]] = division
                     elif row[36] == 'const':
                         row_dict[row[15]] = str(row[37])
         rows_list.append(row_dict)
