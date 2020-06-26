@@ -36,8 +36,9 @@ MaxChunk = 100
 def execute(url,headers,program,methode,dataframe,outputfile=None,start=0,end=None):
     
     df = dataframe
+    
+    df = df.replace(np.nan, '', regex=True)
     df = df.astype(str)
-    df = df.fillna('')
 
     data = {'program': program,
             'cono':    409 }
@@ -110,8 +111,8 @@ def execute(url,headers,program,methode,dataframe,outputfile=None,start=0,end=No
         df,data,chunk = controller.saveresults(r,df,methode,index,chunk,MaxChunk,methode_count)
 
 
-    df = df.replace(np.nan, '', regex=True)
-    df = df.astype(str)
+    #df = df.replace(np.nan, '', regex=True)
+    #df = df.astype(str)
 
     if outputfile is not None:
         print ('Save to file: ' + outputfile)

@@ -68,7 +68,7 @@ def sendresults(url,headers, data,timeout=65,stream=False):
         time.sleep(5) 
 
     try:
-        for z in range(0,5):           
+        for z in range(0,10):           
             response = http.request("POST", url, headers=headers, data=json.dumps(data),timeout=timeout,stream=stream)
 
             if response.status_code == 200:
@@ -80,15 +80,17 @@ def sendresults(url,headers, data,timeout=65,stream=False):
                     print (r)
                     r = "JSON Error"
             else:
-                
-                print (" Error try to get new session "+ str(z) + "/5")
-                headers = inforlogin.reconnect(url,headers)
-                time.sleep(5) 
-                if z == 5:
+                if z >= 5:
+                    print (" Error try to get complete new Session "+ str(z) + "/10")
+                    headers = inforlogin.reconnect2(url,headers)
+                    time.sleep(10) 
+                elif z < 5:
+                    print (" Error try to get new session "+ str(z) + "/10")
+                    headers = inforlogin.reconnect(url,headers)
+                    time.sleep(10)     
+                elif z == 10:
                     sys.exit(0)    
-                
-                
-    
+
     except requests.exceptions.TooManyRedirects:
         print ("Too many redirects")
         r = "Error - Too many redirects"

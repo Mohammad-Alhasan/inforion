@@ -14,10 +14,12 @@ this._GLOBAL_saak = None
 this._GLOBAL_sask = None
 this._GLOBAL_client_id = None
 this._GLOBAL_client_secret = None
+this._GLOBAL_ti = None
 
 
 
-def update(access_token, expires_in,refresh_token,token_type,start_session,session_expire,saak,sask,client_id,client_secret):
+def update(ti,access_token, expires_in,refresh_token,token_type,start_session,session_expire,saak,sask,client_id,client_secret):
+    this._GLOBAL_ti = access_token
     this._GLOBAL_access_token = access_token
     this._GLOBAL_expires_in = expires_in
     this._GLOBAL_refresh_token = refresh_token
