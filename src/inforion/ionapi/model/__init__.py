@@ -36,6 +36,7 @@ MaxChunk = 100
 def execute(url,headers,program,methode,dataframe,outputfile=None,start=0,end=None):
     
     df = dataframe
+    df = df.astype(str)
     
 
     data = {'program': program,

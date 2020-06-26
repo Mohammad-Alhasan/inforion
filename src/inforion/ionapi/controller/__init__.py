@@ -1,3 +1,6 @@
+import sys
+#from io import BytesIO
+#import gzip
 
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import * 
@@ -56,41 +59,40 @@ def sendresults(url,headers, data,timeout=65,stream=False):
     http.mount("https://", adapter)
     http.mount("http://", adapter)
 
-   
 
-    
-
-    
     if datetime.datetime.now().time() > inforlogin_info._GLOBAL_session_expire:
         
         headers = inforlogin.reconnect(url,headers)
         print (" Reconnect and Next Reconnect will be " + str(inforlogin_info._GLOBAL_session_expire))
         #print (headers)
-        
-        
+        time.sleep(5) 
 
-
-    
-    
     try:
-                    
-        #response = requests.request("POST", url, headers=headers, data=json.dumps(data),timeout=15)
-        response = http.request("POST", url, headers=headers, data=json.dumps(data),timeout=timeout,stream=stream)
-               
-        if response.status_code == 200:
-            try:
-                r =  response.json()        
+        for z in range(0,5):           
+            response = http.request("POST", url, headers=headers, data=json.dumps(data),timeout=timeout,stream=stream)
+
+            if response.status_code == 200:
+                try:
+                    r =  response.json()   
+                    break     
     
-            except ValueError:
-                r = " JSON Error"
-        else:
-            r = "Error Respone Code" + str (response.status_code)
-    except requests.exceptions.Timeout:
-        print ("Timeout")
-        r = "Error Timeout"
+                except ValueError:
+                    print (r)
+                    r = "JSON Error"
+            else:
+                
+                print (" Error try to get new session "+ str(z) + "/5")
+                headers = inforlogin.reconnect(url,headers)
+                time.sleep(5) 
+                if z == 5:
+                    sys.exit(0)    
+                
+                
+    
     except requests.exceptions.TooManyRedirects:
         print ("Too many redirects")
         r = "Error - Too many redirects"
+        raise SystemExit(e)
     except requests.exceptions.RequestException as e:
         # catastrophic error. bail.
         print ("OOps: Something Else",e)
