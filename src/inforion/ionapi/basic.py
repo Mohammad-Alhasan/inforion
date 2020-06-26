@@ -21,8 +21,12 @@ def addSecs(tm, secs):
     try:
         if type(secs) != int:
             secs = int(secs)
-        fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
-        fulldate = fulldate + datetime.timedelta(seconds=secs-300)
+        if secs > 3600:
+            fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
+            fulldate = fulldate + datetime.timedelta(seconds=3600)
+        else:
+            fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
+            fulldate = fulldate + datetime.timedelta(seconds=secs-400)
         #fulldate = fulldate + datetime.timedelta(seconds=60)
     except:
         fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
