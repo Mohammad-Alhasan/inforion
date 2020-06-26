@@ -62,8 +62,9 @@ def sendresults(url,headers, data,timeout=65,stream=False):
 
     
     if datetime.datetime.now().time() > inforlogin_info._GLOBAL_session_expire:
-        print ("Reconnect")
+        
         headers = inforlogin.reconnect(url,headers)
+        print (" Reconnect and Next Reconnect will be " + str(inforlogin_info._GLOBAL_session_expire))
         #print (headers)
         
         

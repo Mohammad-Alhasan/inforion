@@ -125,12 +125,9 @@ def executeSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end
 
 
     data = {'program': program,
-            'extendedresult': True,
             'cono':    409 }
         
-    #/ChgOrderInfo
-    #/ChgFinancial
-    #/ChgBasicData
+
 
     methode = methode.split(",")
     methode_count = len(methode)
