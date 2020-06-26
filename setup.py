@@ -80,7 +80,7 @@ setup(
     entry_points={'console_scripts': ['inforion = inforion.__main__:main']},
     keywords=['Infor', 'InforION', 'Datalake', 'LN', 'M3'],
     install_requires=reqs,
-    zip_safe=True)
+    zip_safe=True
 )
 
 '''
