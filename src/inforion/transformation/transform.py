@@ -27,6 +27,7 @@ def tranform_data(mappingfile, mainsheet,stagingdata,outputfile=None):
                         tab = {}
                         for i,val in sheet_to_df_map[row[37]].iterrows():
                             if i >= 7:
+                                if str(val[0]) == 'nan': val[0] = ''
                                 tab[str(val[0])] = str(val[1])
                         if row[38] and not row[38] is np.nan:
                             if tb_row[row[38]] in tab:
