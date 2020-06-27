@@ -1,6 +1,7 @@
 from enum import Enum
 import requests
 import inforion
+import inforion.ionapi.model.inforlogin as inforlogin
 import logging as log
 import json
 
@@ -14,8 +15,8 @@ class ObjectSchemaType(Enum):
 
 def get_datacatalog_ping(base_url, ion_file):
     url_path = '/IONSERVICES/datacatalog/v1/status/ping'
-    config = inforion.load_config(ion_file)
-    token = inforion.login(base_url, config)
+    config = inforlogin.load_config(ion_file)
+    token = inforlogin.login()
     headers = {
         "accept": "application/json",
         "Authorization": "Bearer {}".format(token['access_token'])
@@ -27,8 +28,8 @@ def get_datacatalog_ping(base_url, ion_file):
 
 def delete_datacatalog_object(object_name, base_url, ion_file):
     url_path = '/IONSERVICES/datacatalog/v1/object/{}'.format(object_name)
-    config = inforion.load_config(ion_file)
-    token = inforion.login(base_url, config)
+    config = inforlogin.load_config(ion_file)
+    token = inforlogin.login()
     headers = {
         "accept": "application/json",
         "Authorization": "Bearer {}".format(token['access_token'])
@@ -47,8 +48,8 @@ def post_datacatalog_object(object_name, object_type: ObjectSchemaType, schema, 
         raise ValueError('Schema cannot be None')
 
     url_path = '/IONSERVICES/datacatalog/v1/object'
-    config = inforion.load_config(ion_file)
-    token = inforion.login(base_url, config)
+    config = inforlogin.load_config(ion_file)
+    token = inforlogin.login()
     headers = {
         "Content-type": "application/json",
         "Accept": "application/json",
