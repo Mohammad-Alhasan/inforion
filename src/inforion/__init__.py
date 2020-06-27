@@ -25,6 +25,8 @@ import os.path
 def main_load(url=None,ionfile=None,program=None,method=None,dataframe=None,outputfile=None,start=None,end=None):
      
     
+    if validators.url(url) != True:
+        return ("Error: URL is not valid")
     
     if os.path.exists(ionfile) == False:
         return ("Error: File does not exist")
@@ -32,8 +34,6 @@ def main_load(url=None,ionfile=None,program=None,method=None,dataframe=None,outp
         config = inforlogin.load_config(ionfile)
         
 
-    if validators.url(url) != True:
-        return ("Error: URL is not valid")
     
     result = spliturl(url)
 
