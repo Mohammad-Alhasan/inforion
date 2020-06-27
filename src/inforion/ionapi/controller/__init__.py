@@ -7,8 +7,8 @@ from inforion.ionapi.model import *
 
 import datetime
 
-import inforion.ionapi.model.inforlogin as inforlogin_info
-import inforion.ionapi.basic as inforlogin
+import inforion.ionapi.model.inforlogin as inforlogin
+#import inforion.ionapi.basic as inforlogin
 
 class TimeoutHTTPAdapter(HTTPAdapter):
     def __init__(self, *args, **kwargs):
@@ -60,15 +60,15 @@ def sendresults(url,headers, data,timeout=65,stream=False):
     http.mount("http://", adapter)
 
 
-    if datetime.datetime.now().time() > inforlogin_info._GLOBAL_session_expire:
+    if datetime.datetime.now().time() > inforlogin._GLOBAL_session_expire:
         
-        headers = inforlogin.reconnect(url,headers)
-        print (" Reconnect and Next Reconnect will be " + str(inforlogin_info._GLOBAL_session_expire))
+        headers = inforlogin.reconnect()
+        print (" Reconnect and Next Reconnect will be " + str(inforlogin._GLOBAL_session_expire))
         #print (headers)
         time.sleep(5) 
 
     try:
-        for z in range(0,10):           
+        for z in range(0,5):           
             response = http.request("POST", url, headers=headers, data=json.dumps(data),timeout=timeout,stream=stream)
 
             if response.status_code == 200:
@@ -80,15 +80,12 @@ def sendresults(url,headers, data,timeout=65,stream=False):
                     print (r)
                     r = "JSON Error"
             else:
-                if z >= 5:
-                    print (" Error try to get complete new Session "+ str(z) + "/10")
-                    headers = inforlogin.reconnect2(url,headers)
-                    time.sleep(10) 
-                elif z < 5:
-                    print (" Error try to get new session "+ str(z) + "/10")
-                    headers = inforlogin.reconnect(url,headers)
+                 
+                if z < 5:
+                    print (" Error try to get new session "+ str(z) + "/5")
+                    headers = inforlogin.reconnect()
                     time.sleep(10)     
-                elif z == 10:
+                elif z == 5:
                     sys.exit(0)    
 
     except requests.exceptions.TooManyRedirects:

@@ -3,16 +3,16 @@ import logging as log
 import pandas as pd
 import requests
 import inforion
-from inforion.ionapi.basic import load_config, login
+import inforion.ionapi.model.inforlogin as inforlogin
 
 
 def post_to_data_lake(url, ionfile,imslid, inputfile, schema):
-    config = load_config(ionfile)
-    token = login(url,config)
+    config = inforlogin.load_config(ionfile)
+    token = inforlogin.login()
    
     df = pd.read_csv(inputfile, sep=',')
     
-    headers = inforion.header(config, token)
+    headers = inforlogin.header()
     lake = df.to_csv(sep='|', index=False)
 
     payload = {

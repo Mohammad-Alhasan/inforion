@@ -8,9 +8,13 @@ import os
 import pandas as pd
 
 # Import the test framework (this is a hypothetical module)
+
+import inforion.ionapi.model.inforlogin as inforlogin
 from inforion import *
 
 import inforion.helper.filehandling as filehandling
+
+
 
 def test_urlnotvailid():
     assert  "Error: URL is not valid" in main_load("google","")
@@ -20,6 +24,13 @@ def test_filenotexists():
  
 def test_checklogin():
     assert  "Bearer" in main_load("https://mingle-sso.eu1.inforcloudsuite.com:443/BVB_DEV","FellowKey.ionapi",None,"checklogin")
+
+def test_reconnect():
+    data = inforlogin.load_config("FellowKey.ionapi")
+    r = inforlogin.login()
+    headers = inforlogin.header()
+    headers2 = inforlogin.reconnect()
+    assert headers["Authorization"] != headers2["Authorization"]
 
 def test_checkfiletype_csv():
     assert  ".csv" in  filehandling.checkfiletype("Test.csv")

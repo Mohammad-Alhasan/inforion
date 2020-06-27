@@ -15,7 +15,7 @@ import inforion as infor
 #from requests.auth import HTTPBasicAuth
 #from oauthlib.oauth2 import BackendApplicationClient
 
-from inforion.ionapi.basic import load_config,login,header
+
 from inforion.transformation.transform import tranform_data
 #from inforion.ionapi.MMS import AddItmBasic,MMS021,MMS021bulk,MMS021bulk2,execute,executeSnd,executeAsyncSnd
 from inforion.ionapi.controller import *
