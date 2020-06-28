@@ -5,7 +5,8 @@ import sys
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import * 
 
-import datetime
+from datetime import datetime, timedelta
+import time
 
 import inforion.ionapi.model.inforlogin as inforlogin
 #import inforion.ionapi.basic as inforlogin
@@ -60,16 +61,17 @@ def sendresults(url,headers, data,timeout=65,stream=False):
     http.mount("http://", adapter)
 
 
-    if datetime.datetime.now().time() > inforlogin._GLOBAL_session_expire:
+    if datetime.now() > inforlogin._GLOBAL_session_expire:
         
         headers = inforlogin.reconnect()
         print (" Reconnect and Next Reconnect will be " + str(inforlogin._GLOBAL_session_expire))
-        #print (headers)
-        time.sleep(5) 
+        
+   
 
     try:
         for z in range(0,5):           
-            response = http.request("POST", url, headers=headers, data=json.dumps(data),timeout=timeout,stream=stream)
+            #print (inforlogin.header())
+            response = http.request("POST", url, headers=inforlogin.header(), data=json.dumps(data),timeout=timeout,stream=stream)
 
             if response.status_code == 200:
                 try:

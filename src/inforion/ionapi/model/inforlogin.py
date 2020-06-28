@@ -9,8 +9,7 @@ from oauthlib.oauth2 import BackendApplicationClient
 
 import requests
 
-import time
-import datetime
+from datetime import datetime, timedelta
 
 
 this = sys.modules[__name__]
@@ -78,7 +77,7 @@ def login():
     
     
 
-    start_session = datetime.datetime.now().time()
+    start_session = datetime.now()
 
     
 
@@ -122,25 +121,17 @@ def login():
 
 
 def addSecs(tm, secs):
-    try:
-        if type(secs) != int:
-            secs = int(secs)
-        if secs > 3600:
-            fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
-            fulldate = fulldate + datetime.timedelta(seconds=3600)
-        else:
-            fulldate = datetime.datetime(100, 1, 1, tm.hour, tm.minute, tm.second)
-            fulldate = fulldate + datetime.timedelta(seconds=secs-400)
-        #fulldate = fulldate + datetime.timedelta(seconds=60)
-    except:
-        fulldate = datetime.datetime(100, 1, 1,tm.hour, tm.minute, tm.second)
-        fulldate = fulldate + datetime.timedelta(seconds=600)
-    return fulldate.time()
+    
+    if type(secs) != int:
+        secs = int(secs)
+    expires_date = tm + timedelta(seconds=secs)
+    
+    return expires_date
 
 
 
 def reconnect():
-    start_session = datetime.datetime.now().time()
+    start_session = datetime.now()
 
 
     url = this._GLOBAL_sso_url + this._GLOBAL_token_outh2
@@ -172,12 +163,14 @@ def reconnect():
     r = r.json()
     #print (r)
 
-    session_expire = addSecs(start_session, expires_in)
+    this._GLOBAL_session_expire = addSecs(start_session, r['expires_in'])
     if 'access_token' not in r:
         print ('Error Reconnect Json')
         sys.exit(0)
     else:
         this._GLOBAL_access_token = r['access_token']
+
+     
 
     #update(ti,access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
 
