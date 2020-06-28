@@ -10,6 +10,7 @@ import os
 def spliturl(url):
     result = {}
     path = urllib.parse.urlparse(url).path
+    
     t = os.path.normpath(path).split(os.path.sep)
 
 
