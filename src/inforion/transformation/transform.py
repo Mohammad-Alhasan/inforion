@@ -3,6 +3,7 @@ import pandas as pd
 import json
 import numpy as np
 import decimal
+import datetime
 
 def tranform_data(mappingfile, mainsheet,stagingdata,outputfile=None):
 
@@ -44,6 +45,8 @@ def tranform_data(mappingfile, mainsheet,stagingdata,outputfile=None):
                                 division = decimal.Decimal(tb_row[data_values[0]]) / decimal.Decimal(data_values[1])
                         row_dict[row[15]] = division
                     elif row[36] == 'const':
+                        if isinstance(row[37], datetime.datetime):
+                            row[37] = row[37].strftime("%d/%m/%Y")
                         row_dict[row[15]] = str(row[37])
         rows_list.append(row_dict)
     
