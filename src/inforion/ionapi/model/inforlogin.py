@@ -35,6 +35,34 @@ this._GLOBAL_sso_url = None
 # directory for token 
 this._GLOBAL_token_outh2 = None
 
+def configfile(filename):
+    with open(filename) as file:
+        config_json = json.load(file)
+                
+    if all (k in config_json for k in ('url','ionfile','program','method','inputfile')):
+        typ = "L"
+        url = config_json['url']
+        ionfile = config_json['ionfile']
+        program = config_json['program']
+        method = config_json['method']
+        inputfile = config_json['inputfile']
+        outputfile = config_json['outputfile']
+    
+        
+    else:
+        print ("JSON File wrong config")
+        sys.exit(0)
+    
+    if "start" in config_json:
+            start = config_json["start"]
+    else:
+        start = None
+    if "end" in config_json:
+        end = config_json["end"]
+    else:
+        end = None
+
+
 def update(ti,access_token, expires_in,refresh_token,token_type,start_session,session_expire,saak,sask,client_id,client_secret):
     this._GLOBAL_ti = ti
     this._GLOBAL_access_token = access_token

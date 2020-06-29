@@ -89,26 +89,28 @@ def main():
                 method = config_json['method']
                 inputfile = config_json['inputfile']
                 outputfile = config_json['outputfile']
-                if "start" in config_json:
-                    start = config_json["start"]
-                else:
-                    start = None
-                if "end" in config_json["end"]:
-                    end = config_json["end"]
-                else:
-                    end = None
+                
             else:
                 print ("JSON File wrong config")
                 sys.exit(0)
                 
 
+            if "start" in config_json:
+                start = config_json["start"]
+            else:
+                start = None
+
+            if "end" in config_json:
+                end = config_json["end"]
+            else:
+                end = None
 
    
 
 
     if typ == "L":
         #dataframe = filehandling.loadfile(inputfile)
-        dataframe = pd.read_excel(inputfile)
+        dataframe = pd.read_excel(inputfile,dtype=str)
         return infor.main_load(url,ionfile,program,method,dataframe,outputfile,start,end)
    
     elif typ == 'E':

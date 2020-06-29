@@ -45,3 +45,6 @@ def getDataFrame(inputfile):
     ext = checkfiletype(inputfile)
     df = loadfile(ext,inputfile)
     return df
+
+
+                
