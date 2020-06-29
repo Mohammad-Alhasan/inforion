@@ -55,7 +55,7 @@ def sendresults(url,headers, data,timeout=65,stream=False):
         status_forcelist=[429, 500, 502, 503, 504],
         method_whitelist=["HEAD", "POST","GET", "OPTIONS"]
     )
-    adapter = HTTPAdapter(max_retries=retry_strategy)
+    adapter = HTTPAdapter(max_retries=retry_strategy,pool_connections=100,pool_maxsize=100)
     http = requests.Session()
     http.mount("https://", adapter)
     http.mount("http://", adapter)

@@ -80,16 +80,26 @@ def main():
             configfile = arg
             with open(configfile) as file:
                 config_json = json.load(file)
-            if ['url','ionfile','program','method','inputfile']:
-                print ("JSON File wrong config")
-                sys.exit(0)
-            else:
+                
+            if all (k in config_json for k in ('url','ionfile','program','method','inputfile')):
+                typ = "L"
                 url = config_json['url']
                 ionfile = config_json['ionfile']
                 program = config_json['program']
                 method = config_json['method']
                 inputfile = config_json['inputfile']
-                outputfile = config_json['output']
+                outputfile = config_json['outputfile']
+                if "start" in config_json:
+                    start = config_json["start"]
+                else:
+                    start = None
+                if "end" in config_json["end"]:
+                    end = config_json["end"]
+                else:
+                    end = None
+            else:
+                print ("JSON File wrong config")
+                sys.exit(0)
                 
 
 
