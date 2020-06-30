@@ -28,24 +28,3 @@ def post_messaging_v2_multipart_message(parameter_request, message_payload):
     log.info('messaging v2 multipart message: {}'.format(res.content))
 
     return res
-
-
-def post_messaging_v3_multipart_message(logical_id, schema_name, document_content):
-    url = inforlogin.base_url() + '/IONSERVICES/api/ion/messaging/service/v3/multipartMessage'
-    headers = inforlogin.header()
-    data = {
-        "document": {
-            "characterSet": "UTF-8",
-            "encoding": "NONE",
-            "value": document_content
-        },
-        "documentName": schema_name,
-        "fromLogicalId": logical_id,
-        "messageId": "message72876bbc4e6f49dd8a32a8f7b2017778",
-        "toLogicalId": "lid://default"
-    }
-
-    res = requests.post(url, headers=headers, data=json.dumps(data))
-    log.info('messaging v3 multipart message: {}'.format(res.content))
-
-    return res

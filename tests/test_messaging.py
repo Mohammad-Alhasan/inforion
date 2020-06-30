@@ -2,8 +2,7 @@ import pytest
 
 from inforion.datacatalog.datacatalog import post_datacatalog_object, ObjectSchemaType, delete_datacatalog_object
 from inforion.ionapi.model import inforlogin
-from inforion.messaging.messaging import get_messaging_ping, post_messaging_v2_multipart_message, \
-    post_messaging_v3_multipart_message
+from inforion.messaging.messaging import get_messaging_ping, post_messaging_v2_multipart_message
 
 
 def test_get_messaging_ping():
@@ -12,18 +11,6 @@ def test_get_messaging_ping():
     assert get_messaging_ping().status_code == 200
 
 
-@pytest.mark.skip()
-def test_post_messaging_v3_multipart_message():
-    inforlogin.load_config('credentials/credentials.ionapi')
-    inforlogin.login()
-
-    with open("data/sample.csv", "r") as file:
-        message_payload = file.read()
-
-    assert post_messaging_v3_multipart_message('lid://infor.ims.mongooseims', 'AnyDocument', message_payload) == 200
-
-
-@pytest.mark.skip()
 def test_post_messaging_v2_multipart_message():
     inforlogin.load_config('credentials/credentials.ionapi')
     inforlogin.login()
@@ -80,7 +67,7 @@ def test_post_messaging_v2_multipart_message():
     with open("data/sample.csv", "rb") as file:
         message_payload = file.read()
 
-    assert post_messaging_v2_multipart_message(parameter_request, message_payload) == 200
+    assert post_messaging_v2_multipart_message(parameter_request, message_payload).status_code == 201
 
     # delete Document Schema
     assert delete_datacatalog_object(object_name).status_code == 200
