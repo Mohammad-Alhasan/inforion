@@ -68,6 +68,3 @@ def test_post_messaging_v2_multipart_message():
         message_payload = file.read()
 
     assert post_messaging_v2_multipart_message(parameter_request, message_payload).status_code == 201
-
-    # delete Document Schema
-    assert delete_datacatalog_object(object_name).status_code == 200
