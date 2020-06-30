@@ -5,13 +5,13 @@ from inforion.ionapi.model import inforlogin
 
 def test_get_datacatalog_ping():
     inforlogin.load_config('credentials/credentials.ionapi')
-    token = inforlogin.login()
-    assert get_datacatalog_ping(token).status_code == 200
+    inforlogin.login()
+    assert get_datacatalog_ping().status_code == 200
 
 
 def test_post_delete_datacatalog_object():
     inforlogin.load_config('credentials/credentials.ionapi')
-    token = inforlogin.login()
+    inforlogin.login()
     object_name = 'CSVSchema1'
     schema = {
         "$schema": "http://json-schema.org/draft-06/schema#",
@@ -49,5 +49,5 @@ def test_post_delete_datacatalog_object():
     properties = {
         "VariationPath": "$['ID']"
     }
-    assert post_datacatalog_object(token, object_name, ObjectSchemaType.JSON, schema, properties).status_code == 200
-    assert delete_datacatalog_object(token, object_name).status_code == 200
+    assert post_datacatalog_object(object_name, ObjectSchemaType.DSV, schema, properties).status_code == 200
+    assert delete_datacatalog_object(object_name).status_code == 200

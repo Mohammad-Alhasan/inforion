@@ -1,6 +1,5 @@
 from enum import Enum
 import requests
-import inforion
 import inforion.ionapi.model.inforlogin as inforlogin
 import logging as log
 import json
@@ -13,29 +12,23 @@ class ObjectSchemaType(Enum):
     JSON = 'JSON'
 
 
-def get_datacatalog_ping(token):
+def get_datacatalog_ping():
     url = inforlogin.base_url() + '/IONSERVICES/datacatalog/v1/status/ping'
-    headers = {
-        "accept": "application/json",
-        "Authorization": "Bearer {}".format(token['access_token'])
-    }
+    headers = inforlogin.header()
     res = requests.get(url, headers=headers)
     log.info('datacatalog ping: {}'.format(res.content))
     return res
 
 
-def delete_datacatalog_object(token, object_name):
+def delete_datacatalog_object(object_name):
     url = inforlogin.base_url() + '/IONSERVICES/datacatalog/v1/object/{}'.format(object_name)
-    headers = {
-        "accept": "application/json",
-        "Authorization": "Bearer {}".format(token['access_token'])
-    }
+    headers = inforlogin.header()
     res = requests.delete(url, headers=headers)
     log.info('datacatalog delete: {}'.format(res.content))
     return res
 
 
-def post_datacatalog_object(token, object_name, object_type: ObjectSchemaType, schema, properties):
+def post_datacatalog_object(object_name, object_type: ObjectSchemaType, schema, properties):
 
     if object_type == ObjectSchemaType.ANY and (schema is not None or properties is not None):
         raise ValueError('Schema and properties should be None')
@@ -44,19 +37,13 @@ def post_datacatalog_object(token, object_name, object_type: ObjectSchemaType, s
         raise ValueError('Schema cannot be None')
 
     url = inforlogin.base_url() + '/IONSERVICES/datacatalog/v1/object'
-
-    headers = {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "Bearer {}".format(token['access_token'])
-    }
+    headers = inforlogin.header()
     data = {
         "name": object_name,
         "type": object_type.value,
         "schema": schema,
         "properties": properties
     }
-
     res = requests.post(url, headers=headers, data=json.dumps(data))
     log.info('datacatalog post: {}'.format(res.content))
     return res
