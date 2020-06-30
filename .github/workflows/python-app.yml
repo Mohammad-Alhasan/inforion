@@ -9,7 +9,6 @@ jobs:
     strategy:
       matrix:
         python-version: [3.6, 3.7, 3.8]
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
@@ -20,23 +19,11 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         python -m pip install flake8
-        pip install -r requirements/test.txt
-    
-    - shell: bash
+        pip install -r requirements/test.txt  
+    - name: Decrypt large secret
+      run: ./.github/scripts/decrypt_secret.sh
       env:
-        FellowKey: ${{ secrets.FellowKey }}
-      run: |
-        echo $FellowKey > FellowKey.ionapi
-    - shell: bash
-        env:
-          FellowConsulting_Cloud: ${{ FellowConsulting_Cloud.CREDENTIALS }}
-    - shell: bash
-        env:
-          CREDENTIALS: ${{ secrets.CREDENTIALS }}
-      run: |
-        echo $CREDENTIALS > credentials/credentials.ionapi
-      run: |
-        echo $FellowConsulting_Cloud > FellowConsulting_Cloud.ionapi
+        LARGE_SECRET_PASSPHRASE: ${{ secrets.LARGE_SECRET_PASSPHRASE }}
     - name: Lint with flake8
       run: |
         # stop the build if there are Python syntax errors or undefined names
