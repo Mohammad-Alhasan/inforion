@@ -16,12 +16,11 @@ import inforion as infor
 #from oauthlib.oauth2 import BackendApplicationClient
 
 
-from inforion.transformation.transform import tranform_data
+from inforion.transformation.transform import parallelize_tranformation
 #from inforion.ionapi.MMS import AddItmBasic,MMS021,MMS021bulk,MMS021bulk2,execute,executeSnd,executeAsyncSnd
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *  
 from inforion.excelexport import *
-from inforion.datalake.datalake import *
 
 import inforion.helper.filehandling as filehandling
 
@@ -125,7 +124,7 @@ def main():
 
     elif typ == 'T':
         inputdata = pd.read_excel(inputfile)
-        return tranform_data(mappingfile,mainsheet,inputdata,outputfile)
+        return infor.main_transformation(mappingfile,mainsheet,inputdata,outputfile)
     
     elif typ == 'D':
             post_to_data_lake(url, ionfile, lid, inputfile, schema)

@@ -11,7 +11,7 @@ import sys
 import inforion.ionapi.model.inforlogin as inforlogin
 
 
-from inforion.transformation.transform import tranform_data
+from inforion.transformation.transform import parallelize_tranformation
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import * 
 from inforion.helper.urlsplit import spliturl
@@ -90,7 +90,7 @@ def main_transformation(mappingfile=None,mainsheet=None,stagingdata=None,outputf
     if stagingdata.empty:
         return("Error: Data frame is empty")
     
-    return (tranform_data(mappingfile,mainsheet,stagingdata,outputfile))
+    return (parallelize_tranformation(mappingfile,mainsheet,stagingdata,outputfile))
 
 
 
