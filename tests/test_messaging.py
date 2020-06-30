@@ -11,7 +11,7 @@ def test_get_messaging_ping():
     assert get_messaging_ping(token).status_code == 200
 
 
-# @pytest.mark.skip()
+@pytest.mark.skip()
 def test_post_messaging_v2_multipart_message():
     inforlogin.load_config('credentials/credentials.ionapi')
     token = inforlogin.login()
@@ -54,7 +54,7 @@ def test_post_messaging_v2_multipart_message():
     properties = {
 
     }
-    # assert post_datacatalog_object(token, object_name, ObjectSchemaType.DSV, schema, properties).status_code == 200
+    assert post_datacatalog_object(token, object_name, ObjectSchemaType.DSV, schema, properties).status_code == 200
 
     # post Document
     parameter_request = {
