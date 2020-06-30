@@ -38,7 +38,7 @@ def tranform_data(mappingfile, mainsheet,stagingdata,outputfile=None):
                                 else:
                                     row_dict[row[15]] = str(tb_row[row[38]])
                         elif row[36].strip().lower() == 'func':
-                            if row[37] == "DIV":
+                            if row[37].strip().lower() == "div":
                                 data_values = row[38].split('|')
                                 with decimal.localcontext() as ctx:
                                     if data_values[2] != "":
