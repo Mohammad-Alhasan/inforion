@@ -29,10 +29,6 @@ stages:
             displayName: 'Download ION certificate'
             inputs:
               secureFile: 'FellowKey.ionapi'
-
-          - task: DownloadSecureFile@1
-            inputs:
-              secureFile: FellowConsulting_Cloud.ionapi
           
           - task: DownloadSecureFile@1
             inputs:
@@ -98,10 +94,29 @@ stages:
             displayName: 'Download ION certificate'
             inputs:
               secureFile: 'FellowKey.ionapi'
+          - task: DownloadSecureFile@1
+            name: Datalaketest
+            inputs:
+              secureFile: datalake_test.csv
+          - task: DownloadSecureFile@1
+            name: Credentialsionapi
+            inputs:
+              secureFile: credentials.ionapi              
           - script: |
               echo Installing $(caCertificate.secureFilePath) to the trusted CA directory...
               sudo cp $(FellowKeyionapi.secureFilePath) $(Pipeline.Workspace)
               sudo cp $(FellowKeyionapi.secureFilePath) /home/vsts/work/1/s/
+
+              sudo cp $(Datalaketest.secureFilePath) $(Pipeline.Workspace)
+              sudo cp $(Datalaketest.secureFilePath) /home/vsts/work/1/s/
+
+              sudo cp $(Credentialsionapi.secureFilePath) $(Pipeline.Workspace)
+              mkdir $(Build.SourcesDirectory)\credentials
+              sudo cp $(Credentialsionapi.secureFilePath) /home/vsts/work/1/s/credentials
+
+              ls $(Build.SourcesDirectory)
+              ls $(Build.SourcesDirectory)\credentials
+
           - task: UsePythonVersion@0
             inputs:
               versionSpec: "$(python.version)"
