@@ -7,14 +7,14 @@ from inforion.messaging.messaging import get_messaging_ping, post_messaging_v2_m
 
 def test_get_messaging_ping():
     inforlogin.load_config('credentials/credentials.ionapi')
-    token = inforlogin.login()
-    assert get_messaging_ping(token).status_code == 200
+    inforlogin.login()
+    assert get_messaging_ping().status_code == 200
 
 
 @pytest.mark.skip()
 def test_post_messaging_v2_multipart_message():
     inforlogin.load_config('credentials/credentials.ionapi')
-    token = inforlogin.login()
+    inforlogin.login()
 
     # create Document Schema
     object_name = 'CSVSchema2'
@@ -54,7 +54,7 @@ def test_post_messaging_v2_multipart_message():
     properties = {
 
     }
-    assert post_datacatalog_object(token, object_name, ObjectSchemaType.DSV, schema, properties).status_code == 200
+    assert post_datacatalog_object(object_name, ObjectSchemaType.DSV, schema, properties).status_code == 200
 
     # post Document
     parameter_request = {
@@ -71,4 +71,4 @@ def test_post_messaging_v2_multipart_message():
     assert post_messaging_v2_multipart_message(parameter_request, message_payload) == 200
 
     # delete Document Schema
-    assert delete_datacatalog_object(token, object_name).status_code == 200
+    assert delete_datacatalog_object(object_name).status_code == 200
