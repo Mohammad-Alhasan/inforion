@@ -1,6 +1,5 @@
 from enum import Enum
 import requests
-import inforion
 import inforion.ionapi.model.inforlogin as inforlogin
 import logging as log
 import json
@@ -13,33 +12,23 @@ class ObjectSchemaType(Enum):
     JSON = 'JSON'
 
 
-def get_datacatalog_ping(base_url, ion_file):
-    url_path = '/IONSERVICES/datacatalog/v1/status/ping'
-    config = inforlogin.load_config(ion_file)
-    token = inforlogin.login()
-    headers = {
-        "accept": "application/json",
-        "Authorization": "Bearer {}".format(token['access_token'])
-    }
-    res = requests.get(base_url + url_path, headers=headers)
+def get_datacatalog_ping():
+    url = inforlogin.base_url() + '/IONSERVICES/datacatalog/v1/status/ping'
+    headers = inforlogin.header()
+    res = requests.get(url, headers=headers)
     log.info('datacatalog ping: {}'.format(res.content))
     return res
 
 
-def delete_datacatalog_object(object_name, base_url, ion_file):
-    url_path = '/IONSERVICES/datacatalog/v1/object/{}'.format(object_name)
-    config = inforlogin.load_config(ion_file)
-    token = inforlogin.login()
-    headers = {
-        "accept": "application/json",
-        "Authorization": "Bearer {}".format(token['access_token'])
-    }
-    res = requests.delete(base_url + url_path, headers=headers)
+def delete_datacatalog_object(object_name):
+    url = inforlogin.base_url() + '/IONSERVICES/datacatalog/v1/object/{}'.format(object_name)
+    headers = inforlogin.header()
+    res = requests.delete(url, headers=headers)
     log.info('datacatalog delete: {}'.format(res.content))
     return res
 
 
-def post_datacatalog_object(object_name, object_type: ObjectSchemaType, schema, properties, base_url, ion_file):
+def post_datacatalog_object(object_name, object_type: ObjectSchemaType, schema, properties):
 
     if object_type == ObjectSchemaType.ANY and (schema is not None or properties is not None):
         raise ValueError('Schema and properties should be None')
@@ -47,21 +36,14 @@ def post_datacatalog_object(object_name, object_type: ObjectSchemaType, schema, 
     if (object_type == ObjectSchemaType.DSV or object_type == ObjectSchemaType.DSV) and schema is None:
         raise ValueError('Schema cannot be None')
 
-    url_path = '/IONSERVICES/datacatalog/v1/object'
-    config = inforlogin.load_config(ion_file)
-    token = inforlogin.login()
-    headers = {
-        "Content-type": "application/json",
-        "Accept": "application/json",
-        "Authorization": "Bearer {}".format(token['access_token'])
-    }
+    url = inforlogin.base_url() + '/IONSERVICES/datacatalog/v1/object'
+    headers = inforlogin.header()
     data = {
         "name": object_name,
         "type": object_type.value,
         "schema": schema,
         "properties": properties
     }
-
-    res = requests.post(base_url + url_path, headers=headers, data=json.dumps(data))
+    res = requests.post(url, headers=headers, data=json.dumps(data))
     log.info('datacatalog post: {}'.format(res.content))
     return res

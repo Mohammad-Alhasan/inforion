@@ -26,6 +26,7 @@ this._GLOBAL_sask = None
 this._GLOBAL_client_id = None
 this._GLOBAL_client_secret = None
 this._GLOBAL_ti = None
+this._GLOBAL_cn = None
 
 # Name of the URL
 this._GLOBAL_url = None
@@ -34,6 +35,7 @@ this._GLOBAL_sso_url = None
 
 # directory for token 
 this._GLOBAL_token_outh2 = None
+
 
 def configfile(filename):
     with open(filename) as file:
@@ -63,8 +65,9 @@ def configfile(filename):
         end = None
 
 
-def update(ti,access_token, expires_in,refresh_token,token_type,start_session,session_expire,saak,sask,client_id,client_secret):
+def update(ti, cn, access_token, expires_in,refresh_token,token_type,start_session,session_expire,saak,sask,client_id,client_secret):
     this._GLOBAL_ti = ti
+    this._GLOBAL_cn = cn
     this._GLOBAL_access_token = access_token
     this._GLOBAL_expires_in = expires_in
     this._GLOBAL_refresh_token = refresh_token
@@ -88,7 +91,7 @@ def load_config(IONFile):
             print ("Error in ION file - cn")            
             sys.exit(0)
         else:
-            this._GLOBAL_ti = data["cn"]
+            this._GLOBAL_cn = data["cn"]
 
         this._GLOBAL_client_id = data["ci"] 
         this._GLOBAL_client_secret = data["cs"] 
@@ -135,15 +138,14 @@ def login():
     sask = this._GLOBAL_sask
     client_id = this._GLOBAL_client_id
     ti = this._GLOBAL_ti
+    cn = this._GLOBAL_cn
     client_secret = this._GLOBAL_client_secret
   
     session_expire = addSecs(start_session, expires_in)
     #session_expire = addSecs(start_session, 60)  
 
     
-    update(ti,access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
-
-
+    update(ti, cn, access_token, expires_in, refresh_token, token_type,start_session,session_expire,saak,sask,client_id,client_secret)
 
     return r
 
@@ -247,3 +249,5 @@ def header():
     return headers
 
 
+def base_url():
+    return this._GLOBAL_url + '/' + this._GLOBAL_ti
