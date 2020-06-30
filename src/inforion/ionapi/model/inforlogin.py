@@ -249,5 +249,5 @@ def header():
     return headers
 
 
-def get_base_url():
+def base_url():
     return this._GLOBAL_url + '/' + this._GLOBAL_ti
