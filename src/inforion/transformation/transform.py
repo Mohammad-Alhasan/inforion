@@ -25,29 +25,30 @@ def tranform_data(mappingfile, mainsheet,stagingdata,outputfile=None):
                 if row[33] and not row[33] is np.nan:
                     row_dict[row[15]] = str(tb_row[row[33]])
                 else:
-                    if row[36] == 'tbl':
-                        tab = {}
-                        for i,val in sheet_to_df_map[row[37]].iterrows():
-                            if i >= 7:
-                                if str(val[0]) == 'nan': val[0] = ''
-                                tab[str(val[0])] = str(val[1])
-                        if row[38] and not row[38] is np.nan:
-                            if tb_row[row[38]] in tab:
-                                row_dict[row[15]] = str(tab[tb_row[row[38]]])
-                            else:
-                                row_dict[row[15]] = str(tb_row[row[38]])
-                    elif row[36] == 'func':
-                        if row[37] == "DIV":
-                            data_values = row[38].split('|')
-                            with decimal.localcontext() as ctx:
-                                if data_values[2] != "":
-                                    ctx.prec = int(data_values[2])
-                                division = decimal.Decimal(tb_row[data_values[0]]) / decimal.Decimal(data_values[1])
-                        row_dict[row[15]] = division
-                    elif row[36] == 'const':
-                        if isinstance(row[37], datetime.datetime):
-                            row[37] = row[37].strftime("%d/%m/%Y")
-                        row_dict[row[15]] = str(row[37])
+                    if not row[36] is np.nan:
+                        if row[36].strip().lower() == 'tbl':
+                            tab = {}
+                            for i,val in sheet_to_df_map[row[37]].iterrows():
+                                if i >= 7:
+                                    if str(val[0]) == 'nan': val[0] = ''
+                                    tab[str(val[0])] = str(val[1])
+                            if row[38] and not row[38] is np.nan:
+                                if tb_row[row[38]] in tab:
+                                    row_dict[row[15]] = str(tab[tb_row[row[38]]])
+                                else:
+                                    row_dict[row[15]] = str(tb_row[row[38]])
+                        elif row[36].strip().lower() == 'func':
+                            if row[37] == "DIV":
+                                data_values = row[38].split('|')
+                                with decimal.localcontext() as ctx:
+                                    if data_values[2] != "":
+                                        ctx.prec = int(data_values[2])
+                                    division = decimal.Decimal(tb_row[data_values[0]]) / decimal.Decimal(data_values[1])
+                            row_dict[row[15]] = division
+                        elif row[36].strip().lower() == 'const':
+                            if isinstance(row[37], datetime.datetime):
+                                row[37] = row[37].strftime("%d/%m/%Y")
+                            row_dict[row[15]] = str(row[37])
         rows_list.append(row_dict)
     
     df = pd.DataFrame(rows_list).replace('nan', '', regex=True)
