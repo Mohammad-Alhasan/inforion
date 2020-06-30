@@ -14,7 +14,7 @@ class ObjectSchemaType(Enum):
 
 
 def get_datacatalog_ping(token):
-    url = inforlogin.get_base_url() + '/IONSERVICES/datacatalog/v1/status/ping'
+    url = inforlogin.base_url() + '/IONSERVICES/datacatalog/v1/status/ping'
     headers = {
         "accept": "application/json",
         "Authorization": "Bearer {}".format(token['access_token'])
@@ -25,7 +25,7 @@ def get_datacatalog_ping(token):
 
 
 def delete_datacatalog_object(token, object_name):
-    url = inforlogin.get_base_url() + '/IONSERVICES/datacatalog/v1/object/{}'.format(object_name)
+    url = inforlogin.base_url() + '/IONSERVICES/datacatalog/v1/object/{}'.format(object_name)
     headers = {
         "accept": "application/json",
         "Authorization": "Bearer {}".format(token['access_token'])
@@ -43,7 +43,7 @@ def post_datacatalog_object(token, object_name, object_type: ObjectSchemaType, s
     if (object_type == ObjectSchemaType.DSV or object_type == ObjectSchemaType.DSV) and schema is None:
         raise ValueError('Schema cannot be None')
 
-    url = inforlogin.get_base_url() + '/IONSERVICES/datacatalog/v1/object'
+    url = inforlogin.base_url() + '/IONSERVICES/datacatalog/v1/object'
 
     headers = {
         "Content-type": "application/json",
