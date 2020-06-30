@@ -123,15 +123,15 @@ stages:
               cp -r src/inforion.egg-info .
               python setup.py sdist bdist_wheel
             displayName: "Install Python packages"
-          #- bash: |
-          #    # -n auto is slower on Linux and breaks on Python 3.8
-          #    pytest --junitxml=test.xml -o junit_family=xunit1 --cov=inforion --cov-report=xml
-          #  displayName: "Test"
-          #- task: PublishTestResults@2
-          #  inputs:
-          #    testResultsFiles: "test.xml"
-          #    testRunTitle: "$(Agent.OS) - $(Build.DefinitionName) - Python $(python.version)"
-          #  condition: succeededOrFailed()
+          - bash: |
+              # -n auto is slower on Linux and breaks on Python 3.8
+              pytest --junitxml=test.xml -o junit_family=xunit1 --cov=inforion --cov-report=xml
+            displayName: "Test"
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFiles: "test.xml"
+              testRunTitle: "$(Agent.OS) - $(Build.DefinitionName) - Python $(python.version)"
+            condition: succeededOrFailed()
       #- job: "Ubuntu_1604"
         #pool:
           #vmImage: "ubuntu-16.04"
