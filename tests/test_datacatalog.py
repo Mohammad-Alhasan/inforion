@@ -1,6 +1,7 @@
 from inforion.datacatalog.datacatalog import get_datacatalog_ping, delete_datacatalog_object, post_datacatalog_object, \
     ObjectSchemaType
 from inforion.ionapi.model import inforlogin
+import pytest
 
 
 def test_get_datacatalog_ping():
@@ -9,6 +10,7 @@ def test_get_datacatalog_ping():
     assert get_datacatalog_ping().status_code == 200
 
 
+@pytest.mark.skip()
 def test_post_delete_datacatalog_object():
     inforlogin.load_config('credentials/credentials.ionapi')
     inforlogin.login()
