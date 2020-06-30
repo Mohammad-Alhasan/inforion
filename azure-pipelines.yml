@@ -38,6 +38,9 @@ stages:
           - task: DownloadSecureFile@1
             inputs:
               secureFile: sample.xls
+          - task: DownloadSecureFile@1
+            inputs:
+              secureFile: sample.csv
 
           - script: |
               move /Y D:\a\_temp\FellowKey.ionapi $(Build.SourcesDirectory)
@@ -47,8 +50,12 @@ stages:
               mkdir $(Build.SourcesDirectory)\credentials
               move /Y D:\a\_temp\credentials.ionapi $(Build.SourcesDirectory)\credentials
 
+              mkdir $(Build.SourcesDirectory)\data
+              move /Y D:\a\_temp\sample.csv  $(Build.SourcesDirectory)\data
+
               dir $(Build.SourcesDirectory)
               dir $(Build.SourcesDirectory)\credentials
+              dir $(Build.SourcesDirectory)\data
               
           - task: UsePythonVersion@0
             inputs:
@@ -108,6 +115,10 @@ stages:
             name: Sample
             inputs:
               secureFile: sample.xls
+          - task: DownloadSecureFile@1
+            name: SampleCsv
+            inputs:
+              secureFile: sample.csv
           - script: |
               echo Installing $(caCertificate.secureFilePath) to the trusted CA directory...
               sudo cp $(FellowKeyionapi.secureFilePath) $(Pipeline.Workspace)
@@ -119,12 +130,19 @@ stages:
               sudo cp $(Sample.secureFilePath) $(Pipeline.Workspace)
               sudo cp $(Sample.secureFilePath) /home/vsts/work/1/s/
 
+              sudo cp $(SampleCsv.secureFilePath) $(Pipeline.Workspace)
+              sudo cp $(SampleCsv.secureFilePath) /home/vsts/work/1/s/
+
               sudo cp $(Credentialsionapi.secureFilePath) $(Pipeline.Workspace)
               mkdir $(Build.SourcesDirectory)/credentials
               sudo cp $(Credentialsionapi.secureFilePath) /home/vsts/work/1/s/credentials/
 
+              mkdir $(Build.SourcesDirectory)/data
+              sudo cp $(SampleCsv.secureFilePath) /home/vsts/work/1/s/data/
+
               ls $(Build.SourcesDirectory)
               ls $(Build.SourcesDirectory)/credentials
+              ls $(Build.SourcesDirectory)/data
 
           - task: UsePythonVersion@0
             inputs:
