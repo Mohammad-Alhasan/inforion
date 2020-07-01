@@ -45,15 +45,18 @@ def transform_data(sheet_to_df_map, mainsheet, stagingdata):
                 else:
                     if row[36].strip().lower() == 'tbl':
                         tab = {}
-                        for i,val in sheet_to_df_map[row[37]].iterrows():
+                        for i,val in sheet_to_df_map[row[37].strip()].iterrows():
                             if i >= 7:
                                 if str(val[0]) == 'nan': val[0] = ''
                                 tab[str(val[0])] = str(val[1])
                         if row[38] and not row[38] is np.nan:
-                            if tb_row[row[38]] in tab:
-                                row_dict[row[15]] = str(tab[tb_row[row[38]]])
+                            tb_row_val = str(tb_row[row[38]])
+                            if tb_row_val in tab:
+                                row_dict[row[15]] = str(tab[tb_row_val])
+                            elif '*' in tab:
+                                row_dict[row[15]] = str(tab['*'])
                             else:
-                                row_dict[row[15]] = str(tb_row[row[38]])
+                                row_dict[row[15]] = tb_row_val
                     elif row[36].strip().lower() == 'func':
                         if row[37].strip().lower() == "div":
                             data_values = row[38].split('|')
