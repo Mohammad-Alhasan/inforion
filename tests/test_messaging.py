@@ -1,5 +1,5 @@
 import pytest
-
+import os
 from inforion.datacatalog.datacatalog import post_datacatalog_object, ObjectSchemaType, delete_datacatalog_object
 from inforion.ionapi.model import inforlogin
 from inforion.messaging.messaging import get_messaging_ping, post_messaging_v2_multipart_message
@@ -54,9 +54,6 @@ def test_post_messaging_v2_multipart_message():
 
     }
 
-    '''
-    Data is not in the git data/sample.csv
-    So i comment it out 
     assert post_datacatalog_object(object_name, ObjectSchemaType.DSV, schema, properties).status_code == 200
 
     # post Document
@@ -68,8 +65,8 @@ def test_post_messaging_v2_multipart_message():
         "characterSet": "UTF-8"
     }
 
-    with open("data/sample.csv", "rb") as file:
+    file_path = os.path.dirname(os.path.realpath(__file__)) + "/data/sample.csv"
+    with open(file_path, "rb") as file:
         message_payload = file.read()
 
     assert post_messaging_v2_multipart_message(parameter_request, message_payload).status_code == 201
-    '''
