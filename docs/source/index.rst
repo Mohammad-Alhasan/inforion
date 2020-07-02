@@ -9,14 +9,6 @@ InforION documentation
 Send Data to InforION ( Datalake, M3, LN )
 
 .. toctree::
-   :maxdepth: 1
-
-   introduction
-   load
-   datalake
-   contributing
-
-.. toctree::
    :caption: Usage
    :maxdepth: 2
    
@@ -24,11 +16,6 @@ Send Data to InforION ( Datalake, M3, LN )
    excelmappingfile
    transformation
    errors
-
-.. toctree::
-   :caption: Developers
-   :maxdepth: 2
-
    
 
 Indices and tables
