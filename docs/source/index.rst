@@ -14,10 +14,12 @@ Send Data to InforION ( Datalake, M3, LN )
    introduction
    load
    datalake
+   contributing
 
 .. toctree::
    :caption: Usage
    :maxdepth: 2
+   
    load
    excelmappingfile
    transformation
@@ -27,7 +29,7 @@ Send Data to InforION ( Datalake, M3, LN )
    :caption: Developers
    :maxdepth: 2
 
-   For more information please use this [link](www.fellow-consulting.com)
+   
 
 Indices and tables
 ==================
