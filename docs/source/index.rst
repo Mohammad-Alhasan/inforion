@@ -12,10 +12,13 @@ Send Data to InforION ( Datalake, M3, LN )
    :caption: Usage
    :maxdepth: 2
    
+   introduction
    load
    excelmappingfile
    transformation
+   datalake
    errors
+   contributing
    
 
 Indices and tables
