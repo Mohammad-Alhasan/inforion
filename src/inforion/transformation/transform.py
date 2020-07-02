@@ -8,7 +8,6 @@ from multiprocessing import  Pool
 from functools import partial
 
 def parallelize_tranformation(mappingfile, mainsheet,stagingdata,outputfile=None,n_cores=4):
-
     # Read the file from given location
     xls = pd.ExcelFile(mappingfile)
 
@@ -16,14 +15,17 @@ def parallelize_tranformation(mappingfile, mainsheet,stagingdata,outputfile=None
     sheet_to_df_map = {}
     for sheet_name in xls.sheet_names:
         sheet_to_df_map[sheet_name] = xls.parse(sheet_name)
-    
+
+    main_cache = getMainSheetCache(sheet_to_df_map, mainsheet)
+    tabs_cache = getTabsMappingCache(sheet_to_df_map, main_cache)
+
     df_split = np.array_split(stagingdata, n_cores)
-    func = partial(transform_data, sheet_to_df_map, mainsheet)
+    func = partial(transform_data, sheet_to_df_map, mainsheet, main_cache, tabs_cache)
     pool = Pool(n_cores)
     df = pd.concat(pool.map(func, df_split))
     pool.close()
     pool.join()
-
+    
     if outputfile is not None:
         print ('Save to file: ' + outputfile)
         writer = pd.ExcelWriter(outputfile, engine='xlsxwriter')
@@ -32,45 +34,85 @@ def parallelize_tranformation(mappingfile, mainsheet,stagingdata,outputfile=None
 
     return df
 
-def transform_data(sheet_to_df_map, mainsheet, stagingdata):
+def getMainSheetCache(sheet_to_df_map, mainsheet):
+    mapping_cache = []
+
+    for index, row in sheet_to_df_map[mainsheet].iterrows():
+        if index >=9:
+            row = row.replace(np.nan, '', regex=True)
+
+            map = {}
+            map['API_FIELD'] = row[15]
+
+            if row[33] and not row[33] is np.nan:
+                map['SOURCE'] = row[33]
+            else:
+                map['SOURCE'] = None
+
+            map['FUNC_TYPE'] = row[36].strip().lower()
+
+            map['FUNC_VAL'] = row[37]
+            map['FUNC_ARG'] = row[38]
+
+            mapping_cache.append(map)
+    
+    return mapping_cache
+
+def getTabsMappingCache(sheet_to_df_map, mapping_cache):
+    mapping_sheets_cache = {}
+    
+    for map in mapping_cache:
+        if map['FUNC_TYPE'] == 'tbl':
+            tab_key = map['FUNC_VAL'].strip()
+            if tab_key not in mapping_sheets_cache:
+                tab = {}
+                for i, val in sheet_to_df_map[tab_key].iterrows():
+                    if i >= 7:
+                        if str(val[0]) == 'nan': val[0] = ''
+                        tab[str(val[0])] = str(val[1])
+                mapping_sheets_cache[tab_key] = tab
+    
+    return mapping_sheets_cache
+
+
+def transform_data(sheet_to_df_map, mainsheet, sheet_cache, tabs_cache, stagingdata):
     rows_list = []
 
     for tb_index,tb_row in stagingdata.iterrows():
         row_dict = {}
-        for index,row in sheet_to_df_map[mainsheet].iterrows():
-            row =  row.replace(np.nan, '', regex=True)
-            if index >=9:
-                if row[33] and not row[33] is np.nan:
-                    row_dict[row[15]] = str(tb_row[row[33]])
-                else:
-                    if row[36].strip().lower() == 'tbl':
-                        tab = {}
-                        for i,val in sheet_to_df_map[row[37].strip()].iterrows():
-                            if i >= 7:
-                                if str(val[0]) == 'nan': val[0] = ''
-                                tab[str(val[0])] = str(val[1])
-                        if row[38] and not row[38] is np.nan:
-                            tb_row_val = str(tb_row[row[38]])
-                            if tb_row_val in tab:
-                                row_dict[row[15]] = str(tab[tb_row_val])
-                            elif '*' in tab:
-                                row_dict[row[15]] = str(tab['*'])
-                            else:
-                                row_dict[row[15]] = tb_row_val
-                    elif row[36].strip().lower() == 'func':
-                        if row[37].strip().lower() == "div":
-                            data_values = row[38].split('|')
-                            with decimal.localcontext() as ctx:
-                                if data_values[2] != "":
-                                    ctx.prec = int(data_values[2])
-                                division = decimal.Decimal(tb_row[data_values[0]]) / decimal.Decimal(data_values[1])
-                        row_dict[row[15]] = division
-                    elif row[36].strip().lower() == 'const':
-                        if isinstance(row[37], datetime.datetime):
-                            row[37] = row[37].strftime("%Y-%m-%d")
-                        row_dict[row[15]] = str(row[37])
-        rows_list.append(row_dict)
-    
-    df = pd.DataFrame(rows_list).replace('nan', '', regex=True)
 
+        for map in sheet_cache:
+
+            if map['SOURCE']:
+                row_dict[map['API_FIELD']] = str(tb_row[map['SOURCE']])
+            else:
+                if map['FUNC_TYPE'] == 'tbl':
+                    if map['FUNC_ARG'] and not map['FUNC_ARG'] is np.nan:
+                        tab = tabs_cache[map['FUNC_VAL']]
+                        if tb_row[map['FUNC_ARG']] in tab:
+                            row_dict[map['API_FIELD']] = str(tab[tb_row[map['FUNC_ARG']]])
+                        elif '*' in tab:
+                            row_dict[map['API_FIELD']] = str(tab['*'])
+                        else:
+                            row_dict[map['API_FIELD']] = str(tb_row[map['FUNC_ARG']])
+                elif map['FUNC_TYPE'] == 'func':
+                    if map['FUNC_VAL'].strip().lower() == "div":
+                        data_values = map['FUNC_ARG'].split('|')
+                        with decimal.localcontext() as ctx:
+                            if data_values[2] != "":
+                                ctx.prec = int(data_values[2])
+                            division = decimal.Decimal(tb_row[data_values[0]]) / decimal.Decimal(data_values[1])
+                    row_dict[map['API_FIELD']] = division
+                elif map['FUNC_TYPE'] == 'const':
+                    if isinstance(map['FUNC_VAL'], datetime.datetime):
+                        val = map['FUNC_VAL'].strftime("%Y%m%d")
+                        row_dict[map['API_FIELD']] = str(val)
+                    else:
+                        row_dict[map['API_FIELD']] = str(map['FUNC_VAL'])
+
+
+        rows_list.append(row_dict)
+
+    df = pd.DataFrame(rows_list).replace('nan', '', regex=True)
+    
     return df
