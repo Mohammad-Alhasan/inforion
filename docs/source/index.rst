@@ -12,12 +12,13 @@ Send Data to InforION ( Datalake, M3, LN )
    :maxdepth: 1
 
    introduction
+   load
    datalake
 
 .. toctree::
    :caption: Usage
    :maxdepth: 2
-
+   load
    excelmappingfile
    transformation
    errors
