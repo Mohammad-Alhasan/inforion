@@ -67,7 +67,7 @@ def transform_data(sheet_to_df_map, mainsheet, stagingdata):
                         row_dict[row[15]] = division
                     elif row[36].strip().lower() == 'const':
                         if isinstance(row[37], datetime.datetime):
-                            row[37] = row[37].strftime("%d/%m/%Y")
+                            row[37] = row[37].strftime("%Y-%m-%d")
                         row_dict[row[15]] = str(row[37])
         rows_list.append(row_dict)
     
