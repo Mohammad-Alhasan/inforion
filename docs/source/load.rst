@@ -1,5 +1,5 @@
 ============
-Load Data from Excel to Infor Application 
+Loading
 ============
 
 Example is to load data from Excel to Infor Application for example M3.
