@@ -42,7 +42,6 @@ def load(url, ionfile, program, method, inputfile, outputfile, configfile, start
             config_json = json.load(file)
                 
             if all (k in config_json for k in ('url','ionfile','program','method','inputfile')):
-                typ = "Load"
                 url = config_json['url']
                 ionfile = config_json['ionfile']
                 program = config_json['program']
