@@ -8,7 +8,11 @@ inforion load --help
 
 Options:
 
- * - Parameter
+
+.. list-table::
+   :header-rows: 1
+   
+   * - Parameter
      - Description
    * - -u, --url
      - The full URL to the API is needed. Please note you need to enter the full url like .../M3/m3api-rest/v2/execute/CRS610MI  [required]
@@ -24,9 +28,9 @@ Options:
      - File as Output File - Data are saved here for the load
    * - -s, --start
      - Dataload can be started by 0 or by a number
-    * - -e, --end
+   * - -e, --end
      - Dataload can be end
-    * - -z, --configfile
+   * - -z, --configfile
      - Use a Configfile instead of parameters
   
 
