@@ -100,11 +100,11 @@ def extract(program,outputfile):
 
 
 @click.command(name='transform', help='section to do the transformation')
-@click.option('--mappingfile',"-m",help='Choose the program to extract the sheets from')
-@click.option('--outputfile',"-o",help='File as Output File - Data are saved here for the load')
-@click.option('--mainsheet',"-b",help='Please define the mainsheet')
 @click.option('--mappingfile',"-a",help='Please define the Mapping file')
-def transform(mappingfile,mainsheet,inputdata,outputfile):
+@click.option('--mainsheet',"-b",help='Please define the mainsheet')
+@click.option('--inputfile',"-i",help='File to load the data. Please use XLSX or CSV format. If not provided, the input text will just be printed')
+@click.option('--outputfile',"-o",help='File as Output File - Data are saved here for the load')
+def transform(mappingfile,mainsheet,inputfile,outputfile):
         inputdata = pd.read_excel(inputfile)
         return infor.main_transformation(mappingfile,mainsheet,inputdata,outputfile)
 

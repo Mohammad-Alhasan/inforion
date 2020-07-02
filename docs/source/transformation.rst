@@ -13,8 +13,6 @@ This step provides the functionality of tranforming the external data source int
 
    * - Parameter
      - Description
-   * - -t or --typ
-     - This parameter is used to provide the execution type i.e. "T" in case of transformation.
    * - -a or --mappingfile
      - This parameter is used to provide the mapping file based on which transformation will be done.
    * - -b or --mainsheet
@@ -26,6 +24,6 @@ This step provides the functionality of tranforming the external data source int
 
 **Example**
 
-inforion -t T -a sample_mapping.xlsx -b Sheet1 -i sample_data.xlsx -o output.xlsx
+inforion transform -a sample_mapping.xlsx -b Sheet1 -i sample_data.xlsx -o output.xlsx
 
 
