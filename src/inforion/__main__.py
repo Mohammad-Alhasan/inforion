@@ -7,6 +7,7 @@ from inforion.excelexport import *
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *
 
+import os.path
 
 @click.group()
 def main():
@@ -25,6 +26,14 @@ def main():
 @click.option('--end',"-e",type=int,help='Dataload can be end')
 @click.option('--configfile',"-z",help='Use a Configfile instead of parameters')
 def load(url, ionfile, program, method, inputfile, outputfile, configfile, start=None, end=None):
+
+    if os.path.exists(inputfile) == False:
+        click.secho('Error:', fg='red', nl=True)
+        click.echo("Inputfile does not exist")
+        
+        sys.exit(0)
+    
+
 
     if configfile is not None:
         configfile = arg
