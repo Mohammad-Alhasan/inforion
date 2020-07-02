@@ -63,7 +63,7 @@ setup(
     version_format='1.{tag}.{commitcount}',
     setup_requires=['setuptools-git-version'],
     author="Daniel Jordan",
-    author_email="daniel.jordan@feellow-consulting.de",
+    author_email="daniel.jordan@fellow-consulting.de",
     description="Infor ION Package for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
