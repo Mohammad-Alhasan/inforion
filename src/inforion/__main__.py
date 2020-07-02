@@ -11,7 +11,8 @@ import os.path
 
 @click.group()
 def main():
-    """ Generell section"""
+    """ Generell section\n
+    Please see the dodcumentation on https://inforion.readthedocs.io/ """
     pass
 
 
