@@ -16,3 +16,6 @@ inforion -u https://mingle-sso.eu1.inforcloudsuite.com:443/Fellow_DEV -f FellowK
 More infor [Fellow Consulting AG](https://www.fellow-consulting.com/)
 
 ![Python package](https://github.com/dajor/inforion/workflows/Python%20package/badge.svg)
+
+[![CodeFactor](https://www.codefactor.io/repository/github/dajor/inforion/badge/master)](https://www.codefactor.io/repository/github/dajor/inforion/overview/master)
+
