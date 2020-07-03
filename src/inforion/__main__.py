@@ -97,7 +97,7 @@ def load(
         sys.exit(0)
 
     if configfile is not None:
-        configfile = arg
+        
         with open(configfile) as file:
             config_json = json.load(file)
 
