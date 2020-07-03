@@ -10,6 +10,8 @@ It already populates the mapping file with all the available fields for that API
 
 Once the customer specifies all the mappings, this mapping file is used to push the data to M3.
 
+inforion extract --help    
+
 **Parameters**
 
 .. list-table::
@@ -17,8 +19,6 @@ Once the customer specifies all the mappings, this mapping file is used to push 
 
    * - Parameter
      - Description
-   * - -t or --typ
-     - This parameter is used to provide the execution type i.e. "E" to generate excel mapping file.
    * - -p or --program
      - This parameter is used to provide the API program for which mapping file should be generated. e.g MMS301MI, CRS610MI, AAS320MI
    * - -o or --outputfile

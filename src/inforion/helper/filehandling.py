@@ -14,7 +14,7 @@ def checkfiletype(filepath):
     if ext == ".csv" or ext == ".xlsx" or ext == ".xls":
         return ext
     else:
-        print ("Inputfile Type is not supported")
+        print ("Type is not supported")
         sys.exit(0)
     
     
