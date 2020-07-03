@@ -67,7 +67,7 @@ setup(
     description="Infor ION Package for Python",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/dajor/inforion",
+    url="https://github.com/Fellow-Consulting-AG/inforion/",
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
