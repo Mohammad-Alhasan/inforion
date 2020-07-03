@@ -209,43 +209,43 @@ stages:
               #testResultsFiles: "test.xml"
               #testRunTitle: "$(Agent.OS) - $(Build.DefinitionName) - Python $(python.version)"
             #condition: succeededOrFailed()
-      #- job: "macOS_Mojave"
-        #pool:
-          #vmImage: "macos-10.14"
-        #strategy:
-          #matrix:
-            #Python37:
-              #python.version: "3.7"
-            # Python38:
-            #   python.version: "3.8"
-        #steps:
-          # https://github.com/actions/virtual-environments/issues/664
-          # - task: UsePythonVersion@0
-          #   inputs:
-          #     versionSpec: "$(python.version)"
-          #- bash: |
-              #brew update
-              #brew unlink python@2
+      - job: "macOS_Mojave"
+        pool:
+          vmImage: "macos-10.14"
+        strategy:
+          matrix:
+            Python37:
+              python.version: "3.7"
+             Python38:
+              python.version: "3.8"
+        steps:
+           https://github.com/actions/virtual-environments/issues/664
+           - task: UsePythonVersion@0
+             inputs:
+               versionSpec: "$(python.version)"
+          - bash: |
+              brew update
+              brew unlink python@2
               
-            #displayName: "Install system packages"
-          #- bash: |
-              #pip3 install --upgrade pip
-              #pip3 install -r requirements/main.txt -r requirements/test.txt .
-            #displayName: "Install Python packages"
-          #- bash: |
-              #tesseract --version
-            #displayName: "Record versions"
-          #- bash: pytest -nauto --junitxml=test.xml --cov=ocrmypdf --cov-report=xml
-            #displayName: "Test"
-          #- task: PublishTestResults@2
-            #inputs:
-              #testResultsFiles: "test.xml"
-              #testRunTitle: "$(Agent.OS) - $(Build.DefinitionName) - Python $(python.version)"
-            #condition: succeededOrFailed()
-          #- task: PublishCodeCoverageResults@1
-            #inputs:
-              #codeCoverageTool: Cobertura
-              #summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/coverage.xml"
+            displayName: "Install system packages"
+          - bash: |
+              pip3 install --upgrade pip
+              pip3 install -r requirements/main.txt -r requirements/test.txt .
+            displayName: "Install Python packages"
+          - bash: |
+              tesseract --version
+            displayName: "Record versions"
+          - bash: pytest -nauto --junitxml=test.xml --cov=ocrmypdf --cov-report=xml
+            displayName: "Test"
+          - task: PublishTestResults@2
+            inputs:
+              testResultsFiles: "test.xml"
+              testRunTitle: "$(Agent.OS) - $(Build.DefinitionName) - Python $(python.version)"
+            condition: succeededOrFailed()
+          - task: PublishCodeCoverageResults@1
+            inputs:
+              codeCoverageTool: Cobertura
+              summaryFileLocation: "$(System.DefaultWorkingDirectory)/**/coverage.xml"
 
   - stage: "Artifacts"
     variables:
