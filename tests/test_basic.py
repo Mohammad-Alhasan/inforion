@@ -29,8 +29,8 @@ def test_checklogin():
 
 
 def test_reconnect():
-    data = inforlogin.load_config("FellowKey.ionapi")
-    r = inforlogin.login()
+    inforlogin.load_config("FellowKey.ionapi")
+    inforlogin.login()
     headers = inforlogin.header()
     headers2 = inforlogin.reconnect()
     assert headers["Authorization"] != headers2["Authorization"]

@@ -39,24 +39,18 @@ def configfile(filename):
     if all(
         k in config_json for k in ("url", "ionfile", "program", "method", "inputfile")
     ):
-        typ = "L"
-        url = config_json["url"]
-        ionfile = config_json["ionfile"]
-        program = config_json["program"]
-        method = config_json["method"]
-        inputfile = config_json["inputfile"]
-        outputfile = config_json["outputfile"]
+        pass
 
     else:
         print("JSON File wrong config")
         sys.exit(0)
 
     if "start" in config_json:
-        start = config_json["start"]
+        pass
     else:
         start = None
     if "end" in config_json:
-        end = config_json["end"]
+        pass
     else:
         end = None
 
@@ -186,8 +180,6 @@ def reconnect():
     sask = this._GLOBAL_sask
     client_id = this._GLOBAL_client_id
     client_secret = this._GLOBAL_client_secret
-    ti = this._GLOBAL_ti
-    expires_in = this._GLOBAL_expires_in
 
     data = {
         "grant_type": "refresh_token",

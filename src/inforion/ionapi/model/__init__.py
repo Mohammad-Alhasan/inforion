@@ -45,16 +45,11 @@ def execute(
     df = df.astype(str)
 
     data = {"program": program, "cono": 409}
-
-    mylist = []
     data1 = {}
-    data2 = {}
     a = []
 
     chunk = MaxChunk
     if end is not None:
-        # total_rows = end - start
-        counter = 0
         df = df[start:end].copy(deep=False)
         df = df.reset_index(drop=True)
         # print (df.head(10))
@@ -124,16 +119,11 @@ def executeSnd(
     data = {"program": program, "cono": 409}
 
     methode = methode.split(",")
-    methode_count = len(methode)
-
-    mylist = []
+    len(methode)
     data1 = {}
-    data2 = {}
 
     chunk = MaxChunk
     if end is not None:
-        # total_rows = end - start
-        counter = 0
         df = df[start:end].copy(deep=False)
         df = df.reset_index(drop=True)
 
@@ -188,16 +178,9 @@ def executeAsyncSnd(
     data = {"program": program, "cono": 409}
 
     methode = methode.split(",")
-    methode_count = len(methode)
-
-    mylist = []
+    len(methode)
     data1 = {}
-    data2 = {}
-
-    chunk = MaxChunk
     if end is not None:
-        # total_rows = end - start
-        counter = 0
         df = df[start:end].copy(deep=False)
         df = df.reset_index(drop=True)
         # print (df.head(10))
@@ -245,44 +228,43 @@ def executeAsyncSnd(
 
     """
 
+
 def getSuccessGraphDataframe(df):
     results = {}
-    for index, row in df.iterrows():
-        msgs = row['MESSAGE'].split('|')
+    for _, row in df.iterrows():
+        msgs = row["MESSAGE"].split("|")
         for msg in msgs:
-            if(msg):
-                key = msg[0:msg.index(':')]
-                val = msg[msg.index(':')+1:]
+            if msg:
+                key = msg[0 : msg.index(":")]
+                val = msg[msg.index(":") + 1 :]
 
                 if key not in results:
                     results[key] = {}
-                    results[key]['success'] = 0
-                    results[key]['fail'] = 0
+                    results[key]["success"] = 0
+                    results[key]["fail"] = 0
 
-                if('OK' in val or 'ist bereits vorhanden' in val ):
-                    results[key]['success'] = results[key]['success'] + 1
+                if "OK" in val or "ist bereits vorhanden" in val:
+                    results[key]["success"] = results[key]["success"] + 1
                 else:
-                    results[key]['fail'] = results[key]['fail'] + 1
-
+                    results[key]["fail"] = results[key]["fail"] + 1
 
     success = []
     fail = []
     prog = []
     for key in results:
         prog.append(key)
-        success.append(results[key]['success'])
-        fail.append(results[key]['fail'])
+        success.append(results[key]["success"])
+        fail.append(results[key]["fail"])
 
-    df = pd.DataFrame({'success': success,
-                'fail': fail}, index=prog)
+    df = pd.DataFrame({"success": success, "fail": fail}, index=prog)
     return df
 
 
 def createGraph(excel_file, df):
-    sheet_name = 'Data'
-    sheet_name_graphs = 'Graphs'
+    sheet_name = "Data"
+    sheet_name_graphs = "Graphs"
 
-    writer = pd.ExcelWriter(excel_file, engine='openpyxl')
+    writer = pd.ExcelWriter(excel_file, engine="openpyxl")
     book = load_workbook(excel_file)
     writer.book = book
     writer.sheets = dict((ws.title, ws) for ws in book.worksheets)
@@ -290,13 +272,13 @@ def createGraph(excel_file, df):
     df.to_excel(writer, sheet_name=sheet_name)
 
     ws = writer.sheets[sheet_name]
-    
+
     chart1 = BarChart()
     chart1.type = "col"
     chart1.style = 10
     chart1.title = "ETL Results"
-    chart1.y_axis.title = 'Count'
-    chart1.x_axis.title = 'Programm'
+    chart1.y_axis.title = "Count"
+    chart1.x_axis.title = "Programm"
 
     data = Reference(ws, min_col=2, min_row=1, max_row=7, max_col=3)
     cats = Reference(ws, min_col=1, min_row=2, max_row=7)
@@ -305,8 +287,8 @@ def createGraph(excel_file, df):
     chart1.shape = 4
     chart1.height = 12
     chart1.width = 20
-    #chart1.x_axis = 10
-    #chart1.y_axis = 10
+    # chart1.x_axis = 10
+    # chart1.y_axis = 10
 
     ws_graph.add_chart(chart1, "A10")
     writer.save()
