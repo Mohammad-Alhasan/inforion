@@ -93,7 +93,7 @@ def load(
     end=None,
 ):
 
-    if os.path.exists(inputfile) == False:
+    if os.path.exists(inputfile) is False:
         click.secho("Error:", fg="red", nl=True)
         click.echo("Inputfile does not exist")
 
