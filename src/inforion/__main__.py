@@ -29,8 +29,7 @@ def main():
     """Generell section\n
     Please see the dodcumentation on https://inforion.readthedocs.io/ 
     """
-    
-    
+
     pass
 
 
