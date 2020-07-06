@@ -70,7 +70,8 @@ def register_vcs_handler(vcs, method):  # decorator
 
 def run_command(commands, args, cwd=None, verbose=False, hide_stderr=False, env=None):
     """Call the given command(s)."""
-    assert isinstance(commands, list)
+    if not isinstance(commands, list):
+        raise AssertionError
     p = None
     for c in commands:
         try:
