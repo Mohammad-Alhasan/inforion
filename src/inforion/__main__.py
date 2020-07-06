@@ -163,13 +163,25 @@ def transform(mappingfile, mainsheet, inputfile, outputfile):
     return infor.main_transformation(mappingfile, mainsheet, inputdata, outputfile)
 
 
-@click.command(name="datacatalog_post", help="Datacatalog Section")
+@main.group(name="catalog")
+def catalog():
+    """Commands related to Data Catalog"""
+    pass
+
+
+@main.group(name="datalake")
+def datalake():
+    """Commands related to Data Lake"""
+    pass
+
+
+@catalog.command(name="create", help="Catalog create")
 @click.option("--ionfile", "-i", help="Please define the ionapi file")
 @click.option("--name", "-n", help="Please define the object name")
-@click.option("--type", "-t", help="Please define the object type")
+@click.option("--schema_type", "-t", help="Please define the object schema type")
 @click.option("--schema", "-s", help="Please define the schema file")
 @click.option("--properties", "-p", help="Please define the schema properties file")
-def datacatalog_post(ionfile, name, type, schema, properties):
+def create(ionfile, name, schema_type, schema, properties):
     inforlogin.load_config(ionfile)
     inforlogin.login()
 
@@ -184,7 +196,7 @@ def datacatalog_post(ionfile, name, type, schema, properties):
     with open(properties, "r") as file:
         properties_content = json.loads(file.read())
     response = post_datacatalog_object(
-        name, ObjectSchemaType(type), schema_content, properties_content
+        name, ObjectSchemaType(schema_type), schema_content, properties_content
     )
 
     if response.status_code == 200:
@@ -193,10 +205,10 @@ def datacatalog_post(ionfile, name, type, schema, properties):
         logger.error(response.content)
 
 
-@click.command(name="datacatalog_delete", help="Datacatalog Section")
+@catalog.command(name="delete", help="Catalog delete")
 @click.option("--ionfile", "-i", help="Please define the ionfile file")
 @click.option("--name", "-n", help="Please define the object name")
-def datacatalog_delete(ionfile, name):
+def delete(ionfile, name):
     inforlogin.load_config(ionfile)
     inforlogin.login()
     response = delete_datacatalog_object(name)
@@ -207,12 +219,12 @@ def datacatalog_delete(ionfile, name):
         logger.error(response.content)
 
 
-@click.command(name="messaging_post", help="Messaging Section")
+@datalake.command(name="upload", help="Datalake upload")
 @click.option("--ionfile", "-i", help="Please define the ionfile file")
 @click.option("--schema", "-s", help="Please define the schema name")
 @click.option("--logical_id", "-l", help="Please define the fromLogicalId")
 @click.option("--file", "-f", help="Please define the file")
-def messaging_post(ionfile, schema, logical_id, file):
+def upload(ionfile, schema, logical_id, file):
     inforlogin.load_config(ionfile)
     inforlogin.login()
     parameter_request = {
@@ -232,9 +244,6 @@ def messaging_post(ionfile, schema, logical_id, file):
         logger.error(response.content)
 
 
-main.add_command(messaging_post)
-main.add_command(datacatalog_delete)
-main.add_command(datacatalog_post)
 main.add_command(load)
 main.add_command(transform)
 main.add_command(extract)
