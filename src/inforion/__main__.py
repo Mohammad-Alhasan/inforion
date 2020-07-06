@@ -178,10 +178,10 @@ def datalake():
 @catalog.command(name="create", help="Catalog create")
 @click.option("--ionfile", "-i", help="Please define the ionapi file")
 @click.option("--name", "-n", help="Please define the object name")
-@click.option("--type", "-t", help="Please define the object type")
+@click.option("--schema_type", "-t", help="Please define the object schema type")
 @click.option("--schema", "-s", help="Please define the schema file")
 @click.option("--properties", "-p", help="Please define the schema properties file")
-def create(ionfile, name, type, schema, properties):
+def create(ionfile, name, schema_type, schema, properties):
     inforlogin.load_config(ionfile)
     inforlogin.login()
 
@@ -196,7 +196,7 @@ def create(ionfile, name, type, schema, properties):
     with open(properties, "r") as file:
         properties_content = json.loads(file.read())
     response = post_datacatalog_object(
-        name, ObjectSchemaType(type), schema_content, properties_content
+        name, ObjectSchemaType(schema_type), schema_content, properties_content
     )
 
     if response.status_code == 200:
