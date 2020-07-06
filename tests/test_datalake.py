@@ -1,6 +1,7 @@
+import json
+
 from inforion.datalake.datalake import get_v1_payloads_list
 from inforion.ionapi.model import inforlogin
-import json
 
 
 def test_get_v1_payloads_list():
