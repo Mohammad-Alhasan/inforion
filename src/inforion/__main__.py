@@ -249,14 +249,14 @@ def upload(ionfile, schema, logical_id, file):
 
 @datalake.command(name="list", help="Datalake list")
 @click.option("--ionfile", "-i", help="Please define the ionfile file")
-@click.option("--filter", "-f", help="Please define the filter")
+@click.option("--list_filter", "-f", help="Please define the filter")
 @click.option("--sort", "-s", help="Please define the sort")
 @click.option("--page", "-p", help="Please define the page")
 @click.option("--records", "-r", help="Please define the records")
-def datalake_list(ionfile, filter=None, sort=None, page=None, records=None):
+def datalake_list(ionfile, list_filter=None, sort=None, page=None, records=None):
     inforlogin.load_config(ionfile)
     inforlogin.login()
-    response = get_v1_payloads_list(filter, sort, page, records)
+    response = get_v1_payloads_list(list_filter, sort, page, records)
 
     if response.status_code == 200:
         click.echo(response.text)
