@@ -20,3 +20,6 @@ More infor [Fellow Consulting AG](https://www.fellow-consulting.com/)
 [![CodeFactor](https://www.codefactor.io/repository/github/dajor/inforion/badge/master)](https://www.codefactor.io/repository/github/dajor/inforion/overview/master)
 
 [![Codacy Badge](https://app.codacy.com/project/badge/Grade/51dc66d4b0664f708f3e2480e7ec7b42)](https://www.codacy.com/manual/daniel.jordan/inforion?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=dajor/inforion&amp;utm_campaign=Badge_Grade)
+
+
+[![Requirements Status](https://requires.io/github/Fellow-Consulting-AG/inforion/requirements.svg?branch=master)](https://requires.io/github/Fellow-Consulting-AG/inforion/requirements/?branch=master)
