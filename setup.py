@@ -60,7 +60,7 @@ reqs = install_reqs
 
 setup(
     name="inforion", # Replace with your own username
-    version_format='1.{tag}.{commitcount}',
+    version_format='{tag}.{commitcount}',
     setup_requires=['setuptools-git-version'],
     author="Daniel Jordan",
     author_email="daniel.jordan@fellow-consulting.de",
