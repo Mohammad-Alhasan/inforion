@@ -26,8 +26,11 @@ logger = logging.getLogger("main")
 
 @click.group()
 def main():
-    """ Generell section\n
-    Please see the dodcumentation on https://inforion.readthedocs.io/ """
+    """Generell section\n
+    Please see the dodcumentation on https://inforion.readthedocs.io/ 
+    """
+    
+    
     pass
 
 
