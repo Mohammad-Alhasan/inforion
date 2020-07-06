@@ -47,7 +47,7 @@ def requests_retry_session(
 
     
 
-def sendresults(url,headers, data,timeout=65,stream=False):
+def sendresults(url,_headers, data,timeout=65,stream=False):
     
     retry_strategy = Retry(
         total=5,
