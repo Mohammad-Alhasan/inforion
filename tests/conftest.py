@@ -1,7 +1,4 @@
-import os
-import pytest
-
-'''
+"""
 #from TSIClient import TSIClient as tsi
 import TSIClient as tsi
 
@@ -28,8 +25,4 @@ def client_from_env():
     os.environ["TSICLIENT_TENANT_ID"] = "my_tenant_id"
 
     return tsi.TSIClient()
-'''
-
-
-
-            
+"""
