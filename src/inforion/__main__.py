@@ -165,13 +165,13 @@ def transform(mappingfile, mainsheet, inputfile, outputfile):
 
 @main.group(name="catalog")
 def catalog():
-    """Commands related to Data Catalog"""
+    """Commands related to Data Catalog."""
     pass
 
 
 @main.group(name="datalake")
 def datalake():
-    """Commands related to Data Lake"""
+    """Commands related to Data Lake."""
     pass
 
 
