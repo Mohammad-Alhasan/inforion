@@ -3,10 +3,6 @@ import sys
 
 import json
 
-from requests_oauthlib import OAuth2Session
-from requests.auth import HTTPBasicAuth
-from oauthlib.oauth2 import BackendApplicationClient
-
 import requests
 
 from datetime import datetime, timedelta

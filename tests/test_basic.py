@@ -1,10 +1,6 @@
 # Import the code to be tested
 
 import pytest
-import unittest
-from _pytest._io.saferepr import saferepr
-import logging
-import os
 import pandas as pd
 
 # Import the test framework (this is a hypothetical module)

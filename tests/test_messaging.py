@@ -1,6 +1,5 @@
-import pytest
 import os
-from inforion.datacatalog.datacatalog import post_datacatalog_object, ObjectSchemaType, delete_datacatalog_object
+from inforion.datacatalog.datacatalog import post_datacatalog_object, ObjectSchemaType
 from inforion.ionapi.model import inforlogin
 from inforion.messaging.messaging import get_messaging_ping, post_messaging_v2_multipart_message
 

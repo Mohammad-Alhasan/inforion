@@ -2,7 +2,6 @@ from inforion.datacatalog.datacatalog import get_datacatalog_ping, delete_dataca
     ObjectSchemaType
 from inforion.ionapi.model import inforlogin
 import time
-import pytest
 
 
 def test_get_datacatalog_ping():

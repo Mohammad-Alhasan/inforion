@@ -1,5 +1,3 @@
-import os
-import pytest
 
 '''
 #from TSIClient import TSIClient as tsi

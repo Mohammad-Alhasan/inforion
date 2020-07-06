@@ -1,9 +1,6 @@
 # Import the code to be tested
 
-import pytest
 import unittest
-from _pytest._io.saferepr import saferepr
-import logging
 import os
 
 from inforion.excelexport import *
