@@ -83,7 +83,7 @@ def getTabsMappingCache(sheet_to_df_map, mapping_cache):
 def transform_data(_sheet_to_df_map, _mainsheet, sheet_cache, tabs_cache, stagingdata):
     rows_list = []
 
-    for tb_index, tb_row in stagingdata.iterrows():
+    for _, tb_row in stagingdata.iterrows():
         row_dict = {}
 
         for map in sheet_cache:

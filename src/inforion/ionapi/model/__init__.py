@@ -45,16 +45,11 @@ def execute(
     df = df.astype(str)
 
     data = {"program": program, "cono": 409}
-
-    mylist = []
     data1 = {}
-    data2 = {}
     a = []
 
     chunk = MaxChunk
     if end is not None:
-        # total_rows = end - start
-        counter = 0
         df = df[start:end].copy(deep=False)
         df = df.reset_index(drop=True)
         # print (df.head(10))
@@ -124,16 +119,11 @@ def executeSnd(
     data = {"program": program, "cono": 409}
 
     methode = methode.split(",")
-    methode_count = len(methode)
-
-    mylist = []
+    len(methode)
     data1 = {}
-    data2 = {}
 
     chunk = MaxChunk
     if end is not None:
-        # total_rows = end - start
-        counter = 0
         df = df[start:end].copy(deep=False)
         df = df.reset_index(drop=True)
 
@@ -188,16 +178,9 @@ def executeAsyncSnd(
     data = {"program": program, "cono": 409}
 
     methode = methode.split(",")
-    methode_count = len(methode)
-
-    mylist = []
+    len(methode)
     data1 = {}
-    data2 = {}
-
-    chunk = MaxChunk
     if end is not None:
-        # total_rows = end - start
-        counter = 0
         df = df[start:end].copy(deep=False)
         df = df.reset_index(drop=True)
         # print (df.head(10))
@@ -247,7 +230,7 @@ def executeAsyncSnd(
 
 def getSuccessGraphDataframe(df):
     results = {}
-    for index, row in df.iterrows():
+    for _, row in df.iterrows():
         msgs = row['MESSAGE'].split('|')
         for msg in msgs:
             if(msg):

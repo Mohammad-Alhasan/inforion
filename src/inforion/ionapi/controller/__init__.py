@@ -63,7 +63,7 @@ def sendresults(url, _headers, data, timeout=65, stream=False):
 
     if datetime.now() > inforlogin._GLOBAL_session_expire:
 
-        headers = inforlogin.reconnect()
+        inforlogin.reconnect()
         print(
             " Reconnect and Next Reconnect will be "
             + str(inforlogin._GLOBAL_session_expire)
@@ -122,7 +122,6 @@ def saveresults(r, df, program, index, chunk, MaxChunk=150, elements=1):
             newindex = index - MaxChunk + chunk
         if newindex < 0:
             newindex = 0
-        cmethod = None
         if len(r) > 0:
             if "results" in r.keys():
 

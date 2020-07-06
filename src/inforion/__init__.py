@@ -31,7 +31,7 @@ def main_load(url=None,ionfile=None,program=None,method=None,dataframe=None,outp
     if os.path.exists(ionfile) == False:
         return ("Error: File does not exist")
     else:
-        config = inforlogin.load_config(ionfile)
+        inforlogin.load_config(ionfile)
         
 
     
