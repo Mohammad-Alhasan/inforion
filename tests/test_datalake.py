@@ -1,6 +1,8 @@
 import json
 import os
 
+import pytest
+
 from inforion.datalake.datalake import delete_v1_purge_id
 from inforion.datalake.datalake import get_v1_payloads_list
 from inforion.datalake.datalake import get_v1_payloads_stream_by_id
@@ -55,6 +57,7 @@ def test_get_v1_payloads_stream_by_id():
         assert res1.status_code == 200
 
 
+@pytest.mark.skip()
 def test_delete_v1_purge_id():
     inforlogin.load_config("credentials/credentials.ionapi")
     inforlogin.login()
@@ -66,6 +69,7 @@ def test_delete_v1_purge_id():
     assert res.status_code == 200
 
 
+@pytest.mark.skip()
 def test_delete_v1_purge_id_list():
     inforlogin.load_config("credentials/credentials.ionapi")
     inforlogin.login()
