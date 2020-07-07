@@ -1,4 +1,3 @@
-from urllib.parse import urlparse
 
 
 def url_change(url):
