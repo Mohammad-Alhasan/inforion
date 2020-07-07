@@ -13,3 +13,5 @@ inforion catalog create --ionfile credentials/credentials.ionapi --name CSVSchem
 inforion datalake upload --ionfile credentials/credentials.ionapi --schema CSVSchema2 --logical_id lid://infor.ims.mongooseims --file data/sample.csv
 
 inforion datalake list --ionfile credentials/credentials.ionapi --list_filter "dl_document_name eq 'CSVSchema2'"
+
+
