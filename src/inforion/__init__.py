@@ -1,22 +1,18 @@
+import os.path
 import sys
+
+import inforion.ionapi.model.inforlogin as inforlogin
+import validators
+from inforion.helper.urlsplit import spliturl
+from inforion.ionapi.controller import *
+from inforion.ionapi.model import *
+from inforion.transformation.transform import parallelize_tranformation
 
 # from inforion.ionapi.ionbasic import ionbasic
 
 # from ionbasic import load_config
 
 # Codee Junaid
-
-import inforion.ionapi.model.inforlogin as inforlogin
-
-
-from inforion.transformation.transform import parallelize_tranformation
-from inforion.ionapi.controller import *
-from inforion.ionapi.model import *
-from inforion.helper.urlsplit import spliturl
-
-
-import validators
-import os.path
 
 
 def main_load(
@@ -43,7 +39,7 @@ def main_load(
     if "Call" in result:
         if len(result["Call"]) > 0:
             if result["Call"] == "execute":
-                config = inforlogin.load_config(ionfile)
+                inforlogin.load_config(ionfile)
                 token = inforlogin.login()
 
                 headers = inforlogin.header()

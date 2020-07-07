@@ -48,6 +48,6 @@ def savetodisk(file, df):
 
 
 def getDataFrame(inputfile):
-    ext = checkfiletype(inputfile)
+    checkfiletype(inputfile)
     df = loadfile(inputfile)
     return df

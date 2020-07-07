@@ -1,15 +1,14 @@
 import sys
+import time
+from datetime import datetime
+from datetime import timedelta
 
-# from io import BytesIO
-# import gzip
-
+import inforion.ionapi.model.inforlogin as inforlogin
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *
 
-from datetime import datetime, timedelta
-import time
-
-import inforion.ionapi.model.inforlogin as inforlogin
+# from io import BytesIO
+# import gzip
 
 # import inforion.ionapi.basic as inforlogin
 
@@ -93,7 +92,7 @@ def sendresults(url, _headers, data, timeout=65, stream=False):
 
                 if z < 5:
                     print(" Error try to get new session " + str(z) + "/5")
-                    headers = inforlogin.reconnect()
+                    inforlogin.reconnect()
                     time.sleep(10)
                 elif z == 5:
                     sys.exit(0)
