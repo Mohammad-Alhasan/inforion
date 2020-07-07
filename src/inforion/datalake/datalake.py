@@ -3,6 +3,9 @@ from inforion.ionapi.model import inforlogin
 
 
 def get_v1_payloads_list(filter=None, sort=None, page=None, records=None):
+    """
+    List data object properties using a filter.
+    """
     url = inforlogin.base_url() + "/IONSERVICES/datalakeapi/v1/payloads/list"
     headers = inforlogin.header()
     payload = {}
@@ -24,6 +27,9 @@ def get_v1_payloads_list(filter=None, sort=None, page=None, records=None):
 
 
 def get_v1_payloads_stream_by_id(dl_id):
+    """
+    Retrieve payload based on id from datalake.
+    """
     url = inforlogin.base_url() + "/IONSERVICES/datalakeapi/v1/payloads/streambyid"
     headers = inforlogin.header()
     payload = {"datalakeId": dl_id}
@@ -32,6 +38,9 @@ def get_v1_payloads_stream_by_id(dl_id):
 
 
 def delete_v1_purge_id(ids):
+    """
+    Deletes Data Objects based on the given Data Object identifiers.
+    """
     url = inforlogin.base_url() + "/IONSERVICES/datalakeapi/v1/purge/ids"
     headers = inforlogin.header()
     payload = {"id": ids}
