@@ -7,7 +7,6 @@ import requests
 
 this = sys.modules[__name__]
 
-
 this._GLOBAL_access_token = None
 this._GLOBAL_expires_in = None
 this._GLOBAL_refresh_token = None
@@ -34,9 +33,8 @@ def configfile(filename):
     with open(filename) as file:
         config_json = json.load(file)
 
-    if all(
-        k in config_json for k in ("url", "ionfile", "program", "method", "inputfile")
-    ):
+    if all(k in config_json
+           for k in ("url", "ionfile", "program", "method", "inputfile")):
         pass
 
     else:
@@ -54,18 +52,18 @@ def configfile(filename):
 
 
 def update(
-    ti,
-    cn,
-    access_token,
-    expires_in,
-    refresh_token,
-    token_type,
-    start_session,
-    session_expire,
-    saak,
-    sask,
-    client_id,
-    client_secret,
+        ti,
+        cn,
+        access_token,
+        expires_in,
+        refresh_token,
+        token_type,
+        start_session,
+        session_expire,
+        saak,
+        sask,
+        client_id,
+        client_secret,
 ):
     this._GLOBAL_ti = ti
     this._GLOBAL_cn = cn
