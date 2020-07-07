@@ -1,4 +1,12 @@
+import os.path
 import sys
+
+import inforion.ionapi.model.inforlogin as inforlogin
+import validators
+from inforion.helper.urlsplit import spliturl
+from inforion.ionapi.controller import *
+from inforion.ionapi.model import *
+from inforion.transformation.transform import parallelize_tranformation
 
 # from inforion.ionapi.ionbasic import ionbasic
 
@@ -6,17 +14,10 @@ import sys
 
 # Codee Junaid
 
-import inforion.ionapi.model.inforlogin as inforlogin
 
 
-from inforion.transformation.transform import parallelize_tranformation
-from inforion.ionapi.controller import *
-from inforion.ionapi.model import *
-from inforion.helper.urlsplit import spliturl
 
 
-import validators
-import os.path
 
 
 def main_load(
