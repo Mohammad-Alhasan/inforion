@@ -5,7 +5,7 @@ Windows
 If you have not installed Python on Windows please follow this guide
 
 Install Windows Python
-===========
+======================
 
 Install Python from this URL: :ref:'Python <https://www.python.org/downloads/windows/>'
 Please use at least Python 3.7 or higher
@@ -23,7 +23,7 @@ Many packages can be found in the default source for packages and their dependen
  code . . .
 
 Upgrade
-=====
+=======
 
 If you want to upgrade the inforion please use 
 
@@ -34,7 +34,7 @@ If you want to upgrade the inforion please use
  code . . .
 
 Show Version
-=====
+============
 
 Show the version you have installed please use
 
