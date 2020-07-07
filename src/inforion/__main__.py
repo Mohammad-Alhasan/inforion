@@ -8,7 +8,11 @@ import inforion as infor
 from inforion.datacatalog.datacatalog import ObjectSchemaType
 from inforion.datacatalog.datacatalog import delete_datacatalog_object
 from inforion.datacatalog.datacatalog import post_datacatalog_object
-from inforion.datalake.datalake import get_v1_payloads_list, delete_v1_purge_id, get_v1_payloads_stream_by_id
+from inforion.datalake.datalake import (
+    get_v1_payloads_list,
+    delete_v1_purge_id,
+    get_v1_payloads_stream_by_id,
+)
 from inforion.excelexport import *
 from inforion.helper.filehandling import *
 from inforion.ionapi.controller import *
@@ -265,7 +269,7 @@ def datalake_list(ionfile, list_filter=None, sort=None, page=None, records=None)
 def datalake_purge(ionfile, ids):
     inforlogin.load_config(ionfile)
     inforlogin.login()
-    ids_list = ids.split(',')
+    ids_list = ids.split(",")
     response = delete_v1_purge_id(ids_list)
 
     if response.status_code == 200:
