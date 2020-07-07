@@ -1,28 +1,19 @@
 #!/usr/bin/env python3
-
-import click
-
-import inforion as infor
-
-from inforion.helper.filehandling import filehandling
-
-from inforion.excelexport import *
-from inforion.ionapi.controller import *
-from inforion.ionapi.model import *
-
-
 import logging
 import os.path
-import os
 
-from inforion.datacatalog.datacatalog import (
-    post_datacatalog_object,
-    delete_datacatalog_object,
-    ObjectSchemaType,
-)
+import click
+import inforion as infor
+from inforion.datacatalog.datacatalog import delete_datacatalog_object
+from inforion.datacatalog.datacatalog import ObjectSchemaType
+from inforion.datacatalog.datacatalog import post_datacatalog_object
 from inforion.datalake.datalake import get_v1_payloads_list
-from inforion.messaging.messaging import post_messaging_v2_multipart_message
+from inforion.excelexport import *
+from inforion.helper.filehandling import filehandling
+from inforion.ionapi.controller import *
+from inforion.ionapi.model import *
 from inforion.ionapi.model import inforlogin
+from inforion.messaging.messaging import post_messaging_v2_multipart_message
 
 # TODO update to use multi modules log
 logging.basicConfig(level=logging.INFO)
@@ -32,7 +23,7 @@ logger = logging.getLogger("main")
 @click.group()
 def main():
     """Generell section\n
-    Please see the dodcumentation on https://inforion.readthedocs.io/ 
+    Please see the dodcumentation on https://inforion.readthedocs.io/
     """
 
     pass
@@ -270,7 +261,6 @@ def datalake_list(ionfile, list_filter=None, sort=None, page=None, records=None)
 main.add_command(load)
 main.add_command(transform)
 main.add_command(extract)
-
 
 if __name__ == "__main__":
     main()

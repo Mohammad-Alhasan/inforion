@@ -1,11 +1,9 @@
 # Import the code to be tested
-
-import pytest
-import pandas as pd
-
 # Import the test framework (this is a hypothetical module)
 import inforion.helper.filehandling as filehandling
 import inforion.ionapi.model.inforlogin as inforlogin
+import pandas as pd
+import pytest
 from inforion import *
 
 
