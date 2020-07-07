@@ -33,3 +33,13 @@ If you want to upgrade the inforion please use
 
  code . . .
 
+Show Version
+=====
+
+Show the version you have installed please use
+
+.. code-block:: bash
+
+    pip show inforion 
+
+ code . . .
