@@ -9,7 +9,7 @@ from inforion.datacatalog.datacatalog import ObjectSchemaType
 from inforion.datacatalog.datacatalog import post_datacatalog_object
 from inforion.datalake.datalake import get_v1_payloads_list
 from inforion.excelexport import *
-from inforion.helper.filehandling import filehandling
+from inforion.helper.filehandling import *
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *
 from inforion.ionapi.model import inforlogin
