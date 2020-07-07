@@ -1,3 +1,5 @@
+#!/bin/bash
+
 sudo pip3 uninstall inforion
 
 sudo pip3 install inforion==1.0.89
