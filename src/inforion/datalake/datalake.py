@@ -24,8 +24,7 @@ def get_v1_payloads_list(filter=None, sort=None, page=None, records=None):
 
 
 def get_v1_payloads_stream_by_id(dl_id):
-    url = inforlogin.base_url(
-    ) + "/IONSERVICES/datalakeapi/v1/payloads/streambyid"
+    url = inforlogin.base_url() + "/IONSERVICES/datalakeapi/v1/payloads/streambyid"
     headers = inforlogin.header()
     payload = {"datalakeId": dl_id}
     res = requests.get(url, headers=headers, params=payload)
