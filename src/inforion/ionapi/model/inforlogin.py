@@ -1,14 +1,11 @@
-import sys
-
 import json
+import sys
+from datetime import datetime
+from datetime import timedelta
 
 import requests
 
-from datetime import datetime, timedelta
-
-
 this = sys.modules[__name__]
-
 
 this._GLOBAL_access_token = None
 this._GLOBAL_expires_in = None

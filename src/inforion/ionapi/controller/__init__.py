@@ -1,15 +1,14 @@
 import sys
+import time
+from datetime import datetime
+from datetime import timedelta
 
-# from io import BytesIO
-# import gzip
-
+import inforion.ionapi.model.inforlogin as inforlogin
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *
 
-from datetime import datetime, timedelta
-import time
-
-import inforion.ionapi.model.inforlogin as inforlogin
+# from io import BytesIO
+# import gzip
 
 # import inforion.ionapi.basic as inforlogin
 
