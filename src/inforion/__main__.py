@@ -3,11 +3,12 @@ import logging
 import os.path
 
 import click
+
 import inforion as infor
-from inforion.datacatalog.datacatalog import delete_datacatalog_object
 from inforion.datacatalog.datacatalog import ObjectSchemaType
+from inforion.datacatalog.datacatalog import delete_datacatalog_object
 from inforion.datacatalog.datacatalog import post_datacatalog_object
-from inforion.datalake.datalake import get_v1_payloads_list
+from inforion.datalake.datalake import get_v1_payloads_list, delete_v1_purge_id, get_v1_payloads_stream_by_id
 from inforion.excelexport import *
 from inforion.helper.filehandling import *
 from inforion.ionapi.controller import *
@@ -251,6 +252,35 @@ def datalake_list(ionfile, list_filter=None, sort=None, page=None, records=None)
     inforlogin.load_config(ionfile)
     inforlogin.login()
     response = get_v1_payloads_list(list_filter, sort, page, records)
+
+    if response.status_code == 200:
+        click.echo(response.text)
+    else:
+        logger.error(response.content)
+
+
+@datalake.command(name="purge", help="Datalake purge")
+@click.option("--ionfile", "-i", help="Please define the ionfile file")
+@click.option("--ids", "-id", help="Please define the ids")
+def datalake_purge(ionfile, ids):
+    inforlogin.load_config(ionfile)
+    inforlogin.login()
+    ids_list = ids.split(',')
+    response = delete_v1_purge_id(ids_list)
+
+    if response.status_code == 200:
+        click.echo(response.text)
+    else:
+        logger.error(response.content)
+
+
+@datalake.command(name="get", help="Datalake get")
+@click.option("--ionfile", "-i", help="Please define the ionfile file")
+@click.option("--stream_id", "-id", help="Please define the id")
+def datalake_get(ionfile, stream_id):
+    inforlogin.load_config(ionfile)
+    inforlogin.login()
+    response = get_v1_payloads_stream_by_id(stream_id)
 
     if response.status_code == 200:
         click.echo(response.text)
