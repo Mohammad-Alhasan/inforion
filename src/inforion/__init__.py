@@ -58,7 +58,7 @@ def main_load(
                 config = inforlogin.load_config(ionfile)
                 token = inforlogin.login()
 
-                headers = inforlogin.header(token)
+                headers = inforlogin.header()
                 if "Bearer" not in headers["Authorization"]:
                     return "InforION Login is not working"
                 return executeSnd(
@@ -69,7 +69,7 @@ def main_load(
                 config = inforlogin.load_config(ionfile)
                 token = inforlogin.login()
 
-                headers = inforlogin.header(token)
+                headers = inforlogin.header()
                 if "Bearer" not in headers["Authorization"]:
                     return "InforION Login is not working"
                 return executeAsyncSnd(
