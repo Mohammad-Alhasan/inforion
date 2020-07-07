@@ -26,9 +26,7 @@ def get_v1_payloads_list(filter=None, sort=None, page=None, records=None):
 def get_v1_payloads_stream_by_id(dl_id):
     url = inforlogin.base_url() + "/IONSERVICES/datalakeapi/v1/payloads/streambyid"
     headers = inforlogin.header()
-    payload = {
-        "datalakeId": dl_id
-    }
+    payload = {"datalakeId": dl_id}
     res = requests.get(url, headers=headers, params=payload)
     return res
 
@@ -36,8 +34,6 @@ def get_v1_payloads_stream_by_id(dl_id):
 def delete_v1_purge_id(ids):
     url = inforlogin.base_url() + "/IONSERVICES/datalakeapi/v1/purge/ids"
     headers = inforlogin.header()
-    payload = {
-        "id": ids
-    }
+    payload = {"id": ids}
     res = requests.delete(url, headers=headers, params=payload)
     return res
