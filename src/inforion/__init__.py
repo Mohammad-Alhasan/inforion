@@ -43,7 +43,7 @@ def main_load(
     if "Call" in result:
         if len(result["Call"]) > 0:
             if result["Call"] == "execute":
-                config = inforlogin.load_config(ionfile)
+                inforlogin.load_config(ionfile)
                 token = inforlogin.login()
 
                 headers = inforlogin.header()

@@ -48,11 +48,11 @@ def configfile(filename):
     if "start" in config_json:
         pass
     else:
-        start = None
+        pass
     if "end" in config_json:
         pass
     else:
-        end = None
+        pass
 
 
 def update(
