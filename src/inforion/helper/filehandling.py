@@ -5,6 +5,13 @@ import sys
 
 import pandas as pd
 
+
+def checkfile_exists(file):
+    if os.path.exists(file) is False:
+        return False
+    else:
+        return True
+
 def checkfiletype(filepath):
 
     # Split the extension from the path and normalise it to lowercase.
@@ -43,7 +50,7 @@ def savetodisk(file,df):
 
 def getDataFrame(inputfile):
     ext = checkfiletype(inputfile)
-    df = loadfile(ext,inputfile)
+    df = loadfile(inputfile)
     return df
 
 

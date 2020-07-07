@@ -3,9 +3,15 @@
 import click
 
 import inforion as infor
+
+from inforion.helper.filehandling import filehandling
+
 from inforion.excelexport import *
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *
+
+
+
 
 import logging
 import os.path
@@ -93,10 +99,9 @@ def load(
     end=None,
 ):
 
-    if os.path.exists(inputfile) is False:
+    if checkfile_exists(inputfile) is False:
         click.secho("Error:", fg="red", nl=True)
         click.echo("Inputfile does not exist")
-
         sys.exit(0)
 
     if configfile is not None:

@@ -4,12 +4,17 @@ import pytest
 import pandas as pd
 
 # Import the test framework (this is a hypothetical module)
-
+import inforion.helper.filehandling as filehandling
 import inforion.ionapi.model.inforlogin as inforlogin
 from inforion import *
 
-import inforion.helper.filehandling as filehandling
 
+
+
+def test_inputfile_exists():
+    f1 = False
+    f2 = filehandling.checkfile_exists("Test.xls")
+    assert f1 == f2
 
 def test_urlnotvailid():
     assert "Error: URL is not valid" in main_load("google", "")
