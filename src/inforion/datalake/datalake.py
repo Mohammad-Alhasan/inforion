@@ -54,8 +54,6 @@ def delete_v1_purge_filter(purge_filter):
     """
     url = inforlogin.base_url() + "/IONSERVICES/datalakeapi/v1/purge/filter"
     headers = inforlogin.header()
-    payload = {
-        "filter": purge_filter
-    }
+    payload = {"filter": purge_filter}
     res = requests.delete(url, headers=headers, params=payload)
     return res
