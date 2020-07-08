@@ -18,16 +18,13 @@ def __create_document():
         "encoding": "NONE",
         "characterSet": "UTF-8",
     }
-    file_path = os.path.dirname(os.path.realpath(__file__)) + "/data/sample.csv"
+    file_path = os.path.dirname(
+        os.path.realpath(__file__)) + "/data/sample.csv"
     with open(file_path, "rb") as file:
         message_payload = file.read()
 
-    assert (
-        post_messaging_v2_multipart_message(
-            parameter_request, message_payload
-        ).status_code
-        == 201
-    )
+    assert (post_messaging_v2_multipart_message(
+        parameter_request, message_payload).status_code == 201)
 
 
 def test_get_v1_payloads_list():
@@ -41,7 +38,8 @@ def test_get_v1_payloads_list():
 def test_get_v1_payloads_list_with_filter_and_sort():
     inforlogin.load_config("credentials/credentials.ionapi")
     inforlogin.login()
-    res = get_v1_payloads_list("dl_document_name eq 'CSVSchema2'", ["event_date:desc"])
+    res = get_v1_payloads_list("dl_document_name eq 'CSVSchema2'",
+                               ["event_date:desc"])
     assert res.status_code == 200
     assert json.loads(res.text)["numFound"] > 0
 
@@ -49,7 +47,8 @@ def test_get_v1_payloads_list_with_filter_and_sort():
 def test_get_v1_payloads_stream_by_id():
     inforlogin.load_config("credentials/credentials.ionapi")
     inforlogin.login()
-    res = get_v1_payloads_list("dl_document_name eq 'CSVSchema2'", ["event_date:desc"])
+    res = get_v1_payloads_list("dl_document_name eq 'CSVSchema2'",
+                               ["event_date:desc"])
     documents = json.loads(res.text)["fields"]
 
     for document in documents:
@@ -62,7 +61,8 @@ def test_delete_v1_purge_filter():
     inforlogin.load_config("credentials/credentials.ionapi")
     inforlogin.login()
     __create_document()
-    res = get_v1_payloads_list("dl_document_name eq 'CSVSchema2'", ["event_date:desc"])
+    res = get_v1_payloads_list("dl_document_name eq 'CSVSchema2'",
+                               ["event_date:desc"])
     dl_id = json.loads(res.text)["fields"][0]["dl_id"]
     purge_filter = "dl_id eq '{}'".format(dl_id)
     res = delete_v1_purge_filter(purge_filter)
@@ -76,7 +76,8 @@ def test_delete_v1_purge_id():
     inforlogin.load_config("credentials/credentials.ionapi")
     inforlogin.login()
     __create_document()
-    res = get_v1_payloads_list("dl_document_name eq 'CSVSchema2'", ["event_date:desc"])
+    res = get_v1_payloads_list("dl_document_name eq 'CSVSchema2'",
+                               ["event_date:desc"])
     documents = json.loads(res.text)["fields"]
     dl_id = documents[0]["dl_id"]
     res = delete_v1_purge_id(dl_id)
@@ -90,7 +91,8 @@ def test_delete_v1_purge_id_list():
     __create_document()
     __create_document()
     __create_document()
-    res = get_v1_payloads_list("dl_document_name eq 'CSVSchema2'", ["event_date:desc"])
+    res = get_v1_payloads_list("dl_document_name eq 'CSVSchema2'",
+                               ["event_date:desc"])
     documents = json.loads(res.text)["fields"]
     dl_id = documents[0]["dl_id"]
     dl_id1 = documents[1]["dl_id"]

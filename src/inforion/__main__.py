@@ -34,21 +34,24 @@ def main():
 
 @click.command(
     name="load",
-    help="Section to load data to Infor ION. Right now we support Excel and CSV Data to load",
+    help=
+    "Section to load data to Infor ION. Right now we support Excel and CSV Data to load",
 )
 @click.option(
     "--url",
     "-u",
     required=True,
     prompt="Please enter the url",
-    help="The full URL to the API is needed. Please note you need to enter the full url like .../M3/m3api-rest/v2/execute/CRS610MI",
+    help=
+    "The full URL to the API is needed. Please note you need to enter the full url like .../M3/m3api-rest/v2/execute/CRS610MI",
 )
 @click.option(
     "--ionfile",
     "-f",
     required=True,
     prompt="Please enter the location ionfile",
-    help="IONFile is needed to login in to Infor OS. Please go into ION and generate a IONFile. If not provided, a prompt will allow you to type the input text.",
+    help=
+    "IONFile is needed to login in to Infor OS. Please go into ION and generate a IONFile. If not provided, a prompt will allow you to type the input text.",
 )
 @click.option(
     "--program",
@@ -69,26 +72,30 @@ def main():
     "-i",
     required=True,
     prompt="Please enter the InputFile",
-    help="File to load the data. Please use XLSX or CSV format. If not provided, the input text will just be printed",
+    help=
+    "File to load the data. Please use XLSX or CSV format. If not provided, the input text will just be printed",
 )
-@click.option(
-    "--outputfile", "-o", help="File as Output File - Data are saved here for the load"
-)
-@click.option(
-    "--start", "-s", type=int, help="Dataload can be started by 0 or by a number"
-)
+@click.option("--outputfile",
+              "-o",
+              help="File as Output File - Data are saved here for the load")
+@click.option("--start",
+              "-s",
+              type=int,
+              help="Dataload can be started by 0 or by a number")
 @click.option("--end", "-e", type=int, help="Dataload can be end")
-@click.option("--configfile", "-z", help="Use a Configfile instead of parameters")
+@click.option("--configfile",
+              "-z",
+              help="Use a Configfile instead of parameters")
 def load(
-    url,
-    ionfile,
-    program,
-    method,
-    inputfile,
-    outputfile,
-    configfile,
-    start=None,
-    end=None,
+        url,
+        ionfile,
+        program,
+        method,
+        inputfile,
+        outputfile,
+        configfile,
+        start=None,
+        end=None,
 ):
 
     if checkfile_exists(inputfile) is False:
@@ -101,10 +108,8 @@ def load(
         with open(configfile) as file:
             config_json = json.load(file)
 
-            if all(
-                k in config_json
-                for k in ("url", "ionfile", "program", "method", "inputfile")
-            ):
+            if all(k in config_json for k in ("url", "ionfile", "program",
+                                              "method", "inputfile")):
                 url = config_json["url"]
                 ionfile = config_json["ionfile"]
                 program = config_json["program"]
@@ -126,16 +131,17 @@ def load(
 
     dataframe = pd.read_excel(inputfile, dtype=str)
 
-    return infor.main_load(
-        url, ionfile, program, method, dataframe, outputfile, start, end
-    )
+    return infor.main_load(url, ionfile, program, method, dataframe,
+                           outputfile, start, end)
 
 
 @click.command(name="extract", help="Section to generate empty mapping sheets")
-@click.option("--program", "-p", help="Choose the program to extract the sheets from")
-@click.option(
-    "--outputfile", "-o", help="File as Output File - Data are saved here for the load"
-)
+@click.option("--program",
+              "-p",
+              help="Choose the program to extract the sheets from")
+@click.option("--outputfile",
+              "-o",
+              help="File as Output File - Data are saved here for the load")
 def extract(program, outputfile):
 
     if not "program" in locals() or not program:
@@ -153,14 +159,16 @@ def extract(program, outputfile):
 @click.option(
     "--inputfile",
     "-i",
-    help="File to load the data. Please use XLSX or CSV format. If not provided, the input text will just be printed",
+    help=
+    "File to load the data. Please use XLSX or CSV format. If not provided, the input text will just be printed",
 )
-@click.option(
-    "--outputfile", "-o", help="File as Output File - Data are saved here for the load"
-)
+@click.option("--outputfile",
+              "-o",
+              help="File as Output File - Data are saved here for the load")
 def transform(mappingfile, mainsheet, inputfile, outputfile):
     inputdata = pd.read_excel(inputfile)
-    return infor.main_transformation(mappingfile, mainsheet, inputdata, outputfile)
+    return infor.main_transformation(mappingfile, mainsheet, inputdata,
+                                     outputfile)
 
 
 @main.group(name="catalog")
@@ -178,9 +186,13 @@ def datalake():
 @catalog.command(name="create", help="Catalog create")
 @click.option("--ionfile", "-i", help="Please define the ionapi file")
 @click.option("--name", "-n", help="Please define the object name")
-@click.option("--schema_type", "-t", help="Please define the object schema type")
+@click.option("--schema_type",
+              "-t",
+              help="Please define the object schema type")
 @click.option("--schema", "-s", help="Please define the schema file")
-@click.option("--properties", "-p", help="Please define the schema properties file")
+@click.option("--properties",
+              "-p",
+              help="Please define the schema properties file")
 def create(ionfile, name, schema_type, schema, properties):
     inforlogin.load_config(ionfile)
     inforlogin.login()
@@ -195,9 +207,8 @@ def create(ionfile, name, schema_type, schema, properties):
         schema_content = json.loads(file.read())
     with open(properties, "r") as file:
         properties_content = json.loads(file.read())
-    response = post_datacatalog_object(
-        name, ObjectSchemaType(schema_type), schema_content, properties_content
-    )
+    response = post_datacatalog_object(name, ObjectSchemaType(schema_type),
+                                       schema_content, properties_content)
 
     if response.status_code == 200:
         logger.info("Data catalog schema {} was created.".format(name))
@@ -236,7 +247,8 @@ def upload(ionfile, schema, logical_id, file):
     }
     with open(file, "rb") as file:
         message_payload = file.read()
-    response = post_messaging_v2_multipart_message(parameter_request, message_payload)
+    response = post_messaging_v2_multipart_message(parameter_request,
+                                                   message_payload)
 
     if response.status_code == 201:
         logger.info("Document uploaded successfully.")
@@ -250,7 +262,11 @@ def upload(ionfile, schema, logical_id, file):
 @click.option("--sort", "-s", help="Please define the sort")
 @click.option("--page", "-p", help="Please define the page")
 @click.option("--records", "-r", help="Please define the records")
-def datalake_list(ionfile, list_filter=None, sort=None, page=None, records=None):
+def datalake_list(ionfile,
+                  list_filter=None,
+                  sort=None,
+                  page=None,
+                  records=None):
     """
     List data object properties using a filter.
     :param ionfile: Infor IONAPI credentials file.
@@ -283,7 +299,8 @@ def datalake_purge(ionfile, ids, purge_filter):
     :param purge_filter: The restrictions to be applied to purge the records
     """
     if ids is not None and purge_filter is not None:
-        raise ValueError("You cannot define both arguments: ids and purge_filter.")
+        raise ValueError(
+            "You cannot define both arguments: ids and purge_filter.")
 
     inforlogin.load_config(ionfile)
     inforlogin.login()
