@@ -67,7 +67,7 @@ def test_delete_v1_purge_filter():
     res = delete_v1_purge_filter(purge_filter)
     result = json.loads(res.text)
     assert res.status_code == 200
-    assert result['purgedNumber'] > 0
+    assert result["purgedNumber"] > 0
 
 
 @pytest.mark.skip()
