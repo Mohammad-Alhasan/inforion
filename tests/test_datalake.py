@@ -2,7 +2,8 @@ import json
 import os
 
 import pytest
-from inforion.datalake.datalake import delete_v1_purge_id, delete_v1_purge_filter
+from inforion.datalake.datalake import delete_v1_purge_filter
+from inforion.datalake.datalake import delete_v1_purge_id
 from inforion.datalake.datalake import get_v1_payloads_list
 from inforion.datalake.datalake import get_v1_payloads_stream_by_id
 from inforion.ionapi.model import inforlogin
