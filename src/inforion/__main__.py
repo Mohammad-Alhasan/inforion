@@ -289,9 +289,22 @@ def datalake_get(ionfile, stream_id):
         logger.error(response.content)
 
 
+
+@main.group(name="check")
+def check():
+    """Commands to check soemthing"""
+    pass
+
+
+@check.command(name="Check_Token", help="Check Login Token")
+@click.option("--url", "-u", help="URL to local ION")
+def check_token(url):
+    pass
+
 main.add_command(load)
 main.add_command(transform)
 main.add_command(extract)
+main.add_command(check)
 
 if __name__ == "__main__":
     main()
