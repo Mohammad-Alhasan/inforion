@@ -14,10 +14,10 @@ Send Data to InforION ( Datalake, M3, LN )
    
    introduction
    windows
-   load
    excelmappingfile
    transformation
    datalake
+   load
    errors
    contributing
    
