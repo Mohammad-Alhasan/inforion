@@ -70,7 +70,7 @@ def sendresults(url, _headers, data, timeout=65, stream=False):
 
     try:
         for z in range(0, 5):
-            # print (inforlogin.header())
+            
             response = http.request(
                 "POST",
                 url,
