@@ -86,8 +86,8 @@ def sendresults(url, _headers, data, timeout=65, stream=False):
                     break
 
                 except ValueError:
-                    print(r)
                     r = "JSON Error"
+                    print(r)
             else:
 
                 if z < 5:
