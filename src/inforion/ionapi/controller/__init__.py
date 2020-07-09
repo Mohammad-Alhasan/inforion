@@ -29,10 +29,7 @@ class TimeoutHTTPAdapter(HTTPAdapter):
 
 
 def requests_retry_session(
-        retries=3,
-        backoff_factor=0.3,
-        status_forcelist=(500, 502, 504),
-        session=None,
+    retries=3, backoff_factor=0.3, status_forcelist=(500, 502, 504), session=None,
 ):
     session = session or requests.Session()
     retry = Retry(
@@ -56,9 +53,9 @@ def sendresults(url, _headers, data, timeout=65, stream=False):
         status_forcelist=[429, 500, 502, 503, 504],
         method_whitelist=["HEAD", "POST", "GET", "OPTIONS"],
     )
-    adapter = HTTPAdapter(max_retries=retry_strategy,
-                          pool_connections=100,
-                          pool_maxsize=100)
+    adapter = HTTPAdapter(
+        max_retries=retry_strategy, pool_connections=100, pool_maxsize=100
+    )
     http = requests.Session()
     http.mount("https://", adapter)
     http.mount("http://", adapter)
@@ -66,8 +63,10 @@ def sendresults(url, _headers, data, timeout=65, stream=False):
     if datetime.now() > inforlogin._GLOBAL_session_expire:
 
         inforlogin.reconnect()
-        print(" Reconnect and Next Reconnect will be " +
-              str(inforlogin._GLOBAL_session_expire))
+        print(
+            " Reconnect and Next Reconnect will be "
+            + str(inforlogin._GLOBAL_session_expire)
+        )
 
     try:
         for z in range(0, 5):
@@ -151,20 +150,23 @@ def saveresults(r, df, program, index, chunk, MaxChunk=150, elements=1):
 
                 else:
 
-                    df.loc[df.index.to_series().between(newindex, index),
-                           "MESSAGE"] = "Results are empty"
+                    df.loc[
+                        df.index.to_series().between(newindex, index), "MESSAGE"
+                    ] = "Results are empty"
             else:
 
-                df.loc[df.index.to_series(
-                ).between(newindex, index), "MESSAGE"] = "Results are missing"
+                df.loc[
+                    df.index.to_series().between(newindex, index), "MESSAGE"
+                ] = "Results are missing"
         else:
             for newindex in range(index):
                 # print('Write JSON Error:', str(newindex))
                 df.loc[newindex, "MESSAGE"] = " JSON Error"
     except:
         print(r)
-        df.loc[df.index.to_series().between(newindex, index
-                                            ), "MESSAGE"] = "Unclear Error"
+        df.loc[
+            df.index.to_series().between(newindex, index), "MESSAGE"
+        ] = "Unclear Error"
 
     chunk = MaxChunk
     data = {"program": program, "cono": 409}
