@@ -117,7 +117,6 @@ def login():
         "password": this._GLOBAL_sask,
         "client_id": this._GLOBAL_client_id,
         "client_secret": this._GLOBAL_client_secret,
-        "scope": "",
         "redirect_uri": "https://localhost/",
     }
 
