@@ -7,6 +7,7 @@ import inforion as infor
 from inforion.datacatalog.datacatalog import delete_datacatalog_object
 from inforion.datacatalog.datacatalog import ObjectSchemaType
 from inforion.datacatalog.datacatalog import post_datacatalog_object
+from inforion.datalake.datalake import delete_v1_purge_filter
 from inforion.datalake.datalake import delete_v1_purge_id
 from inforion.datalake.datalake import get_v1_payloads_list
 from inforion.datalake.datalake import get_v1_payloads_stream_by_id
@@ -250,6 +251,15 @@ def upload(ionfile, schema, logical_id, file):
 @click.option("--page", "-p", help="Please define the page")
 @click.option("--records", "-r", help="Please define the records")
 def datalake_list(ionfile, list_filter=None, sort=None, page=None, records=None):
+    """
+    List data object properties using a filter.
+    :param ionfile: Infor IONAPI credentials file.
+    :param list_filter: The restrictions to be applied on the returned records.
+    :param sort: Field name followed by colon followed by direction (asc or desc; default asc).
+    Example: 'event_date:desc'.
+    :param page: The page number from which to start returning records. Starts from 1.
+    :param records: The number of records that will be returned. Starts from 0
+    """
     inforlogin.load_config(ionfile)
     inforlogin.login()
     response = get_v1_payloads_list(list_filter, sort, page, records)
@@ -263,22 +273,46 @@ def datalake_list(ionfile, list_filter=None, sort=None, page=None, records=None)
 @datalake.command(name="purge", help="Datalake purge")
 @click.option("--ionfile", "-i", help="Please define the ionfile file")
 @click.option("--ids", "-id", help="Please define the ids")
-def datalake_purge(ionfile, ids):
+@click.option("--purge_filter", "-f", help="Please define the filter")
+def datalake_purge(ionfile, ids, purge_filter):
+    """
+    Deletes Data Objects based on the given filter or a list of IDs.
+    You cannot define both arguments: ids and purge_filter.
+    :param ionfile: Infor IONAPI credentials file.
+    :param ids: Object ids.
+    :param purge_filter: The restrictions to be applied to purge the records
+    """
+    if ids is not None and purge_filter is not None:
+        raise ValueError("You cannot define both arguments: ids and purge_filter.")
+
     inforlogin.load_config(ionfile)
     inforlogin.login()
-    ids_list = ids.split(",")
-    response = delete_v1_purge_id(ids_list)
 
-    if response.status_code == 200:
-        click.echo(response.text)
-    else:
-        logger.error(response.content)
+    if ids is not None:
+        ids_list = ids.split(",")
+        response = delete_v1_purge_id(ids_list)
+        if response.status_code == 200:
+            click.echo(response.text)
+        else:
+            logger.error(response.content)
+
+    if purge_filter is not None:
+        response = delete_v1_purge_filter(purge_filter)
+        if response.status_code == 200:
+            click.echo(response.text)
+        else:
+            logger.error(response.content)
 
 
 @datalake.command(name="get", help="Datalake get")
 @click.option("--ionfile", "-i", help="Please define the ionfile file")
 @click.option("--stream_id", "-id", help="Please define the id")
 def datalake_get(ionfile, stream_id):
+    """
+    Retrieve payload based on id from datalake.
+    :param ionfile: Infor IONAPI credentials file.
+    :param stream_id: Object ID.
+    """
     inforlogin.load_config(ionfile)
     inforlogin.login()
     response = get_v1_payloads_stream_by_id(stream_id)

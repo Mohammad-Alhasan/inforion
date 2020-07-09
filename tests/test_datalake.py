@@ -2,6 +2,7 @@ import json
 import os
 
 import pytest
+from inforion.datalake.datalake import delete_v1_purge_filter
 from inforion.datalake.datalake import delete_v1_purge_id
 from inforion.datalake.datalake import get_v1_payloads_list
 from inforion.datalake.datalake import get_v1_payloads_stream_by_id
@@ -54,6 +55,20 @@ def test_get_v1_payloads_stream_by_id():
     for document in documents:
         res1 = get_v1_payloads_stream_by_id(document["dl_id"])
         assert res1.status_code == 200
+
+
+@pytest.mark.skip()
+def test_delete_v1_purge_filter():
+    inforlogin.load_config("credentials/credentials.ionapi")
+    inforlogin.login()
+    __create_document()
+    res = get_v1_payloads_list("dl_document_name eq 'CSVSchema2'", ["event_date:desc"])
+    dl_id = json.loads(res.text)["fields"][0]["dl_id"]
+    purge_filter = "dl_id eq '{}'".format(dl_id)
+    res = delete_v1_purge_filter(purge_filter)
+    result = json.loads(res.text)
+    assert res.status_code == 200
+    assert result["purgedNumber"] > 0
 
 
 @pytest.mark.skip()
