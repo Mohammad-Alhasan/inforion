@@ -87,7 +87,7 @@ def sendresults(url, _headers, data, timeout=65, stream=False):
 
                 except ValueError:
                     r = "JSON Error"
-                    
+
                     print(r)
             else:
 
