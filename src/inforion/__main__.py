@@ -289,7 +289,6 @@ def datalake_get(ionfile, stream_id):
         logger.error(response.content)
 
 
-
 @main.group(name="check")
 def check():
     """Commands to check soemthing"""
@@ -299,11 +298,11 @@ def check():
 @check.command(name="Check_Token", help="Check Login Token")
 @click.option("--url", "-u", help="URL to local ION")
 @click.option("--ionfile", "-i", help="Please define the ionfile file")
-
-def check_token(url,ionfile):
+def check_token(url, ionfile):
     """Check Login and display the token"""
     inforlogin.load_config(ionfile)
     inforlogin.login()
+
 
 main.add_command(load)
 main.add_command(transform)
