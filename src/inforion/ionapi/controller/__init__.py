@@ -1,7 +1,6 @@
 import sys
 import time
-from datetime import datetime
-from datetime import timedelta
+from datetime import datetime, timedelta
 
 import inforion.ionapi.model.inforlogin as inforlogin
 from inforion.ionapi.controller import *
