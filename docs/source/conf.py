@@ -22,7 +22,7 @@ copyright = '2020, Fellow Consulting AG'
 author = 'Daniel Jordan'
 
 # The full version, including alpha/beta/rc tags
-release = '1.1'
+release = '2.1'
 today_fmt = '%Y-%m-%d'
 
 master_doc = 'index'
