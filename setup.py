@@ -89,7 +89,7 @@ setup(
             "helper/*",
             "transformation/*",
             "excelexport/*",
-            "excelexport/api-files/*",
+            "excelexport/api-files/*.json",
         ]
     },
 
