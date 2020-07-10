@@ -92,6 +92,10 @@ setup(
             "excelexport/api-files/*.json",
         ]
     },
+    data_dir=[(
+                  ('config', ['excelexport/api-files/'])
+     )],
+    
 
     
 )
