@@ -16,7 +16,7 @@ def parse_requirements(filename):
 
 
 def load_requirements(fname):
-    reqs = parse_requirements(fname, session="test")
+    reqs = parse_requirements(fname)
     return [str(ir.req) for ir in reqs]
 
 
