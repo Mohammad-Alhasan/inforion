@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transformation &#8212; InforION 1.1 documentation</title>
+    <title>Loading &#8212; InforION 1.1 documentation</title>
     <link rel="stylesheet" href="_static/classic.css" type="text/css" />
     <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
     
@@ -17,8 +17,8 @@
     
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="Data Lake" href="datalake.html" />
-    <link rel="prev" title="Generate Excel Mapping File" href="excelmappingfile.html" /> 
+    <link rel="next" title="Common error messages" href="errors.html" />
+    <link rel="prev" title="Data Lake" href="datalake.html" /> 
   </head><body>
     <div class="related" role="navigation" aria-label="related navigation">
       <h3>Navigation</h3>
@@ -27,13 +27,13 @@
           <a href="genindex.html" title="General Index"
              accesskey="I">index</a></li>
         <li class="right" >
-          <a href="datalake.html" title="Data Lake"
+          <a href="errors.html" title="Common error messages"
              accesskey="N">next</a> |</li>
         <li class="right" >
-          <a href="excelmappingfile.html" title="Generate Excel Mapping File"
+          <a href="datalake.html" title="Data Lake"
              accesskey="P">previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">InforION 1.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Transformation</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Loading</a></li> 
       </ul>
     </div>  
 
@@ -42,11 +42,11 @@
         <div class="bodywrapper">
           <div class="body" role="main">
             
-  <div class="section" id="transformation">
-<h1>Transformation<a class="headerlink" href="#transformation" title="Permalink to this headline">¶</a></h1>
-<p><strong>Description</strong>
-This step provides the functionality of tranforming the external data source into Infor data based on the mapping file.</p>
-<p><strong>Parameters</strong></p>
+  <div class="section" id="loading">
+<h1>Loading<a class="headerlink" href="#loading" title="Permalink to this headline">¶</a></h1>
+<p>Example is to load data from Excel to Infor Application for example M3.</p>
+<p>inforion load –help</p>
+<p>Options:</p>
 <table class="docutils align-default">
 <colgroup>
 <col style="width: 50%" />
@@ -58,22 +58,37 @@ This step provides the functionality of tranforming the external data source int
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>-a or –mappingfile</p></td>
-<td><p>This parameter is used to provide the mapping file based on which transformation will be done.</p></td>
+<tr class="row-even"><td><p>-u, –url</p></td>
+<td><p>The full URL to the API is needed. Please note you need to enter the full url like …/M3/m3api-rest/v2/execute/CRS610MI  [required]</p></td>
 </tr>
-<tr class="row-odd"><td><p>-b or –mainsheet</p></td>
-<td><p>This parameter is used to define the main sheet which will contain the mapping fields for transformation.</p></td>
+<tr class="row-odd"><td><p>-f, –ionfile</p></td>
+<td><p>IONFile is needed to login in to Infor OS. Please go into ION and generate a IONFile. If not provided, a prompt will allow you to type the input text. [required]</p></td>
 </tr>
-<tr class="row-even"><td><p>-i or –inputfile</p></td>
-<td><p>This parameter is used to provide the input data.</p></td>
+<tr class="row-even"><td><p>-p, –program</p></td>
+<td><p>What kind of program to use by the load  [required]</p></td>
 </tr>
-<tr class="row-odd"><td><p>-o or –outputfile</p></td>
-<td><p>This parameter is used to write the transformed data into a file.</p></td>
+<tr class="row-odd"><td><p>-m, –method</p></td>
+<td><p>Select the method as a list  [required]</p></td>
+</tr>
+<tr class="row-even"><td><p>-i, –inputfile</p></td>
+<td><p>File to load the data. Please use XLSX or CSV format. If not provided, the input text will just be printed [required]</p></td>
+</tr>
+<tr class="row-odd"><td><p>-o, –outputfile</p></td>
+<td><p>File as Output File - Data are saved here for the load</p></td>
+</tr>
+<tr class="row-even"><td><p>-s, –start</p></td>
+<td><p>Dataload can be started by 0 or by a number</p></td>
+</tr>
+<tr class="row-odd"><td><p>-e, –end</p></td>
+<td><p>Dataload can be end</p></td>
+</tr>
+<tr class="row-even"><td><p>-z, –configfile</p></td>
+<td><p>Use a Configfile instead of parameters</p></td>
 </tr>
 </tbody>
 </table>
 <p><strong>Example</strong></p>
-<p>inforion transform -a sample_mapping.xlsx -b Sheet1 -i sample_data.xlsx -o output.xlsx</p>
+<p>inforion load -u <a class="reference external" href="https://mingle-ionapi.eu1.inforcloudsuite.com/Tendat_DEV/M3/m3api-rest/v2/execute">https://mingle-ionapi.eu1.inforcloudsuite.com/Tendat_DEV/M3/m3api-rest/v2/execute</a> -f FellowKey.ionapi -p CRS610MI -m “Add,ChgBasicData,ChgOrderInfo,ChgFinancial” -i excel/T-KundenNeu1.xlsx  -o load_full_200.xlsx -s 0 -e 2</p>
 </div>
 
 
@@ -84,15 +99,15 @@ This step provides the functionality of tranforming the external data source int
       <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
         <div class="sphinxsidebarwrapper">
   <h4>Previous topic</h4>
-  <p class="topless"><a href="excelmappingfile.html"
-                        title="previous chapter">Generate Excel Mapping File</a></p>
-  <h4>Next topic</h4>
   <p class="topless"><a href="datalake.html"
-                        title="next chapter">Data Lake</a></p>
+                        title="previous chapter">Data Lake</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="errors.html"
+                        title="next chapter">Common error messages</a></p>
   <div role="note" aria-label="source link">
     <h3>This Page</h3>
     <ul class="this-page-menu">
-      <li><a href="_sources/transformation.rst.txt"
+      <li><a href="_sources/load.rst.txt"
             rel="nofollow">Show Source</a></li>
     </ul>
    </div>
@@ -117,13 +132,13 @@ This step provides the functionality of tranforming the external data source int
           <a href="genindex.html" title="General Index"
              >index</a></li>
         <li class="right" >
-          <a href="datalake.html" title="Data Lake"
+          <a href="errors.html" title="Common error messages"
              >next</a> |</li>
         <li class="right" >
-          <a href="excelmappingfile.html" title="Generate Excel Mapping File"
+          <a href="datalake.html" title="Data Lake"
              >previous</a> |</li>
         <li class="nav-item nav-item-0"><a href="index.html">InforION 1.1 documentation</a> &#187;</li>
-        <li class="nav-item nav-item-this"><a href="">Transformation</a></li> 
+        <li class="nav-item nav-item-this"><a href="">Loading</a></li> 
       </ul>
     </div>
     <div class="footer" role="contentinfo">
