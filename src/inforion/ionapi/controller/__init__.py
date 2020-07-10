@@ -13,7 +13,7 @@ from inforion.ionapi.model import *
 # import inforion.ionapi.basic as inforlogin
 
 import logging
-from logger import get_logger
+#from logger import get_logger
 
 import inforion.ionapi.model.inforlogin as inforlogin
 #import inforion.ionapi.basic as inforlogin

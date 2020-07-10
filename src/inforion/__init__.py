@@ -9,7 +9,7 @@ from inforion.ionapi.model import *
 from inforion.transformation.transform import parallelize_tranformation
 
 import logging
-from logger import get_logger
+#from logger import get_logger
 
 # from ionbasic import load_config
 

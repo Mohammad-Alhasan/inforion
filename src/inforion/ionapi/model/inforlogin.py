@@ -8,7 +8,7 @@ import requests
 from datetime import datetime, timedelta
 
 import logging
-from logger import get_logger
+#from logger import get_logger
 
 this = sys.modules[__name__]
 
