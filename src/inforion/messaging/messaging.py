@@ -13,7 +13,7 @@ def get_messaging_ping():
         url = inforlogin.base_url() + '/IONSERVICES/api/ion/messaging/service/ping'
         headers = inforlogin.header()
         res = requests.get(url, headers=headers)
-        logger.info('messaging ping: {}'.format(res.content))
+        log.info('messaging ping: {}'.format(res.content))
         return res
     except Exception as e:
         logger.error("Error ocurred " + str(e))
@@ -32,8 +32,8 @@ def post_messaging_v2_multipart_message(parameter_request, message_payload):
         headers.update({'Content-Type': data.content_type})
 
         res = requests.post(url, headers=headers, data=data)
-        logger.info('messaging v2 multipart message: {}'.format(res.content))
+        log.info('messaging v2 multipart message: {}'.format(res.content))
         return res
     except Exception as e:
-        logger.error("Error ocurred " + str(e))
+        log.error("Error ocurred " + str(e))
 
