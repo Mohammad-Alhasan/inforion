@@ -16,6 +16,8 @@ from inforion.ionapi.controller import *
 from inforion.ionapi.model import * 
 from inforion.helper.urlsplit import spliturl
 
+import logging
+from logger import get_logger
 
 import validators
 import os.path
@@ -26,10 +28,10 @@ def main_load(url=None,ionfile=None,program=None,method=None,dataframe=None,outp
      
     
     if validators.url(url) != True:
-        return ("Error: URL is not valid")
+        logging.info("Error: URL is not valid")
     
     if os.path.exists(ionfile) == False:
-        return ("Error: File does not exist")
+        logging.info("Error: File does not exist")
     else:
         config = inforlogin.load_config(ionfile)
         

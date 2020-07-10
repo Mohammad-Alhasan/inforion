@@ -7,6 +7,9 @@ import datetime
 from multiprocessing import  Pool
 from functools import partial
 
+import logging
+from logger import get_logger
+
 def parallelize_tranformation(mappingfile, mainsheet,stagingdata,outputfile=None,n_cores=4):
     # Read the file from given location
     xls = pd.ExcelFile(mappingfile)
@@ -27,7 +30,7 @@ def parallelize_tranformation(mappingfile, mainsheet,stagingdata,outputfile=None
     pool.join()
     
     if outputfile is not None:
-        print ('Save to file: ' + outputfile)
+        logging.info('Save to file: ' + outputfile)
         writer = pd.ExcelWriter(outputfile, engine='xlsxwriter')
         df.to_excel(writer, sheet_name='Log Output',index=False)
         writer.save()

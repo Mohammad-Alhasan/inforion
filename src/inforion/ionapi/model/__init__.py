@@ -18,7 +18,8 @@ from requests_oauthlib import OAuth2Session
 from requests.auth import HTTPBasicAuth
 from oauthlib.oauth2 import BackendApplicationClient
 
-
+import logging
+from logger import get_logger
 
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
@@ -66,7 +67,7 @@ def execute(url,headers,program,methode,dataframe,outputfile=None,start=0,end=No
     methode = methode.split(",")
     methode_count = len(methode)
 
-    print ("Number of rows " + str(total_rows))
+    logging.info("Number of rows " + str(total_rows))
 
     
     
@@ -154,7 +155,7 @@ def executeSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end
     
     
 
-    print ("Number of rows " + str(total_rows))
+    logging.info("Number of rows " + str(total_rows))
 
     
     a = []
@@ -192,14 +193,14 @@ def executeSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end
     df = df.astype(str)
 
     if outputfile is not None:
-        print ('Save to file: ' + outputfile)
+        logging.info('Save to file: ' + outputfile)
         filehandling.savetodisk(outputfile,df)
     
     return df
 
 def executeAsyncSnd(url,headers,program,methode,dataframe,outputfile=None,start=0,end=None):
 
-    print ("Still in Beta")
+    logging.info("Still in Beta")
 
     df = dataframe
         
@@ -229,7 +230,7 @@ def executeAsyncSnd(url,headers,program,methode,dataframe,outputfile=None,start=
     
     
 
-    print ("Number of rows " + str(total_rows))
+    logging.info("Number of rows " + str(total_rows))
 
     
     a = []
@@ -258,13 +259,13 @@ def executeAsyncSnd(url,headers,program,methode,dataframe,outputfile=None,start=
         data['transactions'] = a
 
 
-        print (data)
+        logging.info(data)
 
         r = controller.sendresults(url,headers,data,stream=True)
         index = index + 1 
         #df,data,chunk = saveresults(r,df,methode,index,chunk)
 
-    print (r)
+    logging.info(r)
 
     '''
 

@@ -8,6 +8,9 @@ from inforion.ionapi.model import *
 from datetime import datetime, timedelta
 import time
 
+import logging
+from logger import get_logger
+
 import inforion.ionapi.model.inforlogin as inforlogin
 #import inforion.ionapi.basic as inforlogin
 
@@ -64,7 +67,7 @@ def sendresults(url,headers, data,timeout=65,stream=False):
     if datetime.now() > inforlogin._GLOBAL_session_expire:
         
         headers = inforlogin.reconnect()
-        print (" Reconnect and Next Reconnect will be " + str(inforlogin._GLOBAL_session_expire))
+        logging.info(" Reconnect and Next Reconnect will be " + str(inforlogin._GLOBAL_session_expire))
         
    
 
@@ -79,24 +82,24 @@ def sendresults(url,headers, data,timeout=65,stream=False):
                     break     
     
                 except ValueError:
-                    print (r)
+                    logging.error(r)
                     r = "JSON Error"
             else:
                  
                 if z < 5:
-                    print (" Error try to get new session "+ str(z) + "/5")
+                    logging.info(" Error try to get new session "+ str(z) + "/5")
                     headers = inforlogin.reconnect()
                     time.sleep(10)     
                 elif z == 5:
                     sys.exit(0)    
 
     except requests.exceptions.TooManyRedirects:
-        print ("Too many redirects")
+        logging.error("Too many redirects")
         r = "Error - Too many redirects"
         raise SystemExit(e)
     except requests.exceptions.RequestException as e:
         # catastrophic error. bail.
-        print ("OOps: Something Else",e)
+        logging.error("OOps: Something Else",e)
         raise SystemExit(e)
         r = "Error"
     
@@ -151,10 +154,10 @@ def saveresults(r,df,program,index,chunk,MaxChunk=150,elements=1):
                 df.loc[df.index.to_series().between(newindex,index), 'MESSAGE'] = "Results are missing"
         else:
             for newindex in range(index):
-                #print('Write JSON Error:', str(newindex))
+                #logging.info('Write JSON Error:', str(newindex))
                 df.loc[newindex, 'MESSAGE'] = ' JSON Error'
     except:
-        print (r)
+        logging.error(r)
         df.loc[df.index.to_series().between(newindex,index), 'MESSAGE'] = 'Unclear Error'
 
 

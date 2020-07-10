@@ -52,6 +52,6 @@ class TestStringMethods(unittest.TestCase):
             os.remove(self.valid_outputfilename)
         except:
             print(self.valid_outputfilename, " doesn't exists")
-
+            
 if __name__ == '__main__':
     unittest.main()

@@ -7,6 +7,10 @@ import logging
 import os
 import pandas as pd
 
+import urllib.request as urllib
+
+
+
 # Import the test framework (this is a hypothetical module)
 
 import inforion.ionapi.model.inforlogin as inforlogin
@@ -51,3 +55,15 @@ def test_mappingfilepath():
 
 def test_checkstagingdata():
     assert  "Error: Data frame is empty" in main_transformation("sample.xls","TestSheet",pd.DataFrame())
+
+
+def test_csv_existance():
+    assert ".csv" in filehandling.checkfiletype("Test.csv")
+
+
+def test_server_connection():
+    try:
+        urllib.urlopen('http://216.58.192.142', timeout=1)
+        return True
+    except urllib.URLError as err:
+        return False

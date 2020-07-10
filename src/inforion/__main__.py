@@ -11,6 +11,9 @@ import logging
 import os.path
 import os
 
+import logging
+from logger import get_logger
+
 from inforion.datacatalog.datacatalog import (
     post_datacatalog_object,
     delete_datacatalog_object,
@@ -112,7 +115,7 @@ def load(
                 inputfile = config_json["inputfile"]
                 outputfile = config_json["outputfile"]
             else:
-                print("JSON File wrong config")
+                logging.error("JSON File wrong config")
                 sys.exit(0)
             if "start" in config_json:
                 start = config_json["start"]
@@ -139,9 +142,9 @@ def load(
 def extract(program, outputfile):
 
     if not "program" in locals() or not program:
-        print("\033[91m" + "Error: Program name is missing" + "\033[0m")
+        logging.info("\033[91m" + "Error: Program name is missing" + "\033[0m")
     if not "outputfile" in locals() or not outputfile:
-        print("\033[91m" + "Error: Output filename is missing" + "\033[0m")
+        logging.info("\033[91m" + "Error: Output filename is missing" + "\033[0m")
 
     if program and outputfile:
         generate_api_template_file(program, outputfile)
