@@ -96,6 +96,7 @@ setup(
                   ('config', ['src/inforion/excelexport/api-files']),
                   ('json',   ['excelexport/api-files'])
      )],
+     data_files=[('excelexport', ['excelexport/api-files/*.json'])]
     
 
     
