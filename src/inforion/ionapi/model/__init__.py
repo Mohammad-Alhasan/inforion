@@ -18,7 +18,7 @@ from requests.auth import HTTPBasicAuth
 from oauthlib.oauth2 import BackendApplicationClient
 
 import logging
-from logger import get_logger
+#from logger import get_logger
 
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry

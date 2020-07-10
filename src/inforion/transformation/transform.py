@@ -7,7 +7,7 @@ from multiprocessing import Pool
 from functools import partial
 
 import logging
-from logger import get_logger
+#from logger import get_logger
 
 def parallelize_tranformation(mappingfile, mainsheet,stagingdata,outputfile=None,n_cores=4):
     # Read the file from given location
