@@ -29,9 +29,11 @@ def main_load(
 
     if validators.url(url) != True:
         logging.info("Error: URL is not valid")
+        return ("Error: URL is not valid")
     
     if os.path.exists(ionfile) == False:
         logging.info("Error: File does not exist")
+        return ("Error: File does not exist")
     else:
         inforlogin.load_config(ionfile)
 
