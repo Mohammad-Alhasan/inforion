@@ -76,6 +76,11 @@ setup(
     python_requires=">=3.6",
     packages=find_packages("src", exclude=["tests", "tests.*"]),
     package_dir={"": "src"},
+    entry_points={"console_scripts": ["inforion = inforion.__main__:main"]},
+    keywords=["Infor", "InforION", "Datalake", "LN", "M3"],
+    install_requires=reqs,
+    zip_safe=True,
+    include_package_data=True,
     package_data={
         "inforion": [
             "ionapi/controller/*",
@@ -87,9 +92,7 @@ setup(
             "excelexport/api-files/*",
         ]
     },
-    entry_points={"console_scripts": ["inforion = inforion.__main__:main"]},
-    keywords=["Infor", "InforION", "Datalake", "LN", "M3"],
-    install_requires=reqs,
-    zip_safe=True,
+
+    
 )
 
