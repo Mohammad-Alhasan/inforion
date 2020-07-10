@@ -19,6 +19,7 @@ Send Data to InforION ( Datalake, M3, LN )
    datalake
    errors
    contributing
+   logging
    
 
 Indices and tables
