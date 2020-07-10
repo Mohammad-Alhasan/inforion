@@ -26,7 +26,7 @@ inforion extract --help
 
 **Example**
 
-inforion -t E -p CRS610MI -o /Users/username/mappings/CRS610MI-Mappings.xlsx
+inforion extract -p CRS610MI -o CRS610MI-Mappings.xlsx
 
 **Note**
 This command should always be executed in terminal as this needs user permissions.
