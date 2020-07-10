@@ -15,13 +15,14 @@ from inforion.excelexport import *
 from inforion.helper.filehandling import *
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *
+import inforion.ln as lni
 
 import logging
 import os.path
 import os
 
 import logging
-from logger import get_logger
+#from logger import get_logger
 
 from inforion.datacatalog.datacatalog import (
     post_datacatalog_object,
@@ -351,6 +352,25 @@ def check_token(url, ionfile):
     inforlogin.load_config(ionfile)
     inforlogin.login()
 
+
+@main.group(name="ln")
+def ln():
+    """Commands related to Export Data from LN."""
+    pass
+
+
+@ln.command(name="ExportData", help="Export Data")
+@click.option("--url", "-u", help="URL to local ION")
+@click.option("--ionfile", "-i", help="Please define the ionfile file")
+@click.option("--company", "-c", help="Company for which we need to export")
+@click.option("--service_name", "-s", help="Service name. e.g. BusinessPartner, SalesOrder")
+@click.option("--outputfile", "-o", help="File as Output File")
+def export_data(url, ionfile, company, service_name, outputfile):
+    """Exports business partner to an Excel file"""
+
+    inforlogin.load_config(ionfile)
+    token = inforlogin.login()['access_token']
+    lni.export_data(url, token, company, service_name, outputfile)
 
 main.add_command(load)
 main.add_command(transform)
