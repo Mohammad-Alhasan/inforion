@@ -93,7 +93,8 @@ setup(
         ]
     },
     data_dir=[(
-                  ('config', ['excelexport/api-files/'])
+                  ('config', ['src/inforion/excelexport/api-files']),
+                  ('json',   ['excelexport/api-files'])
      )],
     
 
