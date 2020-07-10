@@ -83,6 +83,8 @@ setup(
             "ionapi/*",
             "helper/*",
             "transformation/*",
+            "excelexport/*",
+            "excelexport/api-files/*",
         ]
     },
     entry_points={"console_scripts": ["inforion = inforion.__main__:main"]},
