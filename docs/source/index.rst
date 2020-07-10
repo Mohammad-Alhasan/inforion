@@ -13,10 +13,11 @@ Send Data to InforION ( Datalake, M3, LN )
    :maxdepth: 2
    
    introduction
-   load
+   windows
    excelmappingfile
    transformation
    datalake
+   load
    errors
    contributing
    logging

@@ -1,10 +1,9 @@
-# Transformation of Staging Data into M3 format via mapping file 
+# Transformation of Staging Data into M3 format via mapping file
 import pandas as pd
-import json
 import numpy as np
 import decimal
 import datetime
-from multiprocessing import  Pool
+from multiprocessing import Pool
 from functools import partial
 
 import logging
@@ -28,7 +27,7 @@ def parallelize_tranformation(mappingfile, mainsheet,stagingdata,outputfile=None
     df = pd.concat(pool.map(func, df_split))
     pool.close()
     pool.join()
-    
+
     if outputfile is not None:
         logging.info('Save to file: ' + outputfile)
         writer = pd.ExcelWriter(outputfile, engine='xlsxwriter')
@@ -37,85 +36,91 @@ def parallelize_tranformation(mappingfile, mainsheet,stagingdata,outputfile=None
 
     return df
 
+
 def getMainSheetCache(sheet_to_df_map, mainsheet):
     mapping_cache = []
 
     for index, row in sheet_to_df_map[mainsheet].iterrows():
-        if index >=9:
-            row = row.replace(np.nan, '', regex=True)
+        if index >= 9:
+            row = row.replace(np.nan, "", regex=True)
 
             map = {}
-            map['API_FIELD'] = row[15]
+            map["API_FIELD"] = row[15]
 
             if row[33] and not row[33] is np.nan:
-                map['SOURCE'] = row[33]
+                map["SOURCE"] = row[33]
             else:
-                map['SOURCE'] = None
+                map["SOURCE"] = None
 
-            map['FUNC_TYPE'] = row[36].strip().lower()
+            map["FUNC_TYPE"] = row[36].strip().lower()
 
-            map['FUNC_VAL'] = row[37]
-            map['FUNC_ARG'] = row[38]
+            map["FUNC_VAL"] = row[37]
+            map["FUNC_ARG"] = row[38]
 
             mapping_cache.append(map)
-    
+
     return mapping_cache
+
 
 def getTabsMappingCache(sheet_to_df_map, mapping_cache):
     mapping_sheets_cache = {}
-    
+
     for map in mapping_cache:
-        if map['FUNC_TYPE'] == 'tbl':
-            tab_key = map['FUNC_VAL'].strip()
+        if map["FUNC_TYPE"] == "tbl":
+            tab_key = map["FUNC_VAL"].strip()
             if tab_key not in mapping_sheets_cache:
                 tab = {}
                 for i, val in sheet_to_df_map[tab_key].iterrows():
                     if i >= 7:
-                        if str(val[0]) == 'nan': val[0] = ''
+                        if str(val[0]) == "nan":
+                            val[0] = ""
                         tab[str(val[0])] = str(val[1])
                 mapping_sheets_cache[tab_key] = tab
-    
+
     return mapping_sheets_cache
 
 
-def transform_data(sheet_to_df_map, mainsheet, sheet_cache, tabs_cache, stagingdata):
+def transform_data(_sheet_to_df_map, _mainsheet, sheet_cache, tabs_cache, stagingdata):
     rows_list = []
 
-    for tb_index,tb_row in stagingdata.iterrows():
+    for _, tb_row in stagingdata.iterrows():
         row_dict = {}
 
         for map in sheet_cache:
 
-            if map['SOURCE']:
-                row_dict[map['API_FIELD']] = str(tb_row[map['SOURCE']])
+            if map["SOURCE"]:
+                row_dict[map["API_FIELD"]] = str(tb_row[map["SOURCE"]])
             else:
-                if map['FUNC_TYPE'] == 'tbl':
-                    if map['FUNC_ARG'] and not map['FUNC_ARG'] is np.nan:
-                        tab = tabs_cache[map['FUNC_VAL']]
-                        if tb_row[map['FUNC_ARG']] in tab:
-                            row_dict[map['API_FIELD']] = str(tab[tb_row[map['FUNC_ARG']]])
-                        elif '*' in tab:
-                            row_dict[map['API_FIELD']] = str(tab['*'])
+                if map["FUNC_TYPE"] == "tbl":
+                    if map["FUNC_ARG"] and not map["FUNC_ARG"] is np.nan:
+                        tab = tabs_cache[map["FUNC_VAL"]]
+                        if tb_row[map["FUNC_ARG"]] in tab:
+                            row_dict[map["API_FIELD"]] = str(
+                                tab[tb_row[map["FUNC_ARG"]]]
+                            )
+                        elif "*" in tab:
+                            row_dict[map["API_FIELD"]] = str(tab["*"])
                         else:
-                            row_dict[map['API_FIELD']] = str(tb_row[map['FUNC_ARG']])
-                elif map['FUNC_TYPE'] == 'func':
-                    if map['FUNC_VAL'].strip().lower() == "div":
-                        data_values = map['FUNC_ARG'].split('|')
+                            row_dict[map["API_FIELD"]] = str(tb_row[map["FUNC_ARG"]])
+                elif map["FUNC_TYPE"] == "func":
+                    if map["FUNC_VAL"].strip().lower() == "div":
+                        data_values = map["FUNC_ARG"].split("|")
                         with decimal.localcontext() as ctx:
                             if data_values[2] != "":
                                 ctx.prec = int(data_values[2])
-                            division = decimal.Decimal(tb_row[data_values[0]]) / decimal.Decimal(data_values[1])
-                    row_dict[map['API_FIELD']] = division
-                elif map['FUNC_TYPE'] == 'const':
-                    if isinstance(map['FUNC_VAL'], datetime.datetime):
-                        val = map['FUNC_VAL'].strftime("%Y%m%d")
-                        row_dict[map['API_FIELD']] = str(val)
+                            division = decimal.Decimal(
+                                tb_row[data_values[0]]
+                            ) / decimal.Decimal(data_values[1])
+                    row_dict[map["API_FIELD"]] = division
+                elif map["FUNC_TYPE"] == "const":
+                    if isinstance(map["FUNC_VAL"], datetime.datetime):
+                        val = map["FUNC_VAL"].strftime("%Y%m%d")
+                        row_dict[map["API_FIELD"]] = str(val)
                     else:
-                        row_dict[map['API_FIELD']] = str(map['FUNC_VAL'])
-
+                        row_dict[map["API_FIELD"]] = str(map["FUNC_VAL"])
 
         rows_list.append(row_dict)
 
-    df = pd.DataFrame(rows_list).replace('nan', '', regex=True)
-    
+    df = pd.DataFrame(rows_list).replace("nan", "", regex=True)
+
     return df
