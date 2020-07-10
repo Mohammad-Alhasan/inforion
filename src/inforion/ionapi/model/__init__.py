@@ -211,11 +211,11 @@ def executeSnd(
         index = index + 1
         # df,data,chunk = saveresults(r,df,methode,index,chunk)
 
-    print(r)
+  
 
     logging.info(r)
 
-    '''
+  
 
     df = df.replace(np.nan, '', regex=True)
     df = df.astype(str)
@@ -226,7 +226,7 @@ def executeSnd(
     
     return df
 
-    """
+   
 
 
 def getSuccessGraphDataframe(df):
