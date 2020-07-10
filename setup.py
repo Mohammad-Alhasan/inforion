@@ -93,22 +93,3 @@ setup(
     zip_safe=True,
 )
 
-"""
-install_requires=[
-        "certifi",
-        "oauth",
-        "progressbar",
-        "oauthlib",
-        "packaging",
-        "requests",
-        "requests-oauthlib",
-        "requests-toolbelt",
-        "setuptools-git-version",
-        "six",
-        "xlsxwriter",
-        "inforion",
-        "pandas",
-        "progressbar2",
-        "openpyxl"
-    ]
-"""
