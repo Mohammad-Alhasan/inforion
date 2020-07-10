@@ -27,6 +27,7 @@ def get_base_request_xml(company, service_name):
 
     return xml_string
 
+
 def get_method_xml(service_name, method_name):
     if method_name == 'List':
         return f"""<List xmlns="http://www.infor.com/businessinterface/{service_name}">

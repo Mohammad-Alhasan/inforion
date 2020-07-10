@@ -1,4 +1,3 @@
-
 import requests
 import xml.etree.ElementTree as et
 import pandas as pd
@@ -41,12 +40,12 @@ def export_data(url, token, company, service_name, outputfile):
 
     if service_name not in available_services:
         available_services_str = ', '.join(available_services)
-        print(bcolors.FAIL + f'{service_name} is currently not available. Currently only support {available_services_str}.'+bcolors.ENDC)
+        print(bcolors.FAIL + f'{service_name} is currently not available. Currently we only support {available_services_str}.'+bcolors.ENDC)
         return
 
     data = get_data(url, token, company, service_name)
     if len(data) > 0:
-        df_cols = xhelper.get_leaf_node_names(data[0])
+        df_cols = xhelper.get_main_node_names(data[0])
         df = xhelper.get_data_frame_from_XML_Nodes_List(data, df_cols)
         df.to_excel(outputfile)
         print(bcolors.OKGREEN + "Exported data successfully to Excel file. "+bcolors.ENDC)
