@@ -73,7 +73,7 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires=">=3.6",
+    python_requires=">=3.7",
     packages=find_packages("src", exclude=["tests", "tests.*"]),
     package_dir={"": "src"},
     entry_points={"console_scripts": ["inforion = inforion.__main__:main"]},
