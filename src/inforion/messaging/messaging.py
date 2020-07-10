@@ -16,7 +16,7 @@ def get_messaging_ping():
         log.info('messaging ping: {}'.format(res.content))
         return res
     except Exception as e:
-        logger.error("Error ocurred " + str(e))
+        log.error("Error ocurred " + str(e))
 
 
 
