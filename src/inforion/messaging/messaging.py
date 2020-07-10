@@ -3,10 +3,10 @@ from requests_toolbelt import MultipartEncoder
 
 import inforion.ionapi.model.inforlogin as inforlogin
 import logging as log
-from logger import get_logger
+#from logger import get_logger
 import json
 
-logger = get_logger("my_module")
+#logger = get_logger("my_module")
 
 def get_messaging_ping():
     try:
