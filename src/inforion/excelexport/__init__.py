@@ -23,9 +23,20 @@ if os.path.isfile(dir_path + "/11072020.zip") is False:
             "https://fellow.ams3.digitaloceanspaces.com/11072020.zip", dir_path
         )
     except Exception as e:
-        print("Error code: ", e.code)
+        print("Error code: ")
 else:
     print("M3 Config exits from: 11/07/2020")
+
+if os.path.isdir(apiDirPath) is False:
+    try:
+        import dload
+
+        print("M3 Files do not exist...please wait while downloading...")
+        dload.save_unzip(
+            "https://fellow.ams3.digitaloceanspaces.com/11072020.zip", dir_path
+        )
+    except Exception as e:
+        print("Error code: ")
 
 
 class bcolors:
