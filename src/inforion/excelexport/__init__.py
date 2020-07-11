@@ -12,14 +12,18 @@ dir_path = os.path.dirname(path)
 #https://fellow.ams3.digitaloceanspaces.com/11072020.zip
 
 apiDirPath = dir_path + "/api-files"
-print (apiDirPath)
+print (dir_path)
 templateFileName = dir_path + "/Mapping_Template.xlsx"
 
-if os.path.isfile(dir_path + "11072020.zip") is False:
-    import dload
-    print ("M3 Files do not exist...please wait while downloading...")
-    dload.save_unzip("https://fellow.ams3.digitaloceanspaces.com/11072020.zip", dir_path)
-
+if os.path.isfile(dir_path + "/11072020.zip") is False:
+    try:
+        import dload
+        print ("M3 Files do not exist...please wait while downloading...")
+        dload.save_unzip("https://fellow.ams3.digitaloceanspaces.com/11072020.zip", dir_path)
+    except Exception as e:
+        print('Error code: ', e.code)
+else:
+    print("M3 Config exits from: 11/07/2020")
 
 
 class bcolors:
