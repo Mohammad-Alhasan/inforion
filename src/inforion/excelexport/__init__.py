@@ -8,24 +8,21 @@ import xlsxwriter
 path = os.path.abspath(__file__)
 dir_path = os.path.dirname(path)
 
-
 # https://fellow.ams3.digitaloceanspaces.com/11072020.zip
 
 apiDirPath = dir_path + "/api-files"
 print(dir_path)
 templateFileName = dir_path + "/Mapping_Template.xlsx"
 
-if (
-    os.path.isdir(apiDirPath) is False
-    or os.path.isfile(dir_path + "/11072020.zip") is False
-):
+if (os.path.isdir(apiDirPath) is False
+        or os.path.isfile(dir_path + "/11072020.zip") is False):
     try:
         import dload
 
         print("M3 Files do not exist...please wait while downloading...")
         dload.save_unzip(
-            "https://fellow.ams3.digitaloceanspaces.com/11072020.zip", dir_path
-        )
+            "https://fellow.ams3.digitaloceanspaces.com/11072020.zip",
+            dir_path)
     except Exception as e:
         print("Error code: ")
 else:
@@ -60,7 +57,8 @@ def getParametersList(filepath):
         data = json.load(json_file)
         for (k, v) in data["paths"].items():
             key = k.replace("/", "")
-            if key.startswith("Add") or key.startswith("Chg") or key.startswith("Crt"):
+            if key.startswith("Add") or key.startswith(
+                    "Chg") or key.startswith("Crt"):
                 for jparam in v["get"]["parameters"]:
                     if jparam["name"].upper() not in parameters_list:
                         org_description = jparam["description"]
@@ -69,7 +67,7 @@ def getParametersList(filepath):
                         jparam["api"] = key
                         if ind >= 0:
                             jparam["description"] = org_description[0:ind]
-                            jparam["length"] = org_description[ind + 1 : -1]
+                            jparam["length"] = org_description[ind + 1:-1]
                         else:
                             jparam["description"] = org_description
                             jparam["length"] = ""
@@ -149,10 +147,9 @@ def generate_api_template_file(program, outputfile):
         return True
     else:
         print(
-            bcolors.FAIL
-            + "Error: API specifications file not found in directory 'api-files'. Please make sure that specifications file exits"
-            + bcolors.ENDC
-        )
+            bcolors.FAIL +
+            "Error: API specifications file not found in directory 'api-files'. Please make sure that specifications file exits"
+            + bcolors.ENDC)
     return False
 
 
