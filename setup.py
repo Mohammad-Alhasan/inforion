@@ -89,9 +89,8 @@ setup(
             "helper/*",
             "transformation/*",
             "excelexport/*",
-            
-
-    
+        ]
+    },
 )
 
 
