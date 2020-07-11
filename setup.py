@@ -80,7 +80,7 @@ setup(
     keywords=["Infor", "InforION", "Datalake", "LN", "M3"],
     install_requires=reqs,
     zip_safe=True,
-    include_package_data=True,
+    include_package_data=False,
     package_data={
         "inforion": [
             "ionapi/controller/*",
@@ -89,15 +89,7 @@ setup(
             "helper/*",
             "transformation/*",
             "excelexport/*",
-            "excelexport/api-files/*.json",
-        ]
-    },
-    data_dir=[(
-                  ('config', ['src/inforion/excelexport/api-files']),
-                  ('json',   ['excelexport/api-files'])
-     )],
-     data_files=[('excelexport', ['excelexport/api-files/*.json'])]
-    
+            
 
     
 )
