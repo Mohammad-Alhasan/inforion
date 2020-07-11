@@ -7,8 +7,20 @@ import shutil
 path = os.path.abspath(__file__)
 dir_path = os.path.dirname(path)
 
+
+
+#https://fellow.ams3.digitaloceanspaces.com/11072020.zip
+
 apiDirPath = dir_path + "/api-files"
+print (apiDirPath)
 templateFileName = dir_path + "/Mapping_Template.xlsx"
+
+if os.path.isfile(dir_path + "11072020.zip") is False:
+    import dload
+    print ("M3 Files do not exist...please wait while downloading...")
+    dload.save_unzip("https://fellow.ams3.digitaloceanspaces.com/11072020.zip", dir_path)
+
+
 
 class bcolors:
     HEADER = '\033[95m'
