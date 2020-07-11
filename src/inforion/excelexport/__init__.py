@@ -14,7 +14,10 @@ apiDirPath = dir_path + "/api-files"
 print(dir_path)
 templateFileName = dir_path + "/Mapping_Template.xlsx"
 
-if os.path.isdir(apiDirPath) is False or os.path.isfile(dir_path + "/11072020.zip") is False:
+if (
+    os.path.isdir(apiDirPath) is False
+    or os.path.isfile(dir_path + "/11072020.zip") is False
+):
     try:
         import dload
 
