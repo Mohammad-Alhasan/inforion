@@ -1,8 +1,9 @@
 import json
 import os
-import xlsxwriter
-import openpyxl
 import shutil
+
+import openpyxl
+import xlsxwriter
 
 path = os.path.abspath(__file__)
 dir_path = os.path.dirname(path)
