@@ -38,4 +38,3 @@ Arguments:
 Example:
 ~~~~~~~~~~~~~~
 inforion catalog delete --ionfile credentials/credentials.ionapi --name CSVSchema2
-

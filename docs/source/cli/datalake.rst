@@ -74,4 +74,3 @@ Example:
 *$ inforion datalake purge --ionfile credentials/credentials.ionapi --ids 1-dd6aa276-b34d-3905-b378-cdb5452ca17f,1-02d3ed52-5602-36ac-b3b1-fa670dbfeb72*
 
 *$ inforion datalake purge --ionfile credentials/credentials.ionapi -f "dl_id eq '1-d358de11-4658-3c2d-a6ec-88c028f46315'"*
-
