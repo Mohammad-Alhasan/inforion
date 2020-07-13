@@ -3,15 +3,17 @@
 # This file only contains a selection of the most common options. For a full
 # list see the documentation:
 # https://www.sphinx-doc.org/en/master/usage/configuration.html
-
 # -- Path setup --------------------------------------------------------------
-
 # If extensions (or modules to document with autodoc) are in another directory,
 # add these directories to sys.path here. If the directory is relative to the
 # documentation root, use os.path.abspath to make it absolute, like shown here.
 #
 import os
 import sys
+
+import sphinx_rtd_theme
+
+# -- Options for HTML output -------------------------------------------------
 
 # sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath("../.."))
@@ -27,7 +29,6 @@ release = "2.1"
 today_fmt = "%Y-%m-%d"
 
 master_doc = "index"
-
 
 # -- General configuration ---------------------------------------------------
 
@@ -47,10 +48,6 @@ exclude_patterns = []
 pygments_style = "sphinx"
 
 todo_include_todos = False
-
-
-# -- Options for HTML output -------------------------------------------------
-import sphinx_rtd_theme
 
 html_theme = "sphinx_rtd_theme"
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
