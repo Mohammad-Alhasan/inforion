@@ -29,7 +29,7 @@ Once you have downloaded an installer, simply run it by double-clicking on the d
 
 4. After Setup was successful select: **Disable path length limit**
 
-.. image:: image/python1.png
+.. image:: image/python2.png
 
 PIP
 =====
