@@ -1,18 +1,21 @@
 =======================================
-Generate Excel Mapping File
+Generate M3 Excel Mapping File
 =======================================
 
-**Description**
+Description
+-----------
 
-Excel mapping file generation part generates an excel mapping file for a particular API program.
+The **Excel mapping file generation** part generates an excel mapping file for a particular API program of M3.
 
-It already populates the mapping file with all the available fields for that API program. This can be then sent to the customer to map these fields with their database fields.
+It populates the mapping file with all the available fields for the specific M3 API program. This will be used by the Infor Consultant or the customer to map the M3 fields with the source database fields.
 
-Once the customer specifies all the mappings, this mapping file is used to push the data to M3.
+Once the mappings are specified, this mapping file is used to validate data from the source file (provided by the customer) and load it to M3.
+
 
 inforion extract --help    
 
-**Parameters**
+Parameters
+----------
 
 .. list-table::
    :header-rows: 1
@@ -24,9 +27,10 @@ inforion extract --help
    * - -o or --outputfile
      - This parameter is used to provide the output file path where the generated mapping file should be saved.
 
-**Example**
+Example
+-------
 
 inforion extract -p CRS610MI -o CRS610MI-Mappings.xlsx
 
-**Note**
-This command should always be executed in terminal as this needs user permissions.
+**Note:**
+this command should always be executed in terminal as this needs user permissions, if you do not use the DM_ION Workflow manager.
