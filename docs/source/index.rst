@@ -9,20 +9,38 @@ InforION documentation
 Send Data to InforION ( Datalake, M3, LN )
 
 .. toctree::
-   :caption: Usage
-   :maxdepth: 2
-   
+   :maxdepth: 1
+
    introduction
-   windows
+   installation
+   contributing
    excelmappingfile
    transformation
-   datalake
    load
    ln_export
    errors
-   contributing
+   datalake
+   windows
    logging
-   
+
+
+.. toctree::
+   :caption: CLI
+   :maxdepth: 1
+
+   cli/introduction
+   cli/datacatalog
+   cli/datalake
+
+
+.. toctree::
+   :caption: API
+   :maxdepth: 1
+
+   api/introduction
+
+
+
 
 Indices and tables
 ==================
