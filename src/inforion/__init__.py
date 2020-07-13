@@ -7,6 +7,7 @@ from inforion.helper.urlsplit import spliturl
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *
 from inforion.transformation.transform import parallelize_tranformation
+from inforion.merging.merging import merge_files
 
 import logging
 #from logger import get_logger
@@ -102,3 +103,18 @@ def main_transformation(
         return "Error: Data frame is empty"
 
     return parallelize_tranformation(mappingfile, mainsheet, stagingdata, outputfile)
+
+def main_merge(
+    mergesheet1=None, mergesheet2=None, mergeoutput=None, mergecol=None, mergetype="outer"
+):
+
+    if mergecol is None:
+        return "Error: Merging column criteria not defined"
+
+    if mergesheet1.empty:
+        return "Error: First merge sheet frame is empty"
+    
+    if mergesheet2.empty:
+        return "Error: Second merge sheet frame is empty"
+    print(mergetype)
+    return merge_files(mergesheet1, mergesheet2, mergeoutput, mergecol, mergetype)

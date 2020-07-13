@@ -177,6 +177,18 @@ def transform(mappingfile, mainsheet, inputfile, outputfile):
     inputdata = pd.read_excel(inputfile)
     return infor.main_transformation(mappingfile, mainsheet, inputdata, outputfile)
 
+@click.command(name="merge", help="section to do the file merging")
+@click.option("--mergesheet1", "-i", help="Please define the first merge file")
+@click.option("--mergesheet2", "-n", help="Please define the second merge file")
+@click.option("--mergeoutput", "-o", help="Please define the output file for merge")
+@click.option("--mergecol", "-c", help="Please define the column criteria for merge")
+@click.option("--mergetype", "-t", help="Please define the merging type")
+def merge(mergesheet1, mergesheet2, mergeoutput, mergecol, mergetype="outer"):
+    print(mergetype)
+    sheet1 = pd.read_excel(mergesheet1)
+    sheet2 = pd.read_excel(mergesheet2)
+    return infor.main_merge(sheet1, sheet2, mergeoutput, mergecol, mergetype)
+
 
 @main.group(name="catalog")
 def catalog():
@@ -375,6 +387,7 @@ def export_data(url, ionfile, company, service_name, outputfile):
 main.add_command(load)
 main.add_command(transform)
 main.add_command(extract)
+main.add_command(merge)
 main.add_command(check)
 
 if __name__ == "__main__":

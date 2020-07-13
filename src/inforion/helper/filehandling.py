@@ -51,3 +51,7 @@ def getDataFrame(inputfile):
     checkfiletype(inputfile)
     df = loadfile(inputfile)
     return df
+
+def mergedata(sheet1, sheet2, column, mtype):
+    merged = sheet1.merge(sheet2, on=column, how=mtype)
+    return merged
