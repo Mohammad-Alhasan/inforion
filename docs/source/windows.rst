@@ -7,7 +7,7 @@ If you have not installed Python on Windows please follow this guide
 Install Windows Python
 ======================
 
-Install Python from this URL: 
+1. Install Python from this URL: 
 `Python <https://www.python.org/downloads/windows/>`__
 
 
