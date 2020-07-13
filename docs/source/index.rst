@@ -6,7 +6,13 @@
 InforION documentation
 ======================
 
-Send Data to InforION ( Datalake, M3, LN )
+InforION is a Python 3 application and library that interacts with InforOS. This library provides a series of functionalities to handle data via Infor ION:
+
+*	Migration into M3
+*  Import Data to/from the Infor Datalake 
+*	Manage and load data from external systems into e.g. Infor M3 incl. data verification, logging reporting and workflow management via Infor ION.
+*	Export data from Infor LN/M3/EAM
+
 
 .. toctree::
    :caption: Usage
