@@ -13,6 +13,9 @@
 import os
 import sys
 
+# -- Options for HTML output -------------------------------------------------
+import sphinx_rtd_theme
+
 # sys.path.insert(0, os.path.abspath('.'))
 sys.path.insert(0, os.path.abspath("../.."))
 
@@ -49,8 +52,6 @@ pygments_style = "sphinx"
 todo_include_todos = False
 
 
-# -- Options for HTML output -------------------------------------------------
-import sphinx_rtd_theme
 
 html_theme = "sphinx_rtd_theme"
 html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
