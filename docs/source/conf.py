@@ -18,7 +18,7 @@ sys.path.insert(0, os.path.abspath('../..'))
 # -- Project information -----------------------------------------------------
 
 project = 'InforION'
-copyright = '2020, Fellow Consulting AG'
+copyright = '2020, `Fellow Consulting AG <https://www.www.fellow-consulting.com>`__'
 author = 'Daniel Jordan'
 
 # The full version, including alpha/beta/rc tags
