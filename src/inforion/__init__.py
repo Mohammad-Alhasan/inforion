@@ -26,6 +26,7 @@ def main_load(
     outputfile=None,
     start=None,
     end=None,
+    on_progress=None,
 ):
 
     if validators.url(url) != True:
@@ -50,11 +51,11 @@ def main_load(
                 if "Bearer" not in headers["Authorization"]:
                     return "Error: InforION Login is not working"
                 if start is None or end is None:
-                    return execute(url, headers, program, method, dataframe, outputfile)
+                    return execute(url, headers, program, method, dataframe, outputfile,on_progress)
 
                 else:
                     return execute(
-                        url, headers, program, method, dataframe, outputfile, start, end
+                        url, headers, program, method, dataframe, outputfile, start, end , on_progress
                     )
 
             if result["Call"] == "executeSnd":
