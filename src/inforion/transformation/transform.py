@@ -11,11 +11,9 @@ import pandas as pd
 # from logger import get_logger
 
 
-def parallelize_tranformation(mappingfile,
-                              mainsheet,
-                              stagingdata,
-                              outputfile=None,
-                              n_cores=4):
+def parallelize_tranformation(
+    mappingfile, mainsheet, stagingdata, outputfile=None, n_cores=4
+):
     # Read the file from given location
     xls = pd.ExcelFile(mappingfile)
 
@@ -28,8 +26,7 @@ def parallelize_tranformation(mappingfile,
     tabs_cache = getTabsMappingCache(sheet_to_df_map, main_cache)
 
     df_split = np.array_split(stagingdata, n_cores)
-    func = partial(transform_data, sheet_to_df_map, mainsheet, main_cache,
-                   tabs_cache)
+    func = partial(transform_data, sheet_to_df_map, mainsheet, main_cache, tabs_cache)
     pool = Pool(n_cores)
     df = pd.concat(pool.map(func, df_split))
     pool.close()
@@ -87,8 +84,7 @@ def getTabsMappingCache(sheet_to_df_map, mapping_cache):
     return mapping_sheets_cache
 
 
-def transform_data(_sheet_to_df_map, _mainsheet, sheet_cache, tabs_cache,
-                   stagingdata):
+def transform_data(_sheet_to_df_map, _mainsheet, sheet_cache, tabs_cache, stagingdata):
     rows_list = []
 
     for _, tb_row in stagingdata.iterrows():
@@ -104,12 +100,12 @@ def transform_data(_sheet_to_df_map, _mainsheet, sheet_cache, tabs_cache,
                         tab = tabs_cache[map["FUNC_VAL"]]
                         if tb_row[map["FUNC_ARG"]] in tab:
                             row_dict[map["API_FIELD"]] = str(
-                                tab[tb_row[map["FUNC_ARG"]]])
+                                tab[tb_row[map["FUNC_ARG"]]]
+                            )
                         elif "*" in tab:
                             row_dict[map["API_FIELD"]] = str(tab["*"])
                         else:
-                            row_dict[map["API_FIELD"]] = str(
-                                tb_row[map["FUNC_ARG"]])
+                            row_dict[map["API_FIELD"]] = str(tb_row[map["FUNC_ARG"]])
                 elif map["FUNC_TYPE"] == "func":
                     if map["FUNC_VAL"].strip().lower() == "div":
                         data_values = map["FUNC_ARG"].split("|")
@@ -117,8 +113,8 @@ def transform_data(_sheet_to_df_map, _mainsheet, sheet_cache, tabs_cache,
                             if data_values[2] != "":
                                 ctx.prec = int(data_values[2])
                             division = decimal.Decimal(
-                                tb_row[data_values[0]]) / decimal.Decimal(
-                                    data_values[1])
+                                tb_row[data_values[0]]
+                            ) / decimal.Decimal(data_values[1])
                     row_dict[map["API_FIELD"]] = division
                 elif map["FUNC_TYPE"] == "const":
                     if isinstance(map["FUNC_VAL"], datetime.datetime):

@@ -27,10 +27,10 @@ if sys.version_info < (3, 7):
 
 command = next((arg for arg in sys.argv[1:] if not arg.startswith("-")), "")
 if command.startswith("install") or command in [
-        "check",
-        "test",
-        "nosetests",
-        "easy_install",
+    "check",
+    "test",
+    "nosetests",
+    "easy_install",
 ]:
     forced = "--force" in sys.argv
     if forced:
@@ -40,8 +40,7 @@ if "upload" in sys.argv[1:]:
     print("Use twine to upload the package - setup.py upload is insecure")
     sys.exit(1)
 
-tests_require = open("requirements/test.txt",
-                     encoding="utf-8").read().splitlines()
+tests_require = open("requirements/test.txt", encoding="utf-8").read().splitlines()
 
 
 def readme():

@@ -10,6 +10,7 @@ import pandas as pd
 import pytest
 from _pytest._io.saferepr import saferepr
 from inforion import *
+
 # Import the test framework (this is a hypothetical module)
 
 
@@ -24,8 +25,7 @@ def test_urlnotvailid():
 
 
 def test_filenotexists():
-    assert "Error: File does not exist" == main_load("https://www.google.de",
-                                                     "test")
+    assert "Error: File does not exist" == main_load("https://www.google.de", "test")
 
 
 def test_checklogin():
@@ -62,13 +62,13 @@ def test_checkfiletype_notsupport():
 
 
 def test_mappingfilepath():
-    assert "Error: Mapping file path missing" in main_transformation(
-        None, "TestSheet")
+    assert "Error: Mapping file path missing" in main_transformation(None, "TestSheet")
 
 
 def test_checkstagingdata():
     assert "Error: Data frame is empty" in main_transformation(
-        "sample.xls", "TestSheet", pd.DataFrame())
+        "sample.xls", "TestSheet", pd.DataFrame()
+    )
 
 
 def test_csv_existance():

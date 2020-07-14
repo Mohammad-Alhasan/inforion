@@ -15,8 +15,7 @@ import inforion.ionapi.model.inforlogin as inforlogin
 
 def get_messaging_ping():
     try:
-        url = inforlogin.base_url(
-        ) + "/IONSERVICES/api/ion/messaging/service/ping"
+        url = inforlogin.base_url() + "/IONSERVICES/api/ion/messaging/service/ping"
         headers = inforlogin.header()
         res = requests.get(url, headers=headers)
         log.info("messaging ping: {}".format(res.content))
@@ -27,8 +26,10 @@ def get_messaging_ping():
 
 def post_messaging_v2_multipart_message(parameter_request, message_payload):
     try:
-        url = (inforlogin.base_url() +
-               "/IONSERVICES/api/ion/messaging/service/v2/multipartMessage")
+        url = (
+            inforlogin.base_url()
+            + "/IONSERVICES/api/ion/messaging/service/v2/multipartMessage"
+        )
         data = MultipartEncoder(
             fields={
                 "ParameterRequest": (
@@ -41,7 +42,8 @@ def post_messaging_v2_multipart_message(parameter_request, message_payload):
                     message_payload,
                     "application/octet-stream",
                 ),
-            })
+            }
+        )
         headers = inforlogin.header()
         headers.update({"Content-Type": data.content_type})
 

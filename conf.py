@@ -61,17 +61,20 @@ html_theme_options = {"display_version": False}
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ["_static"]
 
-latex_documents = [(master_doc, "inforion.tex", "inforion Documentation",
-                    "Daniel Jordan", "manual")]
+latex_documents = [
+    (master_doc, "inforion.tex", "inforion Documentation", "Daniel Jordan", "manual")
+]
 
 man_pages = [(master_doc, "inforion", "InforION Documentation", [author], 1)]
 
-texinfo_documents = [(
-    master_doc,
-    "InforION",
-    "InforION Documentation",
-    author,
-    "inforion",
-    "One line description of project.",
-    "Miscellaneous",
-)]
+texinfo_documents = [
+    (
+        master_doc,
+        "InforION",
+        "InforION Documentation",
+        author,
+        "inforion",
+        "One line description of project.",
+        "Miscellaneous",
+    )
+]

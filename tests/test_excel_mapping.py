@@ -26,11 +26,13 @@ class TestStringMethods(unittest.TestCase):
 
     def test_param1_missing(self):
         assert "Error: Program name is missing" in generate_api_template_file(
-            None, self.valid_outputfilename)
+            None, self.valid_outputfilename
+        )
 
     def test_param2_missing(self):
         assert "Error: Output filename is missing" in generate_api_template_file(
-            self.valid_program, None)
+            self.valid_program, None
+        )
 
     def test_api_file_exists(self):
         # Check if api files exist for valid endpoints
@@ -49,8 +51,7 @@ class TestStringMethods(unittest.TestCase):
         assert res is not None
 
     def test_generate_mapping_file(self):
-        res = generate_api_template_file(self.valid_program,
-                                         self.valid_outputfilename)
+        res = generate_api_template_file(self.valid_program, self.valid_outputfilename)
         assert res is True
 
     def setUp(self):

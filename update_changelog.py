@@ -55,8 +55,7 @@ def run(version, overwrite=False):
             data = yaml.safe_load(f)
             for k, v in data.items():
                 if k in changes:
-                    if isinstance(v, list) and all(
-                            isinstance(i, str) for i in v):
+                    if isinstance(v, list) and all(isinstance(i, str) for i in v):
                         changes[k].extend(v)
                     else:
                         raise ValueError(f"invalid file {path}")
@@ -102,16 +101,15 @@ def run(version, overwrite=False):
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="Update the InforION changelog")
-    parser.add_argument("version",
-                        help="The version number to name this release section")
+    parser = argparse.ArgumentParser(description="Update the InforION changelog")
+    parser.add_argument(
+        "version", help="The version number to name this release section"
+    )
     parser.add_argument(
         "--overwrite",
         action="store_true",
         default=False,
-        help=
-        "If set, will overwrite the existing changelog and clear the `changes` directory",
+        help="If set, will overwrite the existing changelog and clear the `changes` directory",
     )
     args = parser.parse_args()
     run(args.version, args.overwrite)
