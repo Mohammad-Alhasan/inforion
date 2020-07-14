@@ -18,6 +18,7 @@ import sys
 import logging
 from logger import get_logger
 
+
 def get_keywords():
     """Get the keywords needed to look up the version information."""
     # these strings will be replaced by git during git-archive.

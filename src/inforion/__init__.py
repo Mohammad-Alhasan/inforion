@@ -10,7 +10,8 @@ from inforion.transformation.transform import parallelize_tranformation
 from inforion.merging.merging import merge_files
 
 import logging
-#from logger import get_logger
+
+# from logger import get_logger
 
 # from ionbasic import load_config
 
@@ -30,11 +31,11 @@ def main_load(
 
     if validators.url(url) != True:
         logging.info("Error: URL is not valid")
-        return ("Error: URL is not valid")
-    
+        return "Error: URL is not valid"
+
     if os.path.exists(ionfile) == False:
         logging.info("Error: File does not exist")
-        return ("Error: File does not exist")
+        return "Error: File does not exist"
     else:
         inforlogin.load_config(ionfile)
 
@@ -104,8 +105,13 @@ def main_transformation(
 
     return parallelize_tranformation(mappingfile, mainsheet, stagingdata, outputfile)
 
+
 def main_merge(
-    mergesheet1=None, mergesheet2=None, mergeoutput=None, mergecol=None, mergetype="outer"
+    mergesheet1=None,
+    mergesheet2=None,
+    mergeoutput=None,
+    mergecol=None,
+    mergetype="outer",
 ):
 
     if mergecol is None:
@@ -113,7 +119,7 @@ def main_merge(
 
     if mergesheet1.empty:
         return "Error: First merge sheet frame is empty"
-    
+
     if mergesheet2.empty:
         return "Error: Second merge sheet frame is empty"
     print(mergetype)
