@@ -18,7 +18,7 @@ InforION is a Python 3 application and library that interacts with InforOS. This
 .. toctree::
    :caption: Usage
    :maxdepth: 2
-   
+
    introduction
    installation
    windows
@@ -31,7 +31,7 @@ InforION is a Python 3 application and library that interacts with InforOS. This
    errors
    contributing
    logging
-   
+
 
 Indices and tables
 ==================
