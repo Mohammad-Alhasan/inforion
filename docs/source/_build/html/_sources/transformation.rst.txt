@@ -3,10 +3,13 @@ Transformation
 ===============
 
 
-**Description**
-This step provides the functionality of tranforming the external data source into Infor data based on the mapping file.
+Description
+-----------
 
-**Parameters**
+This step provides the functionality of transforming the **external data source** into a **dataset for M3**, based on the mapping file.
+
+Parameters
+-----------
 
 .. list-table::
    :header-rows: 1
@@ -22,7 +25,8 @@ This step provides the functionality of tranforming the external data source int
    * - -o or --outputfile
      - This parameter is used to write the transformed data into a file.
 
-**Example**
+Example
+-----------
 
 inforion transform -a sample_mapping.xlsx -b Sheet1 -i sample_data.xlsx -o output.xlsx
 

@@ -14,6 +14,7 @@ InforION is a Python 3 application and library that interacts with InforOS. This
 *	Export data from Infor LN/M3/EAM
 
 
+
 .. toctree::
    :caption: Usage
    :maxdepth: 2

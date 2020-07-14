@@ -1,6 +1,6 @@
-=======================
-Windows
-=======================
+===========================
+Python Download for Windows
+===========================
 
 If you have not installed Python on Windows please follow this guide
 
@@ -31,8 +31,9 @@ Once you have downloaded an installer, simply run it by double-clicking on the d
 
 .. image:: image/python2.png
 
+===
 PIP
-=====
+===
 
 Pip is a de facto standard package-management system used to install and manage software packages written in Python.
 Many packages can be found in the default source for packages and their dependencies — Python Package Index (PyPI).
