@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
-import logging
+import os.path
 import os.path
 
 import click
+
 import inforion as infor
-from inforion.datacatalog.datacatalog import delete_datacatalog_object
-from inforion.datacatalog.datacatalog import ObjectSchemaType
-from inforion.datacatalog.datacatalog import post_datacatalog_object
+import inforion.ln as lni
+from inforion.datacatalog.datacatalog import (
+    post_datacatalog_object,
+    delete_datacatalog_object,
+    ObjectSchemaType,
+)
 from inforion.datalake.datalake import delete_v1_purge_filter
 from inforion.datalake.datalake import delete_v1_purge_id
 from inforion.datalake.datalake import get_v1_payloads_list
@@ -15,27 +19,12 @@ from inforion.excelexport import *
 from inforion.helper.filehandling import *
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *
-import inforion.ln as lni
-
-import logging
-import os.path
-import os
-
-import logging
-#from logger import get_logger
-
-from inforion.datacatalog.datacatalog import (
-    post_datacatalog_object,
-    delete_datacatalog_object,
-    ObjectSchemaType,
-)
-from inforion.messaging.messaging import post_messaging_v2_multipart_message
 from inforion.ionapi.model import inforlogin
 from inforion.messaging.messaging import post_messaging_v2_multipart_message
 
-# TODO update to use multi modules log
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("main")
+from inforion.logger.logger import get_logger
+
+logger = get_logger("main")
 
 
 @click.group()
