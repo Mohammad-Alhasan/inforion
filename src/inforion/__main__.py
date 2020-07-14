@@ -19,7 +19,7 @@ from inforion.ionapi.model import inforlogin
 from inforion.logger.logger import get_logger
 from inforion.messaging.messaging import post_messaging_v2_multipart_message
 
-logger = get_logger("main")
+logger = get_logger("main", True)
 
 
 @click.group()
