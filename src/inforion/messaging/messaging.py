@@ -1,4 +1,6 @@
 import requests
+from requests.adapters import HTTPAdapter
+from requests.packages.urllib3.util.retry import Retry
 from requests_toolbelt import MultipartEncoder
 
 import inforion.ionapi.model.inforlogin as inforlogin
@@ -7,6 +9,7 @@ import logging as log
 import json
 
 #logger = get_logger("my_module")
+
 
 def get_messaging_ping():
     try:
@@ -17,7 +20,6 @@ def get_messaging_ping():
         return res
     except Exception as e:
         log.error("Error ocurred " + str(e))
-
 
 
 def post_messaging_v2_multipart_message(parameter_request, message_payload):
@@ -31,9 +33,11 @@ def post_messaging_v2_multipart_message(parameter_request, message_payload):
         headers = inforlogin.header()
         headers.update({'Content-Type': data.content_type})
 
-        res = requests.post(url, headers=headers, data=data)
+        session = requests.Session()
+        retries = Retry(total=10, backoff_factor=1, status_forcelist=[502, 503, 504])
+        session.mount('https://', HTTPAdapter(max_retries=retries))
+        res = session.post(url, headers=headers, data=data)
         log.info('messaging v2 multipart message: {}'.format(res.content))
         return res
     except Exception as e:
         log.error("Error ocurred " + str(e))
-
