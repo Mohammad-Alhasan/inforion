@@ -232,7 +232,7 @@ def executeSnd(
 def getSuccessGraphDataframe(df):
     results = {}
     for _, row in df.iterrows():
-        msgs = row["MESSAGE"].split("|")
+        msgs = row["MESSAGE"].split("^_^")
         for msg in msgs:
             if msg:
                 key = msg[0 : msg.index(":")]
@@ -287,8 +287,6 @@ def createGraph(excel_file, df):
     chart1.shape = 4
     chart1.height = 12
     chart1.width = 20
-    # chart1.x_axis = 10
-    # chart1.y_axis = 10
 
     ws_graph.add_chart(chart1, "A10")
     writer.save()

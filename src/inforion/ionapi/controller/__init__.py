@@ -140,10 +140,10 @@ def saveresults(r, df, program, index, chunk, MaxChunk=150, elements=1):
                             error = key["errorMessage"]
                             error = error.rstrip("\r\n")
                             error = " ".join(error.split())
-                            message += methode + ":" + error + "|"
+                            message += methode + ":" + error + "^_^"
 
                         else:
-                            message += methode + ":OK|"
+                            message += methode + ":OK^_^"
 
                         df.loc[newindex, "MESSAGE"] = message
 
