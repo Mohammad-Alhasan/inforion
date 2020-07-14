@@ -1,6 +1,5 @@
-import urllib.parse
-
 import os
+import urllib.parse
 
 # url = "https://mingle-ionapi.eu1.inforcloudsuite.com/BVB_DEV/M3/m3api-rest/v2/execute"
 

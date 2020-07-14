@@ -1,20 +1,16 @@
 # Import the code to be tested
 
-import pytest
-import unittest
-from _pytest._io.saferepr import saferepr
 import logging
 import os
-import pandas as pd
-
+import unittest
 import urllib.request as urllib
-
 
 # Import the test framework (this is a hypothetical module)
 import inforion.helper.filehandling as filehandling
 import inforion.ionapi.model.inforlogin as inforlogin
 import pandas as pd
 import pytest
+from _pytest._io.saferepr import saferepr
 from inforion import *
 
 

@@ -1,8 +1,9 @@
-from enum import Enum
-import requests
-import inforion.ionapi.model.inforlogin as inforlogin
-import logging as log
 import json
+import logging as log
+from enum import Enum
+
+import inforion.ionapi.model.inforlogin as inforlogin
+import requests
 
 
 class ObjectSchemaType(Enum):

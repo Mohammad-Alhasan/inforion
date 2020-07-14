@@ -10,12 +10,12 @@
 """Git implementation of _version.py."""
 
 import errno
+import logging
 import os
 import re
 import subprocess
 import sys
 
-import logging
 from logger import get_logger
 
 

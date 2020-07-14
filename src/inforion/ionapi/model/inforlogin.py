@@ -1,13 +1,9 @@
 import json
+import logging
 import sys
-from datetime import datetime
-from datetime import timedelta
-
-import requests
-
 from datetime import datetime, timedelta
 
-import logging
+import requests
 
 # from logger import get_logger
 

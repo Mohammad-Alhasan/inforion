@@ -1,12 +1,12 @@
 # Transformation of Staging Data into M3 format via mapping file
-import pandas as pd
-import numpy as np
-import decimal
 import datetime
-from multiprocessing import Pool
-from functools import partial
-
+import decimal
 import logging
+from functools import partial
+from multiprocessing import Pool
+
+import numpy as np
+import pandas as pd
 
 # from logger import get_logger
 

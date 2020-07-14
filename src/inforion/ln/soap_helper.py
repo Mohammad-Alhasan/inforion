@@ -1,7 +1,7 @@
-import requests
 import xml.etree.ElementTree as et
 
 import inforion.ln.xml_helper as xhelper
+import requests
 
 
 def execute_soap_request(url, token, request_body):

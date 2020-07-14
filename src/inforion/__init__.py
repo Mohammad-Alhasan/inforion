@@ -1,3 +1,4 @@
+import logging
 import os.path
 import sys
 
@@ -6,10 +7,8 @@ import validators
 from inforion.helper.urlsplit import spliturl
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *
-from inforion.transformation.transform import parallelize_tranformation
 from inforion.merging.merging import merge_files
-
-import logging
+from inforion.transformation.transform import parallelize_tranformation
 
 # from logger import get_logger
 

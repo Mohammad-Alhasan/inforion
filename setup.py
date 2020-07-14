@@ -3,10 +3,9 @@
 
 from __future__ import print_function, unicode_literals
 
-from setuptools import find_packages, setup
-
-
 import sys
+
+from setuptools import find_packages, setup
 
 
 def parse_requirements(filename):

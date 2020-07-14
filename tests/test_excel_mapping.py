@@ -1,7 +1,7 @@
 # Import the code to be tested
 
-import unittest
 import os
+import unittest
 
 from inforion.excelexport import *
 
