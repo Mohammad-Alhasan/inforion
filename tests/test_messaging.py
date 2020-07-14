@@ -7,7 +7,7 @@ from inforion.messaging.messaging import (
     post_messaging_v2_multipart_message,
 )
 
-''' Roberto fix it 
+
 def test_get_messaging_ping():
     inforlogin.load_config("credentials/credentials.ionapi")
     inforlogin.login()
@@ -61,6 +61,3 @@ def test_post_messaging_v2_multipart_message():
         ).status_code
         == 201
     )
-
-
-'''
