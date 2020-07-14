@@ -13,10 +13,13 @@ from inforion.ionapi.model import *
 # import inforion.ionapi.basic as inforlogin
 
 import logging
-#from logger import get_logger
+
+# from logger import get_logger
 
 import inforion.ionapi.model.inforlogin as inforlogin
-#import inforion.ionapi.basic as inforlogin
+
+# import inforion.ionapi.basic as inforlogin
+
 
 class TimeoutHTTPAdapter(HTTPAdapter):
     def __init__(self, *args, **kwargs):
@@ -66,11 +69,12 @@ def sendresults(url, _headers, data, timeout=65, stream=False):
     http.mount("http://", adapter)
 
     if datetime.now() > inforlogin._GLOBAL_session_expire:
-        
+
         headers = inforlogin.reconnect()
-        logging.info(" Reconnect and Next Reconnect will be " + str(inforlogin._GLOBAL_session_expire))
-        
-   
+        logging.info(
+            " Reconnect and Next Reconnect will be "
+            + str(inforlogin._GLOBAL_session_expire)
+        )
 
     try:
         for z in range(0, 5):
@@ -97,9 +101,9 @@ def sendresults(url, _headers, data, timeout=65, stream=False):
             else:
 
                 if z < 5:
-                    logging.info(" Error try to get new session "+ str(z) + "/5")
+                    logging.info(" Error try to get new session " + str(z) + "/5")
                     headers = inforlogin.reconnect()
-                    time.sleep(10)     
+                    time.sleep(10)
                 elif z == 5:
                     sys.exit(0)
 
@@ -109,7 +113,7 @@ def sendresults(url, _headers, data, timeout=65, stream=False):
         raise SystemExit(e)
     except requests.exceptions.RequestException as e:
         # catastrophic error. bail.
-        logging.error("OOps: Something Else",e)
+        logging.error("OOps: Something Else", e)
         raise SystemExit(e)
         r = "Error"
 
@@ -166,12 +170,13 @@ def saveresults(r, df, program, index, chunk, MaxChunk=150, elements=1):
                 ] = "Results are missing"
         else:
             for newindex in range(index):
-                #logging.info('Write JSON Error:', str(newindex))
-                df.loc[newindex, 'MESSAGE'] = ' JSON Error'
+                # logging.info('Write JSON Error:', str(newindex))
+                df.loc[newindex, "MESSAGE"] = " JSON Error"
     except:
         logging.error(r)
-        df.loc[df.index.to_series().between(newindex,index), 'MESSAGE'] = 'Unclear Error'
-
+        df.loc[
+            df.index.to_series().between(newindex, index), "MESSAGE"
+        ] = "Unclear Error"
 
     chunk = MaxChunk
     data = {"program": program, "cono": 409}
