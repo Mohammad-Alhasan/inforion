@@ -1,28 +1,23 @@
 #!/usr/bin/env python3
 import os.path
-import os.path
 
 import click
-
 import inforion as infor
 import inforion.ln as lni
-from inforion.datacatalog.datacatalog import (
-    post_datacatalog_object,
-    delete_datacatalog_object,
-    ObjectSchemaType,
-)
-from inforion.datalake.datalake import delete_v1_purge_filter
-from inforion.datalake.datalake import delete_v1_purge_id
-from inforion.datalake.datalake import get_v1_payloads_list
-from inforion.datalake.datalake import get_v1_payloads_stream_by_id
+from inforion.datacatalog.datacatalog import (ObjectSchemaType,
+                                              delete_datacatalog_object,
+                                              post_datacatalog_object)
+from inforion.datalake.datalake import (delete_v1_purge_filter,
+                                        delete_v1_purge_id,
+                                        get_v1_payloads_list,
+                                        get_v1_payloads_stream_by_id)
 from inforion.excelexport import *
 from inforion.helper.filehandling import *
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *
 from inforion.ionapi.model import inforlogin
-from inforion.messaging.messaging import post_messaging_v2_multipart_message
-
 from inforion.logger.logger import get_logger
+from inforion.messaging.messaging import post_messaging_v2_multipart_message
 
 logger = get_logger("main")
 
