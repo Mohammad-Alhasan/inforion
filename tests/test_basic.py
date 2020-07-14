@@ -1,22 +1,17 @@
 # Import the code to be tested
-
-import pytest
-import unittest
-from _pytest._io.saferepr import saferepr
 import logging
 import os
-import pandas as pd
-
+import unittest
 import urllib.request as urllib
 
-
-
-# Import the test framework (this is a hypothetical module)
 import inforion.helper.filehandling as filehandling
 import inforion.ionapi.model.inforlogin as inforlogin
 import pandas as pd
 import pytest
+from _pytest._io.saferepr import saferepr
 from inforion import *
+
+# Import the test framework (this is a hypothetical module)
 
 
 def test_inputfile_exists():
@@ -71,7 +66,9 @@ def test_mappingfilepath():
 
 
 def test_checkstagingdata():
-    assert  "Error: Data frame is empty" in main_transformation("sample.xls","TestSheet",pd.DataFrame())
+    assert "Error: Data frame is empty" in main_transformation(
+        "sample.xls", "TestSheet", pd.DataFrame()
+    )
 
 
 def test_csv_existance():
@@ -80,7 +77,7 @@ def test_csv_existance():
 
 def test_server_connection():
     try:
-        urllib.urlopen('http://216.58.192.142', timeout=1)
+        urllib.urlopen("http://216.58.192.142", timeout=1)
         return True
     except urllib.URLError as err:
         return False

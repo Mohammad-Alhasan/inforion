@@ -20,9 +20,9 @@ sys.path.insert(0, os.path.abspath("../.."))
 
 # -- Project information -----------------------------------------------------
 
-project = 'InforION'
-copyright = '2020, Fellow Consulting AG'
-author = 'Daniel Jordan'
+project = "InforION"
+copyright = "2020, Fellow Consulting AG"
+author = "Daniel Jordan"
 
 # The full version, including alpha/beta/rc tags
 release = "2.1"

@@ -1,15 +1,19 @@
 # Transformation of Staging Data into M3 format via mapping file
-import pandas as pd
-import numpy as np
-import decimal
 import datetime
-from multiprocessing import Pool
-from functools import partial
-
+import decimal
 import logging
-#from logger import get_logger
+from functools import partial
+from multiprocessing import Pool
 
-def parallelize_tranformation(mappingfile, mainsheet,stagingdata,outputfile=None,n_cores=4):
+import numpy as np
+import pandas as pd
+
+# from logger import get_logger
+
+
+def parallelize_tranformation(
+    mappingfile, mainsheet, stagingdata, outputfile=None, n_cores=4
+):
     # Read the file from given location
     xls = pd.ExcelFile(mappingfile)
 
@@ -29,9 +33,9 @@ def parallelize_tranformation(mappingfile, mainsheet,stagingdata,outputfile=None
     pool.join()
 
     if outputfile is not None:
-        logging.info('Save to file: ' + outputfile)
-        writer = pd.ExcelWriter(outputfile, engine='xlsxwriter')
-        df.to_excel(writer, sheet_name='Log Output',index=False)
+        logging.info("Save to file: " + outputfile)
+        writer = pd.ExcelWriter(outputfile, engine="xlsxwriter")
+        df.to_excel(writer, sheet_name="Log Output", index=False)
         writer.save()
 
     return df

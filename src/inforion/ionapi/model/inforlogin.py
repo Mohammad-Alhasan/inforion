@@ -1,14 +1,12 @@
 import json
+import logging
 import sys
 from datetime import datetime
 from datetime import timedelta
 
 import requests
 
-from datetime import datetime, timedelta
-
-import logging
-#from logger import get_logger
+# from logger import get_logger
 
 this = sys.modules[__name__]
 
@@ -89,12 +87,12 @@ def load_config(IONFile):
     with open(IONFile) as json_file:
         data = json.load(json_file)
         if "ti" not in data:
-            logging.info("Error in ION file - ti")            
+            logging.info("Error in ION file - ti")
             sys.exit(0)
         else:
             this._GLOBAL_ti = data["ti"]
         if "cn" not in data:
-            logging.info("Error in ION file - cn")            
+            logging.info("Error in ION file - cn")
             sys.exit(0)
         else:
             this._GLOBAL_cn = data["cn"]
@@ -199,9 +197,9 @@ def reconnect():
     r = r.json()
     # print (r)
 
-    this._GLOBAL_session_expire = addSecs(start_session, r['expires_in'])
-    if 'access_token' not in r:
-        logging.info('Error Reconnect Json')
+    this._GLOBAL_session_expire = addSecs(start_session, r["expires_in"])
+    if "access_token" not in r:
+        logging.info("Error Reconnect Json")
         sys.exit(0)
     else:
         this._GLOBAL_access_token = r["access_token"]

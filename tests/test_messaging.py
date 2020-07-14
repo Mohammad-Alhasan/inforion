@@ -1,11 +1,10 @@
 import os
 
-from inforion.datacatalog.datacatalog import post_datacatalog_object, ObjectSchemaType
+from inforion.datacatalog.datacatalog import ObjectSchemaType
+from inforion.datacatalog.datacatalog import post_datacatalog_object
 from inforion.ionapi.model import inforlogin
-from inforion.messaging.messaging import (
-    get_messaging_ping,
-    post_messaging_v2_multipart_message,
-)
+from inforion.messaging.messaging import get_messaging_ping
+from inforion.messaging.messaging import post_messaging_v2_multipart_message
 
 
 def test_get_messaging_ping():

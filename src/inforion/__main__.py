@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-import logging
 import os.path
 
 import click
 import inforion as infor
+import inforion.ln as lni
 from inforion.datacatalog.datacatalog import delete_datacatalog_object
 from inforion.datacatalog.datacatalog import ObjectSchemaType
 from inforion.datacatalog.datacatalog import post_datacatalog_object
@@ -15,27 +15,11 @@ from inforion.excelexport import *
 from inforion.helper.filehandling import *
 from inforion.ionapi.controller import *
 from inforion.ionapi.model import *
-import inforion.ln as lni
-
-import logging
-import os.path
-import os
-
-import logging
-#from logger import get_logger
-
-from inforion.datacatalog.datacatalog import (
-    post_datacatalog_object,
-    delete_datacatalog_object,
-    ObjectSchemaType,
-)
-from inforion.messaging.messaging import post_messaging_v2_multipart_message
 from inforion.ionapi.model import inforlogin
+from inforion.logger.logger import get_logger
 from inforion.messaging.messaging import post_messaging_v2_multipart_message
 
-# TODO update to use multi modules log
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger("main")
+logger = get_logger("main")
 
 
 @click.group()
@@ -176,6 +160,7 @@ def extract(program, outputfile):
 def transform(mappingfile, mainsheet, inputfile, outputfile):
     inputdata = pd.read_excel(inputfile)
     return infor.main_transformation(mappingfile, mainsheet, inputdata, outputfile)
+
 
 @click.command(name="merge", help="section to do the file merging")
 @click.option("--mergesheet1", "-i", help="Please define the first merge file")
@@ -375,14 +360,17 @@ def ln():
 @click.option("--url", "-u", help="URL to local ION")
 @click.option("--ionfile", "-i", help="Please define the ionfile file")
 @click.option("--company", "-c", help="Company for which we need to export")
-@click.option("--service_name", "-s", help="Service name. e.g. BusinessPartner, SalesOrder")
+@click.option(
+    "--service_name", "-s", help="Service name. e.g. BusinessPartner, SalesOrder"
+)
 @click.option("--outputfile", "-o", help="File as Output File")
 def export_data(url, ionfile, company, service_name, outputfile):
     """Exports business partner to an Excel file"""
 
     inforlogin.load_config(ionfile)
-    token = inforlogin.login()['access_token']
+    token = inforlogin.login()["access_token"]
     lni.export_data(url, token, company, service_name, outputfile)
+
 
 main.add_command(load)
 main.add_command(transform)

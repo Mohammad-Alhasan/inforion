@@ -1,12 +1,11 @@
 # import setuptools
-
-
-from __future__ import print_function, unicode_literals
-
-from setuptools import find_packages, setup
-
+from __future__ import print_function
+from __future__ import unicode_literals
 
 import sys
+
+from setuptools import find_packages
+from setuptools import setup
 
 
 def parse_requirements(filename):
@@ -37,11 +36,9 @@ if command.startswith("install") or command in [
     if forced:
         print("The argument --force is deprecated. Please discontinue use.")
 
-
 if "upload" in sys.argv[1:]:
     print("Use twine to upload the package - setup.py upload is insecure")
     sys.exit(1)
-
 
 tests_require = open("requirements/test.txt", encoding="utf-8").read().splitlines()
 
@@ -56,7 +53,6 @@ with open("README.md", "r") as fh:
 
 install_reqs = parse_requirements("requirements/main.txt")
 reqs = install_reqs
-
 
 setup(
     name="inforion",  # Replace with your own username
@@ -92,4 +88,3 @@ setup(
         ]
     },
 )
-

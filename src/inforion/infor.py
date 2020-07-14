@@ -1,4 +1,4 @@
-'''
+"""
 import requests
 import json
 
@@ -27,7 +27,7 @@ import os.path
 
 
 def header(config,token):
-    
+
         headers = {
         'Content-Type': 'application/json',
         'X-TenantId': 'FELLOWCONSULTING_DEV',
@@ -43,7 +43,7 @@ def header(config,token):
         'Cookie': 'useractivity_cookie_mingle=1582207527',
         'Connection': 'keep-alive'
         }
-    
+
 
     headers = {
         'Content-Type':         'application/json',
@@ -61,10 +61,10 @@ def header(config,token):
     return headers
 
 def main(url,IONFile):
-        
+
     if validators.url(url) != True:
         return ("Error: URL is not valid")
-    
+
     if os.path.exists(IONFile) == False:
         return ("Error: File does not exist")
     else:
@@ -74,4 +74,4 @@ def main(url,IONFile):
     test=  ionbasic.login(url,config)
 
 
-'''
+"""

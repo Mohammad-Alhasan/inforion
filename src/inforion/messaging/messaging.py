@@ -1,13 +1,14 @@
+# from logger import get_logger
+import json
+import logging as log
+
 import requests
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from requests_toolbelt import MultipartEncoder
 
 import inforion.ionapi.model.inforlogin as inforlogin
-import logging as log
 
-# from logger import get_logger
-import json
 
 # logger = get_logger("my_module")
 
