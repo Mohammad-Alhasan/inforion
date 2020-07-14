@@ -166,6 +166,7 @@ def transform(mappingfile, mainsheet, inputfile, outputfile):
     inputdata = pd.read_excel(inputfile)
     return infor.main_transformation(mappingfile, mainsheet, inputdata, outputfile)
 
+
 @click.command(name="merge", help="section to do the file merging")
 @click.option("--mergesheet1", "-i", help="Please define the first merge file")
 @click.option("--mergesheet2", "-n", help="Please define the second merge file")
@@ -364,14 +365,17 @@ def ln():
 @click.option("--url", "-u", help="URL to local ION")
 @click.option("--ionfile", "-i", help="Please define the ionfile file")
 @click.option("--company", "-c", help="Company for which we need to export")
-@click.option("--service_name", "-s", help="Service name. e.g. BusinessPartner, SalesOrder")
+@click.option(
+    "--service_name", "-s", help="Service name. e.g. BusinessPartner, SalesOrder"
+)
 @click.option("--outputfile", "-o", help="File as Output File")
 def export_data(url, ionfile, company, service_name, outputfile):
     """Exports business partner to an Excel file"""
 
     inforlogin.load_config(ionfile)
-    token = inforlogin.login()['access_token']
+    token = inforlogin.login()["access_token"]
     lni.export_data(url, token, company, service_name, outputfile)
+
 
 main.add_command(load)
 main.add_command(transform)
